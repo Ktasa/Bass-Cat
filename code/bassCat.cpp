@@ -48,7 +48,7 @@ int main()
 
 //temporary count/modulus system determines when animation updates
 int count = 1;
-int frameRateTemp = 25;
+int frameRateTemp = 20;
 bool F1 = true;
 bool hitThatBass = false;
 int inputTimeOut = 0;
@@ -87,16 +87,10 @@ int hitFrame = 1;
 		if(hitThatBass && inputTimeOut==0 && count%frameRateTemp == 0)
 		{
 			if (hitFrame == 1)
-			{
-				//cout << "A3\n";
 				current = spriteA3;
-			}
 			else
-			{
-				//cout << "A4\n";
 				current = spriteA4;
-			}
-			//cout << "Frame: " << hitFrame << endl;
+			
 			hitFrame++;
 			if(hitFrame>2)
 			{
