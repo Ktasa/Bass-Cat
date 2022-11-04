@@ -52,6 +52,10 @@ int main()
 	Sound bass;
 	bass.setBuffer(bassBuffer);
 
+	Music catMusic;
+	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
+	catMusic.play();
+
 //temporary count/modulus system determines when animation updates
 int count = 1;
 int frameRateTemp = 20;
