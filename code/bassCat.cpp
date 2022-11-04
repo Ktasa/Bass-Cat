@@ -51,7 +51,7 @@ int count = 1;
 int frameRateTemp = 25;
 bool F1 = true;
 bool hitThatBass = false;
-bool inputTimeOut = false;
+int inputTimeOut = 0;
 int hitFrame = 1;
 	while (window.isOpen())
 	{
@@ -60,13 +60,13 @@ int hitFrame = 1;
 		{
 			window.close();
 		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && !inputTimeOut)
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0)
 		{
 			hitThatBass = true;
 		}
 		if (!Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			inputTimeOut = false;
+			inputTimeOut = 0;
 		}
 		if (count%frameRateTemp == 0 && !hitThatBass)
 		{
@@ -81,8 +81,10 @@ int hitFrame = 1;
 				//if(frameRateTemp > 20) //gradually vibrates faster
 				//	frameRateTemp-=1;
 			}
+			if(inputTimeOut!=0)
+				inputTimeOut--;
 		}
-		if(hitThatBass && !inputTimeOut && count%frameRateTemp == 0)
+		if(hitThatBass && inputTimeOut==0 && count%frameRateTemp == 0)
 		{
 			if (hitFrame == 1)
 			{
@@ -98,7 +100,7 @@ int hitFrame = 1;
 			hitFrame++;
 			if(hitFrame>2)
 			{
-				inputTimeOut = true;
+				inputTimeOut = 2;
 				hitThatBass = false;
 				hitFrame = 1;
 			}
