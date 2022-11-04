@@ -8,17 +8,19 @@ int main()
 {
 	int resolutionWidth = VideoMode::getDesktopMode().width;
     int resolutionHeight = VideoMode::getDesktopMode().height;
-    double aspectRatio = resolutionHeight * 1.0 / resolutionWidth;
+    //double aspectRatio = resolutionHeight * 1.0 / resolutionWidth;
 
     VideoMode vm(resolutionWidth, resolutionHeight);
 
 	RenderWindow window(vm, "Bass Cat", Style::Default);
 
 	Texture textureCat;
-	textureCat.loadFromFile("Frames/gumi A1.png");
+	textureCat.loadFromFile("frames/gumi A1.png");
 	Sprite spriteCat;
 	spriteCat.setTexture(textureCat);
 	spriteCat.setPosition(0, 0);
+	float scale = 0.5;
+	spriteCat.setScale(scale, scale);
 
 	while (window.isOpen())
 	{
@@ -28,7 +30,7 @@ int main()
 			window.close();
 		}
 
-		window.clear();
+		window.clear(Color::White);
 		window.draw(spriteCat);
 		window.display();
 
