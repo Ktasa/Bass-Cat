@@ -48,7 +48,7 @@ int main()
 	Sprite current = spriteA1;
 
 	SoundBuffer bassBuffer;
-	bassBuffer.loadFromFile("sound/bass sfx.wav");
+	bassBuffer.loadFromFile("sound/bass sfx v2.wav");
 	Sound bass;
 	bass.setBuffer(bassBuffer);
 
@@ -87,8 +87,8 @@ int hitFrame = 1;
 				//if(frameRateTemp > 20) //gradually vibrates faster
 				//	frameRateTemp-=1;
 			}
-			if(inputTimeOut!=0)
-				inputTimeOut--;
+			//if(inputTimeOut!=0) //automated strumming when holding space
+			//	inputTimeOut--;
 		}
 		if(hitThatBass && inputTimeOut==0 && count%frameRateTemp == 0)
 		{
