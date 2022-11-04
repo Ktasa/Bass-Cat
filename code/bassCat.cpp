@@ -39,11 +39,19 @@ int main()
 	spriteA4.setTexture(textureA4);
 	spriteA4.setPosition(0, 0);
 
+	Texture textureC;
+	textureC.loadFromFile("frames/gumi C.png");
+	Sprite spriteC;
+	spriteC.setTexture(textureC);
+	spriteC.setPosition(0, 0);
+
 	float scale = 0.5;
+	float scaleC = 0.75;
 	spriteA1.setScale(scale, scale);
 	spriteA2.setScale(scale, scale);
 	spriteA3.setScale(scale, scale);
 	spriteA4.setScale(scale, scale);
+	spriteC.setScale(scaleC, scaleC);
 
 	Sprite current = spriteA1;
 
@@ -56,18 +64,24 @@ int main()
 	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
 	catMusic.play();
 
-//temporary count/modulus system determines when animation updates
-int count = 1;
-int frameRateTemp = 20;
-bool F1 = true;
-bool hitThatBass = false;
-int inputTimeOut = 0;
-int hitFrame = 1;
+	//temporary count/modulus system determines when animation updates
+	int count = 1;
+	int frameRateTemp = 20;
+	bool F1 = true;
+	bool hitThatBass = false;
+	int inputTimeOut = 0;
+	int hitFrame = 1;
+
 	while (window.isOpen())
 	{
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
+			current = spriteC;
+			window.clear(Color::White);
+			window.draw(current);
+			window.display();
+
 			window.close();
 		}
 		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0)
@@ -115,7 +129,6 @@ int hitFrame = 1;
 				count %= frameRateTemp;
 		}
 		count++;
-
 		window.clear(Color::White);
 		window.draw(current);
 		window.display();
