@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 using namespace sf;
@@ -46,6 +47,11 @@ int main()
 
 	Sprite current = spriteA1;
 
+	SoundBuffer bassBuffer;
+	bassBuffer.loadFromFile("sound/bass sfx.wav");
+	Sound bass;
+	bass.setBuffer(bassBuffer);
+
 //temporary count/modulus system determines when animation updates
 int count = 1;
 int frameRateTemp = 20;
@@ -87,7 +93,10 @@ int hitFrame = 1;
 		if(hitThatBass && inputTimeOut==0 && count%frameRateTemp == 0)
 		{
 			if (hitFrame == 1)
+			{
 				current = spriteA3;
+				bass.play();
+			}
 			else
 				current = spriteA4;
 			
