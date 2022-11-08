@@ -1,6 +1,8 @@
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+//#include<chrono>
 
 using namespace sf;
 using namespace std;
@@ -72,6 +74,12 @@ int main()
 	int inputTimeOut = 0;
 	int hitFrame = 1;
 
+	Clock clock;
+	Time dt; //chrono potentially more accurate
+	float goal = 0.1;
+	float total = 0.0;
+	int frameCount = 0;
+
 	while (window.isOpen())
 	{
 
@@ -132,6 +140,15 @@ int main()
 		window.clear(Color::White);
 		window.draw(current);
 		window.display();
+
+		dt = clock.restart();
+		total += dt.asSeconds();
+		frameCount++;
+		float avg = total / frameCount;
+		float ratio = goal / avg;
+		frameRateTemp = int(ratio);
+		//std::cout << frameRateTemp << endl;
+		//if a frame takes 0.01 seconds, then 10 frames will meet the goal
 	}
 
 	return 0;
