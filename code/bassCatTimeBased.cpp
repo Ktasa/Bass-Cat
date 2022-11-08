@@ -67,7 +67,7 @@ int main()
 		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0 && hitFrame == 1)
 		{
 			hitThatBass = true;
-			clock.restart();
+			clock.restart(); //reset timing of animation
 		}
 		if (!Keyboard::isKeyPressed(Keyboard::Space))
 		{
@@ -92,7 +92,7 @@ int main()
 			timeCount -= update;
             if(inputTimeOut > 0){inputTimeOut--;}
 		}
-		if(hitThatBass && inputTimeOut==0 && timeCount > update && !boost)
+		if(hitThatBass && inputTimeOut==0 && timeCount > (update-0.005) && !boost)
 		{
             F1 = !F1;
 			if (F1)
@@ -116,16 +116,22 @@ int main()
 			}
 			timeCount -= update;
 		}
-		if(hitThatBass && boost)
+		if(hitThatBass && boost && timeCount > (update-0.005))
 		{
+			F1 = !F1;
+			if(F1)
+				frameID = 1;
+			else
+				frameID = 4;
 
+			timeCount -= update;
 		}
 		//Sprite *ptr = bassCat.getSprite(frameID);
 		current = bassCat.getSprite(frameID);
 		window.clear(Color::White);
 		window.draw(current);
 		window.display();
-//m git config --global user.email "you@example.com"
+
         dt = clock.restart();
         timeCount += dt.asSeconds();
         if(timeCount > update)
