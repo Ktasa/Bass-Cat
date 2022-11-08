@@ -1,4 +1,4 @@
-
+/*
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
@@ -75,8 +75,8 @@ int main()
 	int hitFrame = 1;
 
 	Clock clock;
-	Time dt; //chrono potentially more accurate
-	float goal = 0.1;
+	Time dt; 
+	float goal = 0.15;
 	float total = 0.0;
 	int frameCount = 0;
 
@@ -153,3 +153,4 @@ int main()
 
 	return 0;
 }
+*/

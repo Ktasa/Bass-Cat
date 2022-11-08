@@ -1,7 +1,8 @@
-/*
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include "cat.h"
 
 using namespace sf;
 using namespace std;
@@ -16,45 +17,15 @@ int main()
 
 	RenderWindow window(vm, "Bass Cat", Style::Default);
 
-	Texture textureA1;
-	textureA1.loadFromFile("frames/gumi A1.png");
-	Sprite spriteA1;
-	spriteA1.setTexture(textureA1);
-	spriteA1.setPosition(0, 0);
-
-	Texture textureA2;
-	textureA2.loadFromFile("frames/gumi A2.png");
-	Sprite spriteA2;
-	spriteA2.setTexture(textureA2);
-	spriteA2.setPosition(0, 0);
-
-	Texture textureA3;
-	textureA3.loadFromFile("frames/gumi A3.png");
-	Sprite spriteA3;
-	spriteA3.setTexture(textureA3);
-	spriteA3.setPosition(0, 0);
-
-	Texture textureA4;
-	textureA4.loadFromFile("frames/gumi A4.png");
-	Sprite spriteA4;
-	spriteA4.setTexture(textureA4);
-	spriteA4.setPosition(0, 0);
+	cat bassCat("gumi");
 
 	Texture textureC;
 	textureC.loadFromFile("frames/gumi C.png");
 	Sprite spriteC;
 	spriteC.setTexture(textureC);
 	spriteC.setPosition(0, 0);
-
-	float scale = 0.5;
 	float scaleC = 0.75;
-	spriteA1.setScale(scale, scale);
-	spriteA2.setScale(scale, scale);
-	spriteA3.setScale(scale, scale);
-	spriteA4.setScale(scale, scale);
 	spriteC.setScale(scaleC, scaleC);
-
-	Sprite current = spriteA1;
 
 	SoundBuffer bassBuffer;
 	bassBuffer.loadFromFile("sound/bass sfx v2.wav");
@@ -62,20 +33,25 @@ int main()
 	bass.setBuffer(bassBuffer);
 
 	Music catMusic;
-	//catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
-	//catMusic.play();
+	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
+	catMusic.play();
 
 	bool F1 = true;
 	bool hitThatBass = false;
 	int inputTimeOut = 0;
 	int hitFrame = 1;
+	Sprite current;
+	int frameID = 1;
+	bool boost = false;
 
     Clock clock;
     Time dt;
     float timeCount = 0.0;
-    float update = 0.125;
-    //bool playing = false;
+    float update = 0.10; //4 frames per beat at 150bpm
 
+	Clock test;
+	Time dtTest;
+	
 	while (window.isOpen())
 	{
 
@@ -88,38 +64,47 @@ int main()
 
 			window.close();
 		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0)
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0 && hitFrame == 1)
 		{
 			hitThatBass = true;
+			clock.restart();
 		}
 		if (!Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			inputTimeOut = 0;
 		}
+		if (Keyboard::isKeyPressed(Keyboard::LShift))
+		{
+			boost = true;
+		}
+		if (!Keyboard::isKeyPressed(Keyboard::LShift))
+		{
+			boost = false;
+		}
 		if (timeCount > update && !hitThatBass)
 		{
 			F1 = !F1;
 			if (F1)
-				current = spriteA1;
+				frameID = 1;
 			else
-				current = spriteA2;
+				frameID = 2;
 
 			timeCount -= update;
             if(inputTimeOut > 0){inputTimeOut--;}
 		}
-		if(hitThatBass && inputTimeOut==0 && timeCount > update)
+		if(hitThatBass && inputTimeOut==0 && timeCount > update && !boost)
 		{
             F1 = !F1;
 			if (F1)
-				current = spriteA3;
+				frameID = 3;
 			else
-				current = spriteA4;
+				frameID = 4;
 
 			if (hitFrame == 1)
             {
                 if(bass.getStatus() == bass.Playing)
                     bass.stop();
-                bass.play();
+                //bass.play();
                 
                 hitFrame++;
             }
@@ -131,10 +116,16 @@ int main()
 			}
 			timeCount -= update;
 		}
+		if(hitThatBass && boost)
+		{
+
+		}
+		//Sprite *ptr = bassCat.getSprite(frameID);
+		current = bassCat.getSprite(frameID);
 		window.clear(Color::White);
 		window.draw(current);
 		window.display();
-
+//m git config --global user.email "you@example.com"
         dt = clock.restart();
         timeCount += dt.asSeconds();
         if(timeCount > update)
@@ -146,4 +137,3 @@ int main()
 
 	return 0;
 }
-*/
