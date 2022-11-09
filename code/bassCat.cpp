@@ -93,6 +93,7 @@ int main()
 		if(tCount > 3.0 && tCount < 3.01)
 			cout << fps/3.0 << endl;
 		//my tests say this loop is running at over 6000 fps
+		
         dt = clock.restart();
         timeCount += dt.asSeconds();
         /*

@@ -1,5 +1,5 @@
-/*
-#include <SFML/Graphics.hpp>
+/* uses manages animations by adjusting frame timing 
+
 #include <SFML/Audio.hpp>
 #include <iostream>
 //#include<chrono>

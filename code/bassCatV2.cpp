@@ -1,4 +1,4 @@
-/* old version
+/* updates animation based on time value
 
 	bool F1 = true;
 	bool hitThatBass = false;
