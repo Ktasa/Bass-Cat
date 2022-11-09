@@ -44,10 +44,11 @@ int main()
 	int fps = 0;
 	double tCount = 0.0;
 
+	testClock.restart();
 	Sprite current;
+	//current = bassCat.getSprite();
 	while (window.isOpen())
 	{
-		testClock.restart();
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			current = spriteC;
@@ -76,23 +77,28 @@ int main()
 			bassCat.setBoost(false);
 		}
 
-		if(timeCount > update)
+		if(timeCount > updateTest)
 		{
-			current = bassCat.getSprite();
+			current = bassCat.getSprite(); //this system runs at 6000fps on linux VM
 			timeCount -= update;
 			window.clear(Color::White);
 			window.draw(current);
 			window.display();
 		}
-		//fps++;
+
+		/* //test fps
+		window.clear(Color::White); //260 fps without this
+		window.draw(current); //1130 fps without this - 900 fps faster
+		window.display();
+
 		testDT = testClock.restart();
 		tCount += testDT.asSeconds();
-		//cout << testDT.asSeconds() << endl;
-		if(tCount < 3.0)
+
+		if(tCount < 10.0)
 			fps++;
-		if(tCount > 3.0 && tCount < 3.01)
-			cout << fps/3.0 << endl;
-		//my tests say this loop is running at over 6000 fps
+		if(tCount > 10.0 && tCount < 10.01)
+			cout << fps/10.0 << endl;
+		*/
 
 		dt = clock.restart();
 		timeCount += dt.asSeconds();
