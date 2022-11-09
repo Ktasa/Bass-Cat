@@ -128,5 +128,13 @@ void cat::setBoost(bool boost)
 {
     this->boost = boost;
 }
+int cat::getInputTimeOut()
+{
+    return inputTimeOut;
+}
+int cat::getHitFrame()
+{
+    return hitFrame;
+}
 
 #endif

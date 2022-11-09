@@ -143,7 +143,7 @@ int main()
 
 			window.close();
 		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0 && hitFrame == 1)
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && bassCat.getInputTimeOut()==0 && bassCat.getHitFrame() == 1)
 		{
 			bassCat.hitThatBass();
 			clock.restart(); //reset timing of animation
