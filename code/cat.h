@@ -51,7 +51,7 @@ cat::cat(string catName)
     inputTimeOut = 0;
     actionFrame = 1;
     boost = false;
-    loadSFX("sound/bass sfx v2.wav");
+    loadSFX("sound/bass sfx O.ogg");
 }
 void cat::loadTextureSprite(string catName)
 {
@@ -120,9 +120,7 @@ int cat::getFrame()
         else
             frameID = 4;
     }
-
     F1 = !F1;
-
     return frameID;
 }
 

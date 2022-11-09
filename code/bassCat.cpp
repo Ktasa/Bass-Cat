@@ -1,8 +1,8 @@
-/*
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
-//#include<chrono>
+#include "cat.h"
 
 using namespace sf;
 using namespace std;
@@ -17,72 +17,37 @@ int main()
 
 	RenderWindow window(vm, "Bass Cat", Style::Default);
 
-	Texture textureA1;
-	textureA1.loadFromFile("frames/gumi A1.png");
-	Sprite spriteA1;
-	spriteA1.setTexture(textureA1);
-	spriteA1.setPosition(0, 0);
-
-	Texture textureA2;
-	textureA2.loadFromFile("frames/gumi A2.png");
-	Sprite spriteA2;
-	spriteA2.setTexture(textureA2);
-	spriteA2.setPosition(0, 0);
-
-	Texture textureA3;
-	textureA3.loadFromFile("frames/gumi A3.png");
-	Sprite spriteA3;
-	spriteA3.setTexture(textureA3);
-	spriteA3.setPosition(0, 0);
-
-	Texture textureA4;
-	textureA4.loadFromFile("frames/gumi A4.png");
-	Sprite spriteA4;
-	spriteA4.setTexture(textureA4);
-	spriteA4.setPosition(0, 0);
+	cat bassCat("gumi");
 
 	Texture textureC;
 	textureC.loadFromFile("frames/gumi C.png");
 	Sprite spriteC;
 	spriteC.setTexture(textureC);
 	spriteC.setPosition(0, 0);
-
-	float scale = 0.5;
 	float scaleC = 0.75;
-	spriteA1.setScale(scale, scale);
-	spriteA2.setScale(scale, scale);
-	spriteA3.setScale(scale, scale);
-	spriteA4.setScale(scale, scale);
+	//float scaleC = 1;
 	spriteC.setScale(scaleC, scaleC);
-
-	Sprite current = spriteA1;
-
-	SoundBuffer bassBuffer;
-	bassBuffer.loadFromFile("sound/bass sfx v2.wav");
-	Sound bass;
-	bass.setBuffer(bassBuffer);
 
 	Music catMusic;
 	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
-	catMusic.play();
+	//catMusic.play();
+    
+    Clock clock;
+    Time dt;
+    float timeCount = 0.0;
+    float update = 0.10; //4 frames per beat at 150bpm
+	float updateTest = update - 0.005; //allow catching the update slightly early
+	updateTest = update; //update will always be slightly late
 
-	//temporary count/modulus system determines when animation updates
-	int count = 1;
-	int frameRateTemp = 20;
-	bool F1 = true;
-	bool hitThatBass = false;
-	int inputTimeOut = 0;
-	int hitFrame = 1;
+	Clock testClock;
+	Time testDT;
+	int fps = 0;
+	double tCount = 0.0;
 
-	Clock clock;
-	Time dt; 
-	float goal = 0.15;
-	float total = 0.0;
-	int frameCount = 0;
-
+	Sprite current;
 	while (window.isOpen())
 	{
-
+		testClock.restart();
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			current = spriteC;
@@ -92,65 +57,50 @@ int main()
 
 			window.close();
 		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && inputTimeOut==0)
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) 
+		      && bassCat.getInputTimeOut()==0 && bassCat.getActionFrame() == 1)
 		{
-			hitThatBass = true;
+			bassCat.hitThatBass();
+			clock.restart(); //reset timing of animation
 		}
 		if (!Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			inputTimeOut = 0;
+			//inputTimeOut = 0;
 		}
-		if (count%frameRateTemp == 0 && !hitThatBass)
+		if (Keyboard::isKeyPressed(Keyboard::LShift))
 		{
-			F1 = !F1;
-			if (F1)
-				current = spriteA1;
-			else
-				current = spriteA2;
-			if (count > frameRateTemp)
-			{
-				count %= frameRateTemp;
-				//if(frameRateTemp > 20) //gradually vibrates faster
-				//	frameRateTemp-=1;
-			}
-			//if(inputTimeOut!=0) //automated strumming when holding space
-			//	inputTimeOut--;
+			bassCat.setBoost(true);
 		}
-		if(hitThatBass && inputTimeOut==0 && count%frameRateTemp == 0)
+		if (!Keyboard::isKeyPressed(Keyboard::LShift))
 		{
-			if (hitFrame == 1)
-			{
-				current = spriteA3;
-				bass.play();
-			}
-			else
-				current = spriteA4;
-			
-			hitFrame++;
-			if(hitFrame>2)
-			{
-				inputTimeOut = 2;
-				hitThatBass = false;
-				hitFrame = 1;
-			}
-			if (count > frameRateTemp)
-				count %= frameRateTemp;
+			bassCat.setBoost(false);
 		}
-		count++;
-		window.clear(Color::White);
-		window.draw(current);
-		window.display();
 
-		dt = clock.restart();
-		total += dt.asSeconds();
-		frameCount++;
-		float avg = total / frameCount;
-		float ratio = goal / avg;
-		frameRateTemp = int(ratio);
-		//std::cout << frameRateTemp << endl;
-		//if a frame takes 0.01 seconds, then 10 frames will meet the goal
+		if(timeCount > update)
+		{
+			current = bassCat.getSprite();
+			timeCount -= update;
+			window.clear(Color::White);
+			window.draw(current);
+			window.display();
+		}
+		//fps++;
+		testDT = testClock.restart();
+		tCount += testDT.asSeconds();
+		//cout << testDT.asSeconds() << endl;
+		if(tCount < 3.0)
+			fps++;
+		if(tCount > 3.0 && tCount < 3.01)
+			cout << fps/3.0 << endl;
+		//my tests say this loop is running at over 6000 fps
+        dt = clock.restart();
+        timeCount += dt.asSeconds();
+        /*
+		if(timeCount > update)
+            cout << timeCount << endl;
+        */
+        
 	}
 
 	return 0;
 }
-*/
