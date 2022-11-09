@@ -24,8 +24,8 @@ int main()
 	Sprite spriteC;
 	spriteC.setTexture(textureC);
 	spriteC.setPosition(0, 0);
-	//float scaleC = 0.75;
-	float scaleC = 1;
+	float scaleC = 0.75;
+	//float scaleC = 1;
 	spriteC.setScale(scaleC, scaleC);
 
 	SoundBuffer bassBuffer;
@@ -35,7 +35,7 @@ int main()
 
 	Music catMusic;
 	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
-	catMusic.play();
+	//catMusic.play();
 
 	bool F1 = true;
 	bool hitThatBass = false;
@@ -55,10 +55,56 @@ int main()
 	Clock test;
 	Time dtTest;
 	
-	/*
 	while (window.isOpen())
 	{
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			current = spriteC;
+			window.clear(Color::White);
+			window.draw(current);
+			window.display();
 
+			window.close();
+		}
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && bassCat.getInputTimeOut()==0 && bassCat.getHitFrame() == 1)
+		{
+			bassCat.hitThatBass();
+			clock.restart(); //reset timing of animation
+		}
+		if (!Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			//inputTimeOut = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::LShift))
+		{
+			bassCat.setBoost(true);
+		}
+		if (!Keyboard::isKeyPressed(Keyboard::LShift))
+		{
+			bassCat.setBoost(false);
+		}
+
+		if(timeCount > update)
+		{
+			current = bassCat.getSprite();
+			timeCount -= update;
+			window.clear(Color::White);
+			window.draw(current);
+			window.display();
+		}
+
+        dt = clock.restart();
+        timeCount += dt.asSeconds();
+        //if(timeCount > update)
+        //{
+            //cout << timeCount << endl;
+        //}
+        
+	}
+
+	/* old version
+	while (window.isOpen())
+	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			current = spriteC;
@@ -130,42 +176,7 @@ int main()
 
 			timeCount -= update;
 		}
-		*/
-	while (window.isOpen())
-	{
-
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
-		{
-			current = spriteC;
-			window.clear(Color::White);
-			window.draw(current);
-			window.display();
-
-			window.close();
-		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && bassCat.getInputTimeOut()==0 && bassCat.getHitFrame() == 1)
-		{
-			bassCat.hitThatBass();
-			clock.restart(); //reset timing of animation
-		}
-		if (!Keyboard::isKeyPressed(Keyboard::Space))
-		{
-			//inputTimeOut = 0;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::LShift))
-		{
-			bassCat.setBoost(true);
-		}
-		if (!Keyboard::isKeyPressed(Keyboard::LShift))
-		{
-			bassCat.setBoost(false);
-		}
-
-		//Sprite *ptr = bassCat.getSprite(frameID);
-		if(timeCount > update)
-		{
-			current = bassCat.getSprite(frameID);
-		}
+		current = bassCat.getSprite(frameID);
 		window.clear(Color::White);
 		window.draw(current);
 		window.display();
@@ -176,8 +187,8 @@ int main()
         //{
             //cout << timeCount << endl;
         //}
-        
 	}
+		*/
 
 	return 0;
 }

@@ -15,7 +15,7 @@ class cat
     cat();
     cat(string catName);
     int getFrame(); //return 1,2,3,4
-    Sprite getSprite(int frameID);
+    Sprite getSprite();
     void loadTextureSprite(string catName);
     void setUpdateTime(float seconds);
     void hitThatBass();
@@ -52,8 +52,8 @@ cat::cat(string catName)
 }
 void cat::loadTextureSprite(string catName)
 {
-    //float scale = 0.5;
-    float scale = 1;
+    float scale = 0.5;
+    //float scale = 1;
 
     string fileName = "frames/" + catName + " A";
     for(int i=0; i<4; i++)
@@ -71,14 +71,14 @@ void cat::setUpdateTime(float seconds)
 {
     updateTime = seconds;
 }
-Sprite cat::getSprite(int frameID)
+Sprite cat::getSprite()
 {
-    return sprites[frameID-1];
+    return sprites[getFrame()-1];
 }
 //check update time outside of this function
 int cat::getFrame()
 {
-    if (!hitThatBass || inputTimeOut > 0)
+    if (!hitBass || inputTimeOut > 0)
     {
         if (F1)
             frameID = 1;
@@ -87,7 +87,7 @@ int cat::getFrame()
 
         if(inputTimeOut > 0){inputTimeOut--;}
     }
-    else if(hitThatBass && inputTimeOut==0 && !boost)
+    else if(hitBass && inputTimeOut==0 && !boost)
     {
         if (F1)
             frameID = 3;
@@ -118,6 +118,8 @@ int cat::getFrame()
     }
 
     F1 = !F1;
+
+    return frameID;
 }
 
 void cat::hitThatBass()
