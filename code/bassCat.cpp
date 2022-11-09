@@ -41,8 +41,8 @@ int main()
 
 	Clock testClock;
 	Time testDT;
-	int fps = 0;
-	double tCount = 0.0;
+	//int fps = 0;
+	//double tCount = 0.0;
 
 	testClock.restart();
 	Sprite current;

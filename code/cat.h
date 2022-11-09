@@ -55,13 +55,13 @@ cat::cat(string catName)
 }
 void cat::loadTextureSprite(string catName)
 {
-    float scale = 0.5;
-    //float scale = 1;
+    //float scale = 0.5;
+    float scale = 1;
 
     string fileName = "frames/" + catName + " A";
     for(int i=0; i<4; i++)
     {
-        fileName += to_string(i+1) + ".png";
+        fileName += to_string(i+1) + " reduced.png";
         //cout << fileName << endl;
         textures[i].loadFromFile(fileName);
         sprites[i].setTexture(textures[i]);
