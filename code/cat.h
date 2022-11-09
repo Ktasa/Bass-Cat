@@ -142,7 +142,7 @@ int cat::getActionFrame()
 }
 void cat::loadSFX(string fileName)
 {
-	sfxBuffer.loadFromFile("sound/bass sfx v2.wav");
+	sfxBuffer.loadFromFile("sound/bass sfx O.ogg");
 	sfx.setBuffer(sfxBuffer);
 }
 
