@@ -10,10 +10,10 @@ using namespace std;
 int main()
 {
 	int resolutionWidth = VideoMode::getDesktopMode().width;
-    	int resolutionHeight = VideoMode::getDesktopMode().height;
-    //double aspectRatio = resolutionHeight * 1.0 / resolutionWidth;
+	int resolutionHeight = VideoMode::getDesktopMode().height;
+	//double aspectRatio = resolutionHeight * 1.0 / resolutionWidth;
 
-    	VideoMode vm(resolutionWidth, resolutionHeight);
+	VideoMode vm(resolutionWidth, resolutionHeight);
 
 	RenderWindow window(vm, "Bass Cat", Style::Default);
 
@@ -33,9 +33,9 @@ int main()
 	//catMusic.play();
     
 	Clock clock;
-    	Time dt;
-    	float timeCount = 0.0;
-    	float update = 0.10; //4 frames per beat at 150bpm
+	Time dt;
+	float timeCount = 0.0;
+	float update = 0.10; //4 frames per beat at 150bpm
 	float updateTest = update - 0.005; //allow catching the update slightly early
 	updateTest = update; //update will always be slightly late
 
@@ -58,7 +58,7 @@ int main()
 			window.close();
 		}
 		if ( (Keyboard::isKeyPressed(Keyboard::Space)) 
-		      && bassCat.getInputTimeOut()==0 && bassCat.getActionFrame() == 1)
+			&& bassCat.getInputTimeOut()==0 && bassCat.getActionFrame() == 1)
 		{
 			bassCat.hitThatBass();
 			clock.restart(); //reset timing of animation
@@ -93,14 +93,14 @@ int main()
 		if(tCount > 3.0 && tCount < 3.01)
 			cout << fps/3.0 << endl;
 		//my tests say this loop is running at over 6000 fps
-		
-        	dt = clock.restart();
-        	timeCount += dt.asSeconds();
-        	/*
+
+		dt = clock.restart();
+		timeCount += dt.asSeconds();
+		/*
 		if(timeCount > update)
-            		cout << timeCount << endl;
-        	*/
-        
+			cout << timeCount << endl;
+		*/
+
 	}
 
 	return 0;
