@@ -28,22 +28,9 @@ int main()
 	//float scaleC = 1;
 	spriteC.setScale(scaleC, scaleC);
 
-	SoundBuffer bassBuffer;
-	bassBuffer.loadFromFile("sound/bass sfx v2.wav");
-	Sound bass;
-	bass.setBuffer(bassBuffer);
-
 	Music catMusic;
 	catMusic.openFromFile("sound/Cowboy Spacecat Compressed.ogg");
 	//catMusic.play();
-
-	bool F1 = true;
-	bool hitThatBass = false;
-	int inputTimeOut = 0;
-	int hitFrame = 1;
-	Sprite current;
-	int frameID = 1;
-	bool boost = false;
 
     Clock clock;
     Time dt;
@@ -52,9 +39,7 @@ int main()
 	float updateTest = update - 0.005; //allow catching the update slightly early
 	updateTest = update; //update will always be slightly late
 
-	Clock test;
-	Time dtTest;
-	
+	Sprite current;
 	while (window.isOpen())
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -66,7 +51,8 @@ int main()
 
 			window.close();
 		}
-		if ( (Keyboard::isKeyPressed(Keyboard::Space)) && bassCat.getInputTimeOut()==0 && bassCat.getHitFrame() == 1)
+		if ( (Keyboard::isKeyPressed(Keyboard::Space)) 
+		      && bassCat.getInputTimeOut()==0 && bassCat.getActionFrame() == 1)
 		{
 			bassCat.hitThatBass();
 			clock.restart(); //reset timing of animation
@@ -95,14 +81,23 @@ int main()
 
         dt = clock.restart();
         timeCount += dt.asSeconds();
-        //if(timeCount > update)
-        //{
-            //cout << timeCount << endl;
-        //}
+        /*
+		if(timeCount > update)
+            cout << timeCount << endl;
+        */
         
 	}
 
 	/* old version
+
+	bool F1 = true;
+	bool hitThatBass = false;
+	int inputTimeOut = 0;
+	int hitFrame = 1;
+	Sprite current;
+	int frameID = 1;
+	bool boost = false;
+
 	while (window.isOpen())
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Escape))

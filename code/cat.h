@@ -14,30 +14,32 @@ class cat
     public:
     cat();
     cat(string catName);
-    int getFrame(); //return 1,2,3,4
     Sprite getSprite();
-    void loadTextureSprite(string catName);
-    void setUpdateTime(float seconds);
+    //void setUpdateTime(float seconds); //manage updates independently by passing time to getSprite
     void hitThatBass();
     void setBoost(bool boost);
     int getInputTimeOut();
-    int getHitFrame();
+    int getActionFrame();
+    void loadSFX(string filename);
 
     private:
+
+    int getFrame(); 
+    void loadTextureSprite(string catName);
     Sprite sprites[4];
     Texture textures[4];
     int status[4]; //F1, hitThatBass, inputTimeout, hitFrame, etc
     bool player; //is this cat on the left or right of the screen
     bool F1; //animation always alternates between frame 1 and 2 of a nearly identical set
-    bool hitBass; //activates action animation
+    bool action; //activates action animation
     int inputTimeOut; //two frames of action will always be followed by two frames rest
-    int hitFrame; //what is the current frame of the action animation
-    float updateTime;
-    bool update;
+    int actionFrame; //what is the current frame of the action animation
+    //float updateTime;
+    //bool update;
     int frameID;
     bool boost;
-
-
+    SoundBuffer sfxBuffer;
+    Sound sfx;
 };
 
 cat::cat(string catName)
@@ -45,10 +47,11 @@ cat::cat(string catName)
     loadTextureSprite(catName);
     frameID = 1;
     F1 = true;
-    hitBass = false;
+    action = false;
     inputTimeOut = 0;
-    hitFrame = 1;
+    actionFrame = 1;
     boost = false;
+    loadSFX("sound/bass sfx v2.wav");
 }
 void cat::loadTextureSprite(string catName)
 {
@@ -67,10 +70,11 @@ void cat::loadTextureSprite(string catName)
         fileName = fileName.substr(0,9+catName.length());
     }
 }
+/*
 void cat::setUpdateTime(float seconds)
 {
     updateTime = seconds;
-}
+}*/
 Sprite cat::getSprite()
 {
     return sprites[getFrame()-1];
@@ -78,7 +82,7 @@ Sprite cat::getSprite()
 //check update time outside of this function
 int cat::getFrame()
 {
-    if (!hitBass || inputTimeOut > 0)
+    if (!action || inputTimeOut > 0)
     {
         if (F1)
             frameID = 1;
@@ -87,29 +91,29 @@ int cat::getFrame()
 
         if(inputTimeOut > 0){inputTimeOut--;}
     }
-    else if(hitBass && inputTimeOut==0 && !boost)
+    else if(action && inputTimeOut==0 && !boost)
     {
         if (F1)
             frameID = 3;
         else
             frameID = 4;
 
-        if (hitFrame == 1)
+        if (actionFrame == 1)
         {
-            //if(bass.getStatus() == bass.Playing)
-            //    bass.stop();
-            //bass.play();
+            if(sfx.getStatus() == sfx.Playing)
+                sfx.stop();
+            sfx.play();
             
-            hitFrame++;
+            actionFrame++;
         }
         else
         {
             inputTimeOut = 2;
-            hitBass = false;
-            hitFrame = 1;
+            action = false;
+            actionFrame = 1;
         }
     }
-    else if(hitBass && boost)
+    else if(action && boost)
     {
         if(F1)
             frameID = 1;
@@ -124,7 +128,7 @@ int cat::getFrame()
 
 void cat::hitThatBass()
 {
-    hitBass = true;
+    action = true;
 }
 void cat::setBoost(bool boost)
 {
@@ -134,9 +138,14 @@ int cat::getInputTimeOut()
 {
     return inputTimeOut;
 }
-int cat::getHitFrame()
+int cat::getActionFrame()
 {
-    return hitFrame;
+    return actionFrame;
+}
+void cat::loadSFX(string fileName)
+{
+	sfxBuffer.loadFromFile("sound/bass sfx v2.wav");
+	sfx.setBuffer(sfxBuffer);
 }
 
 #endif
