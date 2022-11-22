@@ -15,6 +15,10 @@ private:
 
     //TextureHolder th;
 
+    //background sprite/texture
+	Sprite m_BackgroundSprite;
+	Texture m_BackgroundTexture;
+
     //include constants needed throughout the program
 
     //is the game playing or paused / menu
@@ -23,8 +27,7 @@ private:
     //include any basic variables to determine
     //the state of the program
 
-    //what is the current time of a battle
-    Time m_BattleTimeTotal;
+    Time m_GameTimeTotal;
 
     void input();
     void update(float dtAsSeconds);
