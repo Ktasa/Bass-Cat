@@ -16,7 +16,7 @@ const int CHARACTER_SHEET_WIDTH = 1000;
 class Character
 {
 public:
-    Character(CharacterType type, LineColor color, Side side);
+    Character(CharacterType type, LineColor color, Side side, float frameTime);
     //Sprite getSprite(); //unnecessary? (pass texture to draw by reference)
     void updateCharacter(float dtAsSeconds);
 
@@ -26,36 +26,20 @@ public:
 
 private:
     Texture m_charTexture;
-    VertexArray charVA; //holds coords for sprites in sheet
+    VertexArray m_charVA(Quads,4); //holds coords for sprites in sheet
     //Sprite m_sprite; //unnecessary? (pass texture to draw by reference)
         
     //CharacterType m_type; //cat or dog
     //LineColor m_lineColor;
     Side m_side; //left or right
 
-    Vector2f position; //screen position
+    Vector2f m_position; //screen position
 
     int m_frameID; //current frame
     float m_timePerFrame; //time per frame
     float m_timeUntilUpdate; 
 
-    bool isPressed; //is player input live
+    bool m_isPressed; //is player input live
 };
-
-Character::Character(CharacterType type, LineColor color, Side side)
-{
-    //load texture file
-    //CHANGE TO USE TEXTUREHOLDER
-    string fileName = "/graphics/spritesheet ";
-    if(type == CAT) {fileName += "cat ";}
-    else {fileName += "dog ";}
-    if(color == BLACK) {fileName += "B";}
-    else {fileName += "W";}
-    fileName += ".png";
-    m_charTexture.loadFromFile(fileName);
-
-    m_side = side;
-
-}
 
 #endif
