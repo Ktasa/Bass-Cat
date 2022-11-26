@@ -3,7 +3,7 @@
 void Engine::input()
 {
     Event event;
-    while(m_Window.pollEvent(event));
+    while(m_Window.pollEvent(event))
     {
         if (event.type == Event::KeyPressed)
         {
