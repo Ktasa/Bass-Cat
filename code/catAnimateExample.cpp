@@ -16,6 +16,10 @@ int main()
     RenderWindow window(VideoMode(resolution.x, resolution.y),
         "Animate Cat", Style::Default);
 
+    View mainView;
+    mainView.setSize(resolution);
+    window.setView(mainView);
+
     sf::Clock clock;
 
     Texture characterTexture;
@@ -25,15 +29,20 @@ int main()
     Character.setPrimitiveType(Quads);
     Character.resize(4);
 
+    Sprite characterSprite;
+    characterSprite.setTexture(characterTexture);
+    characterSprite.setScale(Vector2f{0.5,0.5});
+    characterSprite.setPosition(Vector2f(0,200));
+
     const int CHARACTER_SHEET_WIDTH = 1000;
     const float FRAME_TIME_S = 0.2f;
 
-    Vector2f characterPosition = {0,0};
+    //Vector2f characterPosition = {0,0};
 
-    Character[0].position = characterPosition + Vector2f(0, 0);
-    Character[1].position = characterPosition + Vector2f(CHARACTER_SHEET_WIDTH, 0);
-    Character[2].position = characterPosition + Vector2f(CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
-    Character[3].position = characterPosition + Vector2f(0, CHARACTER_SHEET_WIDTH);
+    //Character[0].position = characterPosition + Vector2f(0, 0);
+    //Character[1].position = characterPosition + Vector2f(CHARACTER_SHEET_WIDTH, 0);
+    //Character[2].position = characterPosition + Vector2f(CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
+    //Character[3].position = characterPosition + Vector2f(0, CHARACTER_SHEET_WIDTH);
 
     Time character_animate_time;
     int characterFrame = 0;
@@ -56,19 +65,24 @@ int main()
         {
             characterFrame++;
             characterFrame %= 4;
+            //std::cout << "Frame: " << characterFrame << endl;
             character_animate_time = Time::Zero;
         }
 
         // Set the texture coordinates of each vertex
         int frameOffset = CHARACTER_SHEET_WIDTH * characterFrame;
 
-        Character[0].texCoords = Vector2f(0 + frameOffset, 0);
-        Character[1].texCoords = Vector2f(CHARACTER_SHEET_WIDTH + frameOffset, 0);
-        Character[2].texCoords = Vector2f(CHARACTER_SHEET_WIDTH + frameOffset, CHARACTER_SHEET_WIDTH);
-        Character[3].texCoords = Vector2f(0 + frameOffset, CHARACTER_SHEET_WIDTH);
+        //Character[0].texCoords = Vector2f(0 + frameOffset, 0);
+        //Character[1].texCoords = Vector2f(CHARACTER_SHEET_WIDTH + frameOffset, 0);
+        //Character[2].texCoords = Vector2f(CHARACTER_SHEET_WIDTH + frameOffset, CHARACTER_SHEET_WIDTH);
+        //Character[3].texCoords = Vector2f(0 + frameOffset, CHARACTER_SHEET_WIDTH);
+
+        IntRect rect(0 + frameOffset, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
+        characterSprite.setTextureRect(rect);
 
         window.clear(Color::White);
-        window.draw(Character, &characterTexture);
+        //window.draw(Character, &characterTexture);
+        window.draw(characterSprite);
         window.display();
     }
 }
