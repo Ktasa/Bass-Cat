@@ -24,8 +24,7 @@ Engine::Engine()
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);
     //not sure whether to use Fullscreen or Default
-
-    View m_mainView;
+    
     m_mainView.setSize(resolution);
     //set up HudView
 

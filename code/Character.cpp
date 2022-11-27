@@ -1,7 +1,5 @@
 #include "Character.h"
 
-Character::Character(){}
-
 Character::Character(CharacterType type, Color color, Side side, int BPM)
 {
     //Remove once battle class handles this with setPosition

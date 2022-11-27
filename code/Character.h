@@ -15,7 +15,6 @@ const int CHARACTER_SHEET_WIDTH = 1000;
 class Character
 {
 public:
-    Character();
     Character(CharacterType type, Color color, Side side, int BPM);
     void updateCharacter(float dtAsSeconds);
     Sprite getSprite(); //use in draw()
