@@ -9,6 +9,10 @@ using namespace std;
 
 enum CharacterType{CAT, DOG};
 enum Side{LEFT, RIGHT};
+enum AnimationState
+{IDLE, //frames 1&2
+ACTION, //frames 3&4
+VICTORY}; //frames 5&6
 
 const int CHARACTER_SHEET_WIDTH = 1000;
 
@@ -36,6 +40,7 @@ private:
 
     Vector2f m_position; //screen position
 
+    AnimationState m_state = IDLE;
     int m_frameID; //current frame
     int m_frameNum; //1 or 2 (all frames come in sets of 2 nearly identical images)
     float m_timePerFrame; //time per frame
