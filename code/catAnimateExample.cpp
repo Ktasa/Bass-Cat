@@ -1,5 +1,5 @@
 //EXAMPLE PROGRAM FOR ANIMATING SPRITE SHEETS
-
+/*
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "HSV.h"
@@ -172,3 +172,4 @@ int main()
         window.display();
     }
 }
+*/

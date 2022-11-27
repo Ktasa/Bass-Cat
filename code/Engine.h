@@ -1,11 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
+#include "Character.h"
 using namespace sf;
 
 class Engine
 {
 private:
+    Character m_cat;
 
     RenderWindow m_Window;
 

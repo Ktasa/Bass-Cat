@@ -1,30 +1,45 @@
 #include "Character.h"
 
-Character::Character(CharacterType type, LineColor color, Side side, int BPM)
+Character::Character(){}
+
+Character::Character(CharacterType type, Color color, Side side, int BPM)
 {
+    //Remove once battle class handles this with setPosition
+    Vector2f resolution;
+    resolution.x = VideoMode::getDesktopMode().width;
+    resolution.y = VideoMode::getDesktopMode().height;
+
     //load texture file
     //CHANGE TO USE TEXTUREHOLDER
-    string fileName = "/graphics/spritesheet ";
-    if(type == CAT) {fileName += "cat ";}
-    else {fileName += "dog ";}
-    if(color == BLACK) {fileName += "B";}
-    else {fileName += "W";}
-    fileName += ".png";
+    string fileName;
+    if(type == CAT) {fileName += "graphics/cat.png";}
+    else {fileName += "graphics/dog.png";}
     m_charTexture.loadFromFile(fileName);
 
-    m_side = side; //use later to flip sprite
+    //set sprite texture, position, origin, scale, color
+    m_charSprite.setTexture(m_charTexture);
+    //position is relative to resolution. 
+    Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
+    Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
+    if(side==LEFT) {m_position = player1Position;}
+    else {m_position = player2Position;}
+    m_charSprite.setPosition(m_position);
+    //origin is the center of a sprite to help with alignment
+    m_charSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
+    //scaled relative to resolution
+    float catScaleXY = resolution.y / 1500;
+    Vector2f catScale = {catScaleXY,catScaleXY};
+    m_charSprite.setScale(catScale);
+    //set outline color
+    m_charSprite.setColor(color); //set color works with white sprites
 
     setFrameTime(BPM);
-
-    m_charVA.setPrimitiveType(Quads);
-    m_charVA.resize(4);
 
     m_isPressed = false;
 
     m_frameID = 0;
     m_frameNum = 1;
 
-    m_position = Vector2f(0,0); //position on screen
 }
 
 void Character::updateCharacter(float dtAsSeconds)
@@ -32,29 +47,26 @@ void Character::updateCharacter(float dtAsSeconds)
     m_timeUntilUpdate -= dtAsSeconds;
     if(m_timeUntilUpdate <= 0.0)
     {
-        //set text coords [location of current sprite]
         m_frameID++; //FIX: need to set frame base on more information
-        int frameOffset = CHARACTER_SHEET_WIDTH * m_frameID;
-        m_charVA[0].texCoords = Vector2f(0, 0 + frameOffset);
-        m_charVA[1].texCoords = Vector2f(CHARACTER_SHEET_WIDTH, 0 + frameOffset);
-        m_charVA[2].texCoords = Vector2f(CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH + frameOffset);
-        m_charVA[3].texCoords = Vector2f(0, CHARACTER_SHEET_WIDTH + frameOffset);
-
-        //reset timer, but keep a slight offset to make up for lost time
+        m_frameID %= 4;
         m_timeUntilUpdate += m_timePerFrame;
-        m_frameID %= 2;
+
+        //set texture coords of sprite
+        int frameOffset = CHARACTER_SHEET_WIDTH * m_frameID;
+        IntRect rect(0 + frameOffset, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
+        m_charSprite.setTextureRect(rect);
     }
 }
 
-//set screen position
-//make relative to View coord system?
+Sprite Character::getSprite()
+{
+    return m_charSprite;
+}
+
 void Character::setPosition(Vector2f coord)
 {
-    m_position = coord; //m_position unnecessary middle man?
-    m_charVA[0].position = m_position + Vector2f(0, 0);
-    m_charVA[1].position = m_position + Vector2f(CHARACTER_SHEET_WIDTH, 0);
-    m_charVA[2].position = m_position + Vector2f(CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
-    m_charVA[3].position = m_position + Vector2f(0, CHARACTER_SHEET_WIDTH);
+    m_position = coord;
+    m_charSprite.setPosition(m_position); 
 }
 void Character::setFrameTime(int BPM)
 {

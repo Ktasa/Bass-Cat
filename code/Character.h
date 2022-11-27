@@ -9,16 +9,16 @@ using namespace std;
 
 enum CharacterType{CAT, DOG};
 enum Side{LEFT, RIGHT};
-enum LineColor{BLACK, WHITE};
 
 const int CHARACTER_SHEET_WIDTH = 1000;
 
 class Character
 {
 public:
-    Character(CharacterType type, LineColor color, Side side, int BPM);
-    //Sprite getSprite(); //unnecessary? (pass texture to draw by reference)
+    Character();
+    Character(CharacterType type, Color color, Side side, int BPM);
     void updateCharacter(float dtAsSeconds);
+    Sprite getSprite(); //use in draw()
 
     //to be used by Battle.h to set scene
     void setPosition(Vector2f coord);
@@ -28,12 +28,11 @@ public:
 
 private:
     Texture m_charTexture;
-    VertexArray m_charVA; //holds coords for sprites in sheet
-    //Sprite m_sprite; //unnecessary? (pass texture to draw by reference)
-        
-    //CharacterType m_type; //cat or dog
-    //LineColor m_lineColor;
-    Side m_side; //left or right
+    Sprite m_charSprite; 
+
+    CharacterType m_type; //cat or dog
+    Color m_color; //line color
+    Side m_side;
 
     Vector2f m_position; //screen position
 
@@ -44,7 +43,5 @@ private:
 
     bool m_isPressed; //is player input live
 };
-
-//window.draw(talkingFace, &faceTexture); draw vetrext array by reference
 
 #endif

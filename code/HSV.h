@@ -1,5 +1,5 @@
 /*****************************************************************************
-FROM "Simple Color Conversions between RGB and HSL/HSV" BY Marukrap on github
+FROM "Simple Color Conversions between RGB and HSL/HSV" by Marukrap on github
 *****************************************************************************/
 
 #ifndef HSV_H

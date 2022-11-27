@@ -4,6 +4,9 @@ void Engine::draw()
 {
 	m_Window.clear(Color::White);
 
+    m_Window.setView(m_mainView);
+    m_Window.draw(m_cat.getSprite());
+
     //depending on game state,
     //set views and draw objects to those views
 

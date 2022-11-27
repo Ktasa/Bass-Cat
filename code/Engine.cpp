@@ -1,7 +1,10 @@
 #include "Engine.h"
+#include "Character.h"
 
 Engine::Engine()
 {
+    Character m_cat(CAT, Color::Black, LEFT, 150);
+
     Vector2f resolution;
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
@@ -10,7 +13,8 @@ Engine::Engine()
         "Bass Cat", Style::Fullscreen);
     //not sure whether to use Fullscreen or Default
 
-    //m_MainView.setSize(resolution);
+    View m_mainView;
+    m_mainView.setSize(resolution);
     //set up HudView
 
     //get background texture from texture holder, set to m_BackgroundSprite
