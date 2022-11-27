@@ -23,15 +23,15 @@ int main()
     sf::Clock clock;
 
     Texture nebulaTexture;
-    nebulaTexture.loadFromFile("graphics/nebula.png");
+    nebulaTexture.loadFromFile("graphics/nebula 800.png");
     Sprite nebulaSprite;
     nebulaSprite.setTexture(nebulaTexture);
-    nebulaSprite.setScale(1,1);
+    nebulaSprite.setScale(2,2);
     nebulaSprite.setPosition(-200,0);
     nebulaSprite.setOrigin(0,0);
 
     Texture characterTexture;
-    characterTexture.loadFromFile("graphics/spritesheet cat W.png");
+    characterTexture.loadFromFile("graphics/cat.png");
 
     //VertexArray Character;
     //Character.setPrimitiveType(Quads);
@@ -42,7 +42,8 @@ int main()
 
     Sprite characterSprite;
     characterSprite.setTexture(characterTexture);
-    characterSprite.setScale(Vector2f{0.5,0.5});
+    Vector2f catScale = {0.5,0.5};
+    characterSprite.setScale(catScale);
     //characterSprite.setScale(Vector2f{-0.5,0.5}); //make 1st argument negative to flip horizontal
     characterSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,0);
     characterSprite.setPosition(Vector2f(300,250));
@@ -52,7 +53,7 @@ int main()
     auraTexture.loadFromFile("graphics/Aura.png");
 
     float auraScale = 1.0;
-    float auraFlip = 0.9;
+    float auraFlip = 1.0;
     Sprite auraSprite;
     auraSprite.setTexture(auraTexture);
     auraSprite.setScale(Vector2f{auraFlip,auraScale});
