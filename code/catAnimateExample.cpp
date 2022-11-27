@@ -40,28 +40,40 @@ int main()
     const int CHARACTER_SHEET_WIDTH = 1000;
     const float FRAME_TIME_S = 0.2f;
 
+    Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
+    Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
+
     Sprite characterSprite;
     characterSprite.setTexture(characterTexture);
-    Vector2f catScale = {0.5,0.5};
+    float catScaleXY = resolution.y / 1500;
+    Vector2f catScale = {catScaleXY,catScaleXY};
     characterSprite.setScale(catScale);
-    //characterSprite.setScale(Vector2f{-0.5,0.5}); //make 1st argument negative to flip horizontal
-    characterSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,0);
-    characterSprite.setPosition(Vector2f(300,250));
+    //characterSprite.setScale(Vector2f{-1,1}); //make 1st argument negative to flip horizontal
+    characterSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
+    characterSprite.setPosition(player1Position);
     characterSprite.setColor(Color::White); //set color works with white sprites
 
     Texture auraTexture;
     auraTexture.loadFromFile("graphics/Aura.png");
 
-    float auraScale = 1.0;
-    float auraFlip = 1.0;
+    const int AURA_SHEET_WIDTH = 600;
+    float auraScale = resolution.y / 700;
+    float auraFlip = auraScale * 1.0;
     Sprite auraSprite;
     auraSprite.setTexture(auraTexture);
     auraSprite.setScale(Vector2f{auraFlip,auraScale});
-    auraSprite.setPosition(Vector2f(300,250));
+    auraSprite.setPosition(player1Position);
     auraSprite.setColor(Color::Cyan);
-    auraSprite.setOrigin(300,80);
-    //const int AURA_SHEET_WIDTH = 600;
+    auraSprite.setOrigin(AURA_SHEET_WIDTH/2,AURA_SHEET_WIDTH/2);
 
+    Sprite c2Sprite;
+    c2Sprite.setTexture(characterTexture);
+    
+    Vector2f c2Scale = {-catScaleXY,catScaleXY};
+    c2Sprite.setScale(c2Scale);
+    c2Sprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
+    c2Sprite.setPosition(player2Position);
+    c2Sprite.setColor(Color::White); //set color works with white sprites
     
 
 
@@ -109,12 +121,14 @@ int main()
 
         IntRect rect(0 + frameOffset, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
         characterSprite.setTextureRect(rect);
+        c2Sprite.setTextureRect(rect);
 
         window.clear(Color::Black);
-        window.draw(nebulaSprite);
+        //window.draw(nebulaSprite);
         //window.draw(Character, &characterTexture);
         window.draw(auraSprite);
         window.draw(characterSprite);
+        window.draw(c2Sprite);
         window.display();
     }
 }
