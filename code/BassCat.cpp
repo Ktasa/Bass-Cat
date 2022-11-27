@@ -5,6 +5,7 @@
 
 int main()
 {
+    /*
     Vector2f resolution;
     resolution.x = VideoMode::getDesktopMode().width;
     resolution.y = VideoMode::getDesktopMode().height;
@@ -16,7 +17,7 @@ int main()
     Time dt;
 
     Character cat(CAT, Color::White, LEFT, 150);
-    Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
+    //Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
     cat.setPosition(Vector2f(300,300));
 
     while (window.isOpen())
@@ -35,10 +36,11 @@ int main()
         window.draw(cat.getSprite());
         window.display();
     }
+    */
 
-    //Engine engine;
+    Engine engine;
 
-    //engine.run();
+    engine.run();
 
     return 0;
 }

@@ -7,6 +7,7 @@ using namespace sf;
 void Engine::update(float dtAsSeconds)
 {
 	//m_cat.updateCharacter(dtAsSeconds);
+	cat_ptr->updateCharacter(dtAsSeconds);
 
     if (m_Playing)
 	{

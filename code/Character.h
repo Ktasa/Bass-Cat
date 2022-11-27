@@ -22,6 +22,7 @@ public:
 
     //to be used by Battle.h to set scene
     void setPosition(Vector2f coord);
+    void setScale(Vector2f xyScale);
     void setFrameTime(int BPM);
     void setInput(bool isInput);
     void resetTime(); //use to resync animation

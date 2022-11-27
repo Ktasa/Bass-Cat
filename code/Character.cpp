@@ -26,10 +26,6 @@ Character::Character(CharacterType type, Color color, Side side, int BPM)
     m_charSprite.setPosition(m_position);
     //origin is the center of a sprite to help with alignment
     m_charSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
-    //scaled relative to resolution
-    float catScaleXY = resolution.y / 1500;
-    Vector2f catScale = {catScaleXY,catScaleXY};
-    m_charSprite.setScale(catScale);
     //set outline color
     m_charSprite.setColor(color); //set color works with white sprites
 
@@ -66,11 +62,14 @@ Sprite Character::getSprite()
 {
     return m_charSprite;
 }
-
 void Character::setPosition(Vector2f coord)
 {
     m_position = coord;
     m_charSprite.setPosition(m_position); 
+}
+void Character::setScale(Vector2f xyScale)
+{
+    m_charSprite.setScale(xyScale);
 }
 void Character::setFrameTime(int BPM)
 {
