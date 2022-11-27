@@ -63,18 +63,23 @@ int main()
     auraSprite.setTexture(auraTexture);
     auraSprite.setScale(Vector2f{auraFlip,auraScale});
     auraSprite.setPosition(player1Position);
-    auraSprite.setColor(Color::Cyan);
-    auraSprite.setOrigin(AURA_SHEET_WIDTH/2,AURA_SHEET_WIDTH/2);
+    auraSprite.setColor(Color(0,100,255));
+    auraSprite.setOrigin(AURA_SHEET_WIDTH/2,AURA_SHEET_WIDTH*float(0.6));
 
     Sprite c2Sprite;
     c2Sprite.setTexture(characterTexture);
-    
     Vector2f c2Scale = {-catScaleXY,catScaleXY};
     c2Sprite.setScale(c2Scale);
     c2Sprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
     c2Sprite.setPosition(player2Position);
-    c2Sprite.setColor(Color::White); //set color works with white sprites
+    c2Sprite.setColor(Color::White);
     
+    Sprite a2Sprite;
+    a2Sprite.setTexture(auraTexture);
+    a2Sprite.setScale(Vector2f{auraFlip,auraScale});
+    a2Sprite.setPosition(player2Position);
+    a2Sprite.setColor(Color(255,0,100));
+    a2Sprite.setOrigin(AURA_SHEET_WIDTH/2,AURA_SHEET_WIDTH*float(0.6));
 
 
     //Vector2f characterPosition = {0,0};
@@ -109,6 +114,7 @@ int main()
             character_animate_time = Time::Zero;
             auraFlip *= -1;
             auraSprite.setScale(auraFlip,auraScale);
+            a2Sprite.setScale(auraFlip, auraScale);
         }
 
         // Set the texture coordinates of each vertex
@@ -127,6 +133,7 @@ int main()
         //window.draw(nebulaSprite);
         //window.draw(Character, &characterTexture);
         window.draw(auraSprite);
+        window.draw(a2Sprite);
         window.draw(characterSprite);
         window.draw(c2Sprite);
         window.display();
