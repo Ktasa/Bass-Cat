@@ -25,19 +25,36 @@ int main()
     Texture characterTexture;
     characterTexture.loadFromFile("graphics/spritesheet cat W.png");
 
-    VertexArray Character;
-    Character.setPrimitiveType(Quads);
-    Character.resize(4);
+    //VertexArray Character;
+    //Character.setPrimitiveType(Quads);
+    //Character.resize(4);
+
+    const int CHARACTER_SHEET_WIDTH = 1000;
+    const float FRAME_TIME_S = 0.2f;
 
     Sprite characterSprite;
     characterSprite.setTexture(characterTexture);
     characterSprite.setScale(Vector2f{0.5,0.5});
     //characterSprite.setScale(Vector2f{-0.5,0.5}); //make 1st argument negative to flip horizontal
-    characterSprite.setPosition(Vector2f(0,200));
-    characterSprite.setColor(Color::Green); //set color works with white sprites
+    characterSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,0);
+    characterSprite.setPosition(Vector2f(100,250));
+    characterSprite.setColor(Color::White); //set color works with white sprites
 
-    const int CHARACTER_SHEET_WIDTH = 1000;
-    const float FRAME_TIME_S = 0.2f;
+    Texture auraTexture;
+    auraTexture.loadFromFile("graphics/Aura.png");
+
+    float auraScale = 1.0;
+    float auraFlip = 0.9;
+    Sprite auraSprite;
+    auraSprite.setTexture(auraTexture);
+    auraSprite.setScale(Vector2f{auraFlip,auraScale});
+    auraSprite.setPosition(Vector2f(100,250));
+    auraSprite.setColor(Color::Cyan);
+    auraSprite.setOrigin(300,80);
+    //const int AURA_SHEET_WIDTH = 600;
+
+    
+
 
     //Vector2f characterPosition = {0,0};
 
@@ -69,6 +86,8 @@ int main()
             characterFrame %= 4;
             //std::cout << "Frame: " << characterFrame << endl;
             character_animate_time = Time::Zero;
+            auraFlip *= -1;
+            auraSprite.setScale(auraFlip,auraScale);
         }
 
         // Set the texture coordinates of each vertex
@@ -84,6 +103,7 @@ int main()
 
         window.clear(Color::Black);
         //window.draw(Character, &characterTexture);
+        window.draw(auraSprite);
         window.draw(characterSprite);
         window.display();
     }
