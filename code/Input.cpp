@@ -18,6 +18,10 @@ void Engine::input()
 				m_Playing = true;
 			}
         }
+        if(event.type == Event::Closed)
+        {
+            m_Window.close();
+        }
 
     }
     //Example from CH15

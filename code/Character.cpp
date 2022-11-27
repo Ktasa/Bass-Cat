@@ -33,6 +33,9 @@ Character::Character(CharacterType type, Color color, Side side, int BPM)
     //set outline color
     m_charSprite.setColor(color); //set color works with white sprites
 
+    IntRect rect(0, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
+    m_charSprite.setTextureRect(rect);
+
     setFrameTime(BPM);
 
     m_isPressed = false;
@@ -45,6 +48,7 @@ Character::Character(CharacterType type, Color color, Side side, int BPM)
 void Character::updateCharacter(float dtAsSeconds)
 {
     m_timeUntilUpdate -= dtAsSeconds;
+    
     if(m_timeUntilUpdate <= 0.0)
     {
         m_frameID++; //FIX: need to set frame base on more information
@@ -71,7 +75,7 @@ void Character::setPosition(Vector2f coord)
 void Character::setFrameTime(int BPM)
 {
     int framesPerBeat = 4;
-    m_timePerFrame = (BPM / 60.0) / framesPerBeat;
+    m_timePerFrame = (60.0 / BPM) / framesPerBeat;
     m_timeUntilUpdate = m_timePerFrame; //countdown time
 }
 //use to resync animation

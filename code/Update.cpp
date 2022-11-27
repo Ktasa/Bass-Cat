@@ -1,10 +1,13 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
+#include "Character.h"
 
 using namespace sf;
 
 void Engine::update(float dtAsSeconds)
 {
+	//m_cat.updateCharacter(dtAsSeconds);
+
     if (m_Playing)
 	{
         /* //Example CH15

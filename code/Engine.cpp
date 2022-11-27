@@ -3,14 +3,14 @@
 
 Engine::Engine()
 {
-    Character m_cat(CAT, Color::Black, LEFT, 150);
+    //Character m_cat(CAT, Color::Black, LEFT, 150);
 
     Vector2f resolution;
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
-        "Bass Cat", Style::Fullscreen);
+        "Bass Cat", Style::Default);
     //not sure whether to use Fullscreen or Default
 
     View m_mainView;

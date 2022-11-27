@@ -7,7 +7,7 @@ using namespace sf;
 class Engine
 {
 private:
-    Character m_cat;
+    //Character m_cat;
 
     RenderWindow m_Window;
 
