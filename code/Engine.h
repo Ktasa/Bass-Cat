@@ -7,7 +7,8 @@ using namespace sf;
 class Engine
 {
 private:
-    Character* cat_ptr;
+    Character* player1;
+    //Character* player2;
 
     RenderWindow m_Window;
 
