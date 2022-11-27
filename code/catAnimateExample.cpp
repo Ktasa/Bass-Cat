@@ -23,7 +23,7 @@ int main()
     sf::Clock clock;
 
     Texture characterTexture;
-    characterTexture.loadFromFile("graphics/spritesheet cat B.png");
+    characterTexture.loadFromFile("graphics/spritesheet cat W.png");
 
     VertexArray Character;
     Character.setPrimitiveType(Quads);
@@ -32,7 +32,9 @@ int main()
     Sprite characterSprite;
     characterSprite.setTexture(characterTexture);
     characterSprite.setScale(Vector2f{0.5,0.5});
+    //characterSprite.setScale(Vector2f{-0.5,0.5}); //make 1st argument negative to flip horizontal
     characterSprite.setPosition(Vector2f(0,200));
+    characterSprite.setColor(Color::Green); //set color works with white sprites
 
     const int CHARACTER_SHEET_WIDTH = 1000;
     const float FRAME_TIME_S = 0.2f;
@@ -80,7 +82,7 @@ int main()
         IntRect rect(0 + frameOffset, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
         characterSprite.setTextureRect(rect);
 
-        window.clear(Color::White);
+        window.clear(Color::Black);
         //window.draw(Character, &characterTexture);
         window.draw(characterSprite);
         window.display();
