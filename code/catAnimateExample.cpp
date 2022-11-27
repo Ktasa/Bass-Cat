@@ -22,6 +22,14 @@ int main()
 
     sf::Clock clock;
 
+    Texture nebulaTexture;
+    nebulaTexture.loadFromFile("graphics/nebula.png");
+    Sprite nebulaSprite;
+    nebulaSprite.setTexture(nebulaTexture);
+    nebulaSprite.setScale(1,1);
+    nebulaSprite.setPosition(-200,0);
+    nebulaSprite.setOrigin(0,0);
+
     Texture characterTexture;
     characterTexture.loadFromFile("graphics/spritesheet cat W.png");
 
@@ -37,7 +45,7 @@ int main()
     characterSprite.setScale(Vector2f{0.5,0.5});
     //characterSprite.setScale(Vector2f{-0.5,0.5}); //make 1st argument negative to flip horizontal
     characterSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,0);
-    characterSprite.setPosition(Vector2f(100,250));
+    characterSprite.setPosition(Vector2f(300,250));
     characterSprite.setColor(Color::White); //set color works with white sprites
 
     Texture auraTexture;
@@ -48,7 +56,7 @@ int main()
     Sprite auraSprite;
     auraSprite.setTexture(auraTexture);
     auraSprite.setScale(Vector2f{auraFlip,auraScale});
-    auraSprite.setPosition(Vector2f(100,250));
+    auraSprite.setPosition(Vector2f(300,250));
     auraSprite.setColor(Color::Cyan);
     auraSprite.setOrigin(300,80);
     //const int AURA_SHEET_WIDTH = 600;
@@ -102,6 +110,7 @@ int main()
         characterSprite.setTextureRect(rect);
 
         window.clear(Color::Black);
+        window.draw(nebulaSprite);
         //window.draw(Character, &characterTexture);
         window.draw(auraSprite);
         window.draw(characterSprite);
