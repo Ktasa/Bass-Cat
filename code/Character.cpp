@@ -1,7 +1,7 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character(CharacterType type, Color color, Side side, int BPM)
+Character::Character(CharacterType type, Color color, PlayerID playerID, int BPM)
 {
     //Remove once battle class handles this with setPosition
     Vector2f resolution;
@@ -21,7 +21,7 @@ Character::Character(CharacterType type, Color color, Side side, int BPM)
     //position is relative to resolution. 
     Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
     Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
-    if(side==LEFT) {m_position = player1Position;}
+    if(playerID==P1) {m_position = player1Position;}
     else {m_position = player2Position;}
     m_charSprite.setPosition(m_position);
     //origin is the center of a sprite to help with alignment
@@ -41,13 +41,13 @@ Character::Character(CharacterType type, Color color, Side side, int BPM)
     m_frameNum = 0;
     m_stateChange = false;
 
-    m_side = side;
+    m_playerID = playerID;
 }
 void Character::handleInput()
 {
     //different characters use different input keys
     Keyboard::Key key;
-    if(m_side == LEFT)
+    if(m_playerID == P1)
     {key = Keyboard::Space;}
     else{key = Keyboard::Return;}
 

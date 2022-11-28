@@ -9,18 +9,20 @@ using namespace sf;
 using namespace std;
 
 enum CharacterType{CAT, DOG};
-enum Side{LEFT, RIGHT};
+enum PlayerID{P1, P2}; //replacing "side" to be more reusable
 enum AnimationState
-{IDLE, //frames 0&1
-ACTION, //frames 2&3
-VICTORY}; //frames 4&5
+{
+    IDLE, //frames 0&1
+    ACTION, //frames 2&3
+    VICTORY //frames 4&5
+}; 
 
 const int CHARACTER_SHEET_WIDTH = 1000;
 
 class Character
 {
 public:
-    Character(CharacterType type, Color color, Side side, int BPM);
+    Character(CharacterType type, Color color, PlayerID playerID, int BPM);
     void handleInput(); //use in input()
     void updateCharacter(float dtAsSeconds); //use in update()
     Sprite getSprite(); //use in draw()
@@ -40,11 +42,11 @@ private:
 
     CharacterType m_type; //cat or dog
     Color m_color; //line color
-    Side m_side;
+    PlayerID m_playerID;
 
     Vector2f m_position; //screen position
 
-    AnimationState m_state = IDLE;
+    AnimationState m_state;
     int m_frameID; //current frame
     int m_frameNum; //1 or 2 (all frames come in sets of 2 nearly identical images)
     float m_timePerFrame; //time per frame
