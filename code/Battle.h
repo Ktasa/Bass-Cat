@@ -30,21 +30,22 @@ public:
     Character* getCharacter(PlayerID id); //change "Side" to "PlayerID?"
 
 private:
-    //scene background (these can cause hard lag... must be because full screen display?)
+    Sprite background; //(these can cause hard lag... must be because full screen display?)
+    
+    //might be best to use pointers for all these class objects with lots of data
     Character *m_p1, *m_p2;
 
-    //move to character
-    Healthbar m_health;
-    //Menu m_menu;
-    Effect m_magic, m_damage;
+    //all these object pairs for each character, might be best to move to character class
+    Healthbar *m_health1, *m_health2;
+    Menu *m_menu1, *m_menu2; //menu specifically for battle options
+    Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
 
-    //Rhythm bar //I hope to display a scrolling sequence of notes with simple lines over a box
+    RhythmBar m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
     
     Text m_text; //use to announce actions
 };
 
 
-//move to character class
 //use int or doubles?
 const int MAX_HEALTH = 100;
 class Healthbar
@@ -64,7 +65,6 @@ private:
 
 };
 
-//Move to character class
 enum EffectType{MAGIC, DAMAGE};
 class Effect
 {
@@ -96,6 +96,17 @@ private:
     vector<RectangleShape*> m_rects;
     int unitsToDisplay = 100; //range of note units to be displayed
 
+
+};
+
+class Menu
+{
+public:
+    Menu(PlayerID id);
+    //getsprite
+    //set position, scale
+private:
+    //has flashing rectangle outline or tiny triangle as selector
 
 };
 
