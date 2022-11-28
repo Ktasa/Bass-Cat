@@ -13,8 +13,7 @@ private:
 	// map holds pairs of String and Texture
 	map<string, Texture> m_Textures;
 
-	// A pointer of the same type as the class itself
-	// the one and only instance
+	// Pointer to the only class instance
 	static TextureHolder* m_s_Instance;
 
 public:

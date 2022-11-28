@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "TextureHolder.h"
 
 using namespace sf;
 using namespace std;
@@ -10,9 +11,9 @@ using namespace std;
 enum CharacterType{CAT, DOG};
 enum Side{LEFT, RIGHT};
 enum AnimationState
-{IDLE, //frames 1&2
-ACTION, //frames 3&4
-VICTORY}; //frames 5&6
+{IDLE, //frames 0&1
+ACTION, //frames 2&3
+VICTORY}; //frames 4&5
 
 const int CHARACTER_SHEET_WIDTH = 1000;
 
@@ -20,10 +21,13 @@ class Character
 {
 public:
     Character(CharacterType type, Color color, Side side, int BPM);
-    void updateCharacter(float dtAsSeconds);
+    void handleInput(); //use in input()
+    void updateCharacter(float dtAsSeconds); //use in update()
     Sprite getSprite(); //use in draw()
 
+
     //to be used by Battle.h to set scene
+    void setState(AnimationState state);
     void setPosition(Vector2f coord);
     void setScale(Vector2f xyScale);
     void setFrameTime(int BPM);
@@ -47,6 +51,7 @@ private:
     float m_timeUntilUpdate; 
 
     bool m_isPressed; //is player input live
+    bool m_stateChange; //make animations repond to input without delay (bypass timer)
 };
 
 #endif

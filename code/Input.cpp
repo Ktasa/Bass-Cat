@@ -5,6 +5,7 @@ void Engine::input()
     Event event;
     while(m_Window.pollEvent(event))
     {
+        //dont put events here that need to track key releases
         if (event.type == Event::KeyPressed)
         {
             // Quit game
@@ -22,6 +23,8 @@ void Engine::input()
         {
             m_Window.close();
         }
+
+        player1->handleInput();
 
     }
     //Example from CH15

@@ -16,7 +16,7 @@ private:
     View m_HudView; //HUD
     View m_BgView; //background
 
-    //TextureHolder th;
+    TextureHolder th;
 
     //background sprite/texture
 	Sprite m_BackgroundSprite;
