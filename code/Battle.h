@@ -33,9 +33,14 @@ private:
     //scene background (these can cause hard lag... must be because full screen display?)
     Character *m_p1, *m_p2;
 
-    //Text
-    //Health bar
+    //move to character
+    Healthbar m_health;
+    //Menu m_menu;
+    Effect m_magic, m_damage;
+
     //Rhythm bar //I hope to display a scrolling sequence of notes with simple lines over a box
+    
+    Text m_text; //use to announce actions
 };
 
 
@@ -75,6 +80,22 @@ private:
     Sprite m_sprite;
     Vector2f m_position;
     Color m_color; //color of effects will be based on health/accuracy stats
+
+};
+
+
+#include "Song.h"
+class RhythmBar
+{
+public:
+    RhythmBar();
+    void loadNotes(vector<Note*> *notes);
+    vector<RectangleShape*> getRects();
+
+private:
+    vector<RectangleShape*> m_rects;
+    int unitsToDisplay = 100; //range of note units to be displayed
+
 
 };
 
