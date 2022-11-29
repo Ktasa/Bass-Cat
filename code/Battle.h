@@ -43,6 +43,10 @@ public:
 
     void handleInput();
 
+    //do calibration
+    //enact a turn
+    //get menu, health bar, rhythm bar, etc
+
 private:
     Sprite background; //(these can cause hard lag... must be because full screen display?)
     
@@ -121,15 +125,25 @@ private:
 
 };
 
+enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
+
 class CombatMenu
 {
 public:
-    CombatMenu(PlayerID id);
-    //getsprite
-    //set position, scale
-private:
-    //has flashing rectangle outline or tiny triangle as selector
+    CombatMenu();
+    void handleInput();
+    void update(float dtAsSeconds);
+    Sprite getSprite();
+    void setPlayer(PlayerID); //position changes depending on whose turn it is
+    Color setColor(Color color); //change outline color
 
+private:
+    Sprite m_sprite;
+    Sprite m_selector; //little pointy arrow / transparent box thing
+    bool m_isActive;
+    Color outlineColor;
+
+    const int NUM_OPTIONS = 4;
 };
 
 #endif
