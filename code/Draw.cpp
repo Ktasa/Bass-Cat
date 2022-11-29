@@ -7,10 +7,16 @@ void Engine::draw()
 	m_Window.clear(Color::Black);
 
     m_Window.setView(m_mainView);
-    //m_Window.draw(m_cat.getSprite());
-    Sprite catSprite = player1->getSprite();
-    m_Window.draw(catSprite);
 
+    //CHARACTER CLASS BASED DRAWING [TESTING]
+    //m_Window.draw(m_cat.getSprite());
+    //Sprite catSprite = player1->getSprite();
+    //m_Window.draw(catSprite);
+
+    //BATTLE CLASS BASED DRAWING
+    Sprite p1Sprite;
+    p1Sprite = battle->getCharacterSprite(P1);
+    m_Window.draw(p1Sprite);
     Sprite p2Sprite;
     p2Sprite = battle->getCharacterSprite(P2);
     m_Window.draw(p2Sprite);

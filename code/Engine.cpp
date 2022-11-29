@@ -7,22 +7,21 @@ Engine::Engine()
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
-    //set up new battle() instead of character here
-   battle = new Battle(DARK, CAT, CAT, "fileName.wav");
+    //set up battle manager
+    battle = new Battle(DARK, CAT, CAT, "fileName.wav");
 
-
-    player1 = new Character(P1, CAT, Color::White, 150);
+    //CHARACTER CLASS BASED CONSTRUCTION FOR TESTING
+    //player1 = new Character(P1, CAT, Color::White, 150);
     //player2 = new Character(P2, CAT, Color::White, 150);  
-    Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
-    player1->setPosition(player1Position);
-    
+    //Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
+    //player1->setPosition(player1Position);
     //size of cat proportional to resolution
-    float defaultSize = CHARACTER_SHEET_WIDTH / resolution.y;
-    float goalSize = 0.50;
-    float adjustScale = goalSize / defaultSize;
+    //float defaultSize = CHARACTER_SHEET_WIDTH / resolution.y;
+    //float goalSize = 0.50;
+    //float adjustScale = goalSize / defaultSize;
     //std::cout << "scale: " << catScaleXY << endl;
-    Vector2f catScale = {adjustScale,adjustScale};
-    player1->setScale(catScale);
+    //Vector2f catScale = {adjustScale,adjustScale};
+    //player1->setScale(catScale);
 
 
 

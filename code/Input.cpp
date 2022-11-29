@@ -24,7 +24,7 @@ void Engine::input()
             m_Window.close();
         }
 
-        player1->handleInput();
+        //player1->handleInput(); //character class based input
         battle->handleInput();
 
     }
