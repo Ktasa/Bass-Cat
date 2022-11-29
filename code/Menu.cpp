@@ -41,8 +41,8 @@ Menu::Menu()
     resolution.y = VideoMode::getDesktopMode().height;
 
     m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.5));
-    FloatRect textRect = m_menuText.getLocalBounds();
-    m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
+    m_textRect = m_menuText.getLocalBounds();
+    m_menuText.setOrigin(m_textRect.width / 2, m_textRect.height / 2);
 }
 
 void Menu::handleMenuInput()
@@ -84,13 +84,7 @@ void Menu::drawText(RenderWindow &window)
     menuFont.loadFromFile("fonts/DanmarkURWTDem.ttf");
     m_menuText.setFont(menuFont);
 
-    Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
-    m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.5));
-    FloatRect textRect = m_menuText.getLocalBounds();
-    m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
-
+    window.setView(window.getDefaultView()); //prevent view slicing errors
     window.draw(m_menuText);
 }
 

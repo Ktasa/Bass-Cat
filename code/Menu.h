@@ -22,6 +22,7 @@ public:
 
 private:
     Text m_menuText;
+    FloatRect m_textRect;
     vector<string> m_prompts;
     //vector<int> m_choices[NUM_OPTIONS]; //store user input
     vector<int> m_choices;

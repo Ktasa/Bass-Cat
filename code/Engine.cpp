@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Character.h"
-//////////
+////////////
 Engine::Engine()
 {
     Vector2f resolution;

@@ -23,7 +23,7 @@ void Engine::draw()
         m_Window.draw(p2Sprite);
     }
 //cout << "exiting battle draw()\n";
-    
+    //
     //cout << "entering draw\n";
     if(menu->isActive())
     {
