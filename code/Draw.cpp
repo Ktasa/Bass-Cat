@@ -6,14 +6,13 @@ void Engine::draw()
     //std::cout<<"Entering draw()" << endl;
 	m_Window.clear(Color::Black);
     if(battle->getState() != INACTIVE)
+    {
         m_Window.clear(battle->getBackground());
+        //cout << "battle background active\n";
+    }
 
     m_Window.setView(m_mainView);
 
-    //CHARACTER CLASS BASED DRAWING [TESTING]
-    //Sprite catSprite = player1->getSprite();
-    //m_Window.draw(catSprite);
-//cout << "entering battle draw()\n";
     //BATTLE CLASS BASED DRAWING
     if(m_Playing)
     {

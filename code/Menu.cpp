@@ -45,6 +45,9 @@ Menu::Menu()
 
 void Menu::handleInput()
 {
+    //prevent extra values from being added
+    if(m_current >= NUM_OPTIONS)
+        m_validInput = false;
     if (Keyboard::isKeyPressed(Keyboard::Num1) && m_validInput)
     {
         m_choices.push_back(1);
@@ -60,14 +63,14 @@ void Menu::handleInput()
     if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num1)))
     {m_validInput = true;}
     else
-    {m_validInput = false;}
+    {m_validInput = false;} //only allow new input for unique key presses
 }
 void Menu::update()
 {
-    if (m_current == NUM_OPTIONS)
+    if (m_current >= NUM_OPTIONS)
         m_isActive = false;
     string currentString;
-    if(m_current < m_prompts.size())
+    if(m_current < NUM_OPTIONS)
     {
         currentString = m_prompts.at(m_current);
         m_menuText.setString(currentString);

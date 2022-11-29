@@ -24,7 +24,14 @@ void Battle::setChoices(vector<int> choices)
         if(choices[2] == 1){display = LIGHT;}
         else{display = DARK;}
     }
-    else{cout << "invalid choices vector size" << endl;}
+    else
+    {
+        cout << "invalid choices vector size" << endl;
+        for(size_t i = 0; i<choices.size();i++)
+        {
+            cout << "choice " << i << ": " << choices[i] << endl;
+        }
+    }
 
     //this may be a selectable option in the future
     string songFileName = "placeholder";
@@ -34,16 +41,16 @@ void Battle::setChoices(vector<int> choices)
     int BPM = m_song->getBPM(); //important to set frame time for all animation
 
     //set up characters
-    Color outline, background;
+    Color outline;
     if(display == DARK)
     {
         outline = Color::White;
-        background = Color::Black;
+        m_display = DARK;
     }
     else
     {
         outline = Color::Black;
-        background = Color::White;
+        m_display = LIGHT;
     }
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
