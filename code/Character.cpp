@@ -21,8 +21,26 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     //position is relative to resolution. 
     Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
     Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
-    if(playerID==P1) {m_position = player1Position;}
-    else {m_position = player2Position;}
+    
+    //size of cat proportional to resolution
+    float defaultSize = CHARACTER_SHEET_WIDTH / resolution.y;
+    float goalSize = 0.50;
+    float adjustScale = goalSize / defaultSize;
+    //std::cout << "scale: " << catScaleXY << endl;
+    Vector2f p1Scale = {adjustScale,adjustScale};
+    Vector2f p2Scale = {-adjustScale,adjustScale}; //flip sprite
+
+    //set position and scale based on PlayerID
+    if(playerID==P1) 
+    {
+        m_position = player1Position;
+        m_charSprite.setScale(p1Scale);
+    }
+    else 
+    {
+        m_position = player2Position;
+        m_charSprite.setScale(p2Scale);
+    }
     m_charSprite.setPosition(m_position);
     //origin is the center of a sprite to help with alignment
     m_charSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
