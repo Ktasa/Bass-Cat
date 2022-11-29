@@ -26,6 +26,8 @@ enum BattleState
 };
 
 enum Display{LIGHT, DARK}; //black or white background/sprites
+enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
+enum EffectType{MAGIC, DAMAGE};
 
 //The game engine will have a battle object, accessing everything through there?
 
@@ -33,19 +35,18 @@ class Battle
 {
 public:
     Battle(Display mode, CharacterType p1, CharacterType p2, string songFileName);
-    void update(float dtAsSeconds); //update all objects within
-
-    //void setDisplay(Display display); //light or dark mode
-
-    //void setCharacter(PlayerID playerID, CharacterType type); 
     
-    Sprite getCharacterSprite(PlayerID id); //get sprite instead?
+    Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
+    Sprite getEffectSprite(PlayerID id, EffectType effect);
+    Sprite getCombatMenuSprite(PlayerID id);
+    Sprite getHealthBar(PlayerID id);
+    vector<RectangleShape*> getRhythmBar();
 
     void handleInput();
-
-    //do calibration
-    //enact a turn
-    //get menu, health bar, rhythm bar, etc
+    void update(float dtAsSeconds); //update all objects within
+    void drawBattle(RenderWindow &window);
+    
+    BattleState getState();
 
 private:
     Sprite background; //(these can cause hard lag... must be because full screen display?)
@@ -90,7 +91,7 @@ private:
 
 };
 
-enum EffectType{MAGIC, DAMAGE};
+//enum EffectType{MAGIC, DAMAGE};
 class Effect
 {
 public:
@@ -125,7 +126,7 @@ private:
 
 };
 
-enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
+//enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
 
 class CombatMenu
 {
