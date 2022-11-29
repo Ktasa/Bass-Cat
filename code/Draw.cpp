@@ -9,7 +9,6 @@ void Engine::draw()
     m_Window.setView(m_mainView);
 
     //CHARACTER CLASS BASED DRAWING [TESTING]
-    //m_Window.draw(m_cat.getSprite());
     //Sprite catSprite = player1->getSprite();
     //m_Window.draw(catSprite);
 
