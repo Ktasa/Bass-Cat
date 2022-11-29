@@ -1,7 +1,7 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character(CharacterType type, Color color, PlayerID playerID, int BPM)
+Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM)
 {
     //Remove once battle class handles this with setPosition
     Vector2f resolution;

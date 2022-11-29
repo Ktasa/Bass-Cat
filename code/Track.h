@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include "Song.h"
+#include "Note.h"
 
 using namespace sf;
 using namespace std;
@@ -14,7 +16,7 @@ public:
     //tracks should be set up by Song::loadTracks() by adding notes according to file read
     Track();
     void addNote(Note* note);
-    Note getNote(int unit);
+    Note* getNote(int unit);
     vector<Note*> getNotesInRange(int unit, int range); //helper function for Song::getNotesInRange
     //vector<Note*>
 

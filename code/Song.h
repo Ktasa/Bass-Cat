@@ -19,6 +19,7 @@ public:
     void loadSong(string fileName);
     void loadTracks(string fileName);
     double getDuration();
+    int getBPM();
 
     //get unit info? (read unit length info from track file when loading)
 
@@ -28,7 +29,7 @@ public:
     //setters
 
 private:
-    Music music;
+    Music m_music;
 
     //vector<Track*> m_tracks;
     double duration; //duration in seconds

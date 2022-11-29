@@ -22,7 +22,7 @@ const int CHARACTER_SHEET_WIDTH = 1000;
 class Character
 {
 public:
-    Character(CharacterType type, Color color, PlayerID playerID, int BPM);
+    Character(PlayerID playerID, CharacterType type, Color color, int BPM);
     void handleInput(); //use in input()
     void updateCharacter(float dtAsSeconds); //use in update()
     Sprite getSprite(); //use in draw()

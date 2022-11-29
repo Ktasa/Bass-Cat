@@ -4,10 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "TextureHolder.h"
+#include "Song.h"
 #include "Character.h"
 
 using namespace sf;
 using namespace std;
+
+//forward definitions prevent compile errors in Battle class
+class Healthbar;
+class CombatMenu;
+class Effect;
+class RhythmBar;
 
 enum BattleState
 {
@@ -15,19 +22,24 @@ enum BattleState
     MENU, //awaiting user selection of combat options
     INPUT,
     EFFECT,
-    VICTORY
+    ENDSCREEN
 };
 enum Turn{PLAYER1, PLAYER2};
+enum Display{LIGHT, DARK}; //black or white background/sprites
 
 //The game engine will have a battle object, accessing everything through there?
 
 class Battle
 {
 public:
-    Battle();
+    Battle(Display mode, CharacterType p1, CharacterType p2, string songFileName);
     void update(float dtAsSeconds); //update all objects within
+
+    //void setDisplay(Display display); //light or dark mode
+
+    //void setCharacter(PlayerID playerID, CharacterType type); 
     
-    Character* getCharacter(PlayerID id); //change "Side" to "PlayerID?"
+    Sprite getCharacterSprite(PlayerID id); //get sprite instead?
 
 private:
     Sprite background; //(these can cause hard lag... must be because full screen display?)
@@ -37,12 +49,18 @@ private:
 
     //all these object pairs for each character, might be best to move to character class
     Healthbar *m_health1, *m_health2;
-    Menu *m_menu1, *m_menu2; //menu specifically for battle options
+    CombatMenu *m_menu1, *m_menu2; //menu specifically for battle options
     Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
 
-    RhythmBar m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
+    RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
     
     Text m_text; //use to announce actions
+
+    Turn m_turn;
+    Display m_display;
+    
+    Song *m_song;
+
 };
 
 
@@ -90,6 +108,7 @@ class RhythmBar
 public:
     RhythmBar();
     void loadNotes(vector<Note*> *notes);
+    void setRange(int units);
     vector<RectangleShape*> getRects();
 
 private:
@@ -99,10 +118,10 @@ private:
 
 };
 
-class Menu
+class CombatMenu
 {
 public:
-    Menu(PlayerID id);
+    CombatMenu(PlayerID id);
     //getsprite
     //set position, scale
 private:

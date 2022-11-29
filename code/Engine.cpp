@@ -7,8 +7,9 @@ Engine::Engine()
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
-    player1 = new Character(CAT, Color::White, P1, 150);
-    //player2 = new Character(CAT, Color::White, P2, 150);
+    //set up new battle() instead of character here
+    player1 = new Character(P1, CAT, Color::White, 150);
+    //player2 = new Character(P2, CAT, Color::White, 150);  
     Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
     player1->setPosition(player1Position);
     
