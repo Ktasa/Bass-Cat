@@ -25,7 +25,7 @@ void Engine::input()
         }
         
         if(menu->isActive())
-            menu->handleMenuInput();
+            menu->handleInput();
         else
             battle->handleInput();
     }

@@ -14,7 +14,7 @@ class Menu
 {
 public:
     Menu();
-    void handleMenuInput(); //use in input()
+    void handleInput(); //use in input()
     void update(); //use in update()
     void drawText(RenderWindow &window); //use in draw()
     bool isActive();
@@ -22,7 +22,6 @@ public:
 
 private:
     Text m_menuText;
-    FloatRect m_textRect;
     vector<string> m_prompts;
     //vector<int> m_choices[NUM_OPTIONS]; //store user input
     vector<int> m_choices;

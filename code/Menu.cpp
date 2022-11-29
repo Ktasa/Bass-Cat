@@ -39,11 +39,11 @@ Menu::Menu()
     resolution.y = VideoMode::getDesktopMode().height;
 
     m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.5));
-    m_textRect = m_menuText.getLocalBounds();
-    m_menuText.setOrigin(m_textRect.width / 2, m_textRect.height / 2);
+    FloatRect textRect = m_menuText.getLocalBounds();
+    m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
 }
 
-void Menu::handleMenuInput()
+void Menu::handleInput()
 {
     if (Keyboard::isKeyPressed(Keyboard::Num1) && m_validInput)
     {
