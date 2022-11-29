@@ -18,6 +18,7 @@ class RhythmBar;
 
 enum BattleState
 {
+    INACTIVE,
     CALIBRATE, //sequence to sync audio with user input if necessary
     MENU, //awaiting user selection of combat options
     INPUT,
@@ -34,8 +35,10 @@ enum EffectType{MAGIC, DAMAGE};
 class Battle
 {
 public:
-    Battle(Display mode, CharacterType p1, CharacterType p2, string songFileName);
-    
+    Battle();
+    void setChoices(vector<int> choices);
+
+    Color getBackground(); //use in draw()    
     Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
     Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite getCombatMenuSprite(PlayerID id);
@@ -66,6 +69,8 @@ private:
     PlayerID m_turn; //whose turn is active
 
     Display m_display;
+
+    BattleState m_state;
     
     Song *m_song;
 

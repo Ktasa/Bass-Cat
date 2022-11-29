@@ -5,6 +5,8 @@ void Engine::draw()
 {
     //std::cout<<"Entering draw()" << endl;
 	m_Window.clear(Color::Black);
+    if(battle->getState() != INACTIVE)
+        m_Window.clear(battle->getBackground());
 
     m_Window.setView(m_mainView);
 

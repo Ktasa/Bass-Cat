@@ -18,9 +18,9 @@ void Engine::update(float dtAsSeconds)
 
     if (m_Playing)
 	{
+		if(battle->getState() == INACTIVE) //set battle options one time
+			battle->setChoices(menu->getChoices());
 		//cout << "entering updates\n";
-		//m_cat.updateCharacter(dtAsSeconds);
-		//player1->updateCharacter(dtAsSeconds);
 		battle->update(dtAsSeconds);
 		//cout << "exiting character updates\n";
 	}// End if playing

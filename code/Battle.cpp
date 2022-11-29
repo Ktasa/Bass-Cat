@@ -3,12 +3,35 @@
 using namespace sf;
 using namespace std;
 
-Battle::Battle(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
+Battle::Battle()
 {
+    m_state = INACTIVE;
+ //set up stuff that doesnt require user input
+}
+//void Battle::setChoices(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
+void Battle::setChoices(vector<int> choices)
+{
+    m_state = CALIBRATE; //1st step of actual battle 
+    //I dont like these magic numbers but Im testing the menu
+    CharacterType p1_type, p2_type;
+    Display display;
+    if(choices.size() == 3)
+    {
+        if(choices[0] == 1){p1_type = CAT;}
+        else{p1_type = DOG;}
+        if(choices[1] == 1){p2_type = CAT;}
+        else{p2_type = DOG;}
+        if(choices[2] == 1){display = LIGHT;}
+        else{display = DARK;}
+    }
+    else{cout << "invalid choices vector size" << endl;}
+
+    //this may be a selectable option in the future
+    string songFileName = "placeholder";
 
     //set up song
     m_song = new Song(songFileName);
-    int BPM = m_song->getBPM();
+    int BPM = m_song->getBPM(); //important to set frame time for all animation
 
     //set up characters
     Color outline, background;
@@ -51,4 +74,19 @@ Sprite Battle::getCharacterSprite(PlayerID id)
 {
     if(id == P1){return m_p1->getSprite();}
     else{return m_p2->getSprite();}
+}
+
+BattleState Battle::getState()
+{
+    return m_state;
+}
+
+Color Battle::getBackground()
+{
+    Color color = Color::Black;
+    if(m_display == LIGHT)
+    {color = Color::White;}
+    else if(m_display == DARK)
+    {color = Color::Black;}
+    return color;
 }

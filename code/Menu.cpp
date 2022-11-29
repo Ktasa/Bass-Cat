@@ -23,8 +23,6 @@ Menu::Menu()
     m_prompts.push_back(p1Select.str());
     m_prompts.push_back(p2Select.str());
     m_prompts.push_back(displaySelect.str());
-    //cout << "Testing vector" << endl;
-    //cout << m_prompts[0] << endl;
 
     Font font;
     font.loadFromFile("fonts/DanmarkURWTDem.ttf");
@@ -51,11 +49,13 @@ void Menu::handleMenuInput()
     {
         m_choices.push_back(1);
         m_current++;
+        //cout << "Num 1 entered" << endl;
     }
     else if (Keyboard::isKeyPressed(Keyboard::Num2) && m_validInput)
     {
         m_choices.push_back(2);
         m_current++;
+        //cout << "num 2 entered" << endl;
     }
     if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num1)))
     {m_validInput = true;}
@@ -64,20 +64,16 @@ void Menu::handleMenuInput()
 }
 void Menu::update()
 {
-    //cout << "inside inner update\n";
-    if (m_current == NUM_OPTIONS-1)
+    if (m_current == NUM_OPTIONS)
         m_isActive = false;
     string currentString;
     if(m_current < m_prompts.size())
     {
         currentString = m_prompts.at(m_current);
-    //cout << "access vector success\n";
         m_menuText.setString(currentString);
-    //cout << "exiting inner update\n";
     }
 }
 
-//better to do this with Text*?
 void Menu::drawText(RenderWindow &window)
 {
     Font menuFont;

@@ -23,22 +23,10 @@ void Engine::input()
         {
             m_Window.close();
         }
-    
-        //player1->handleInput(); //character class based input
-        //cout << "entering battle input\n";
-        battle->handleInput();
-        //cout << "exiting battle input\n";
         
         if(menu->isActive())
             menu->handleMenuInput();
+        else
+            battle->handleInput();
     }
-    //Example from CH15
-    //Not sure why this works outside the while loop?
-    /*
-    //Handle input specific to Thomas
-	if (m_Thomas.handleInput())
-	{
-		// Play a jump sound
-	}
-    */
 }
