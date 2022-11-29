@@ -8,6 +8,7 @@ void Engine::update(float dtAsSeconds)
 {
 	//m_cat.updateCharacter(dtAsSeconds);
 	player1->updateCharacter(dtAsSeconds);
+	battle->update(dtAsSeconds);
 
     if (m_Playing)
 	{

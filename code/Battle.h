@@ -24,7 +24,7 @@ enum BattleState
     EFFECT,
     ENDSCREEN
 };
-enum Turn{PLAYER1, PLAYER2};
+
 enum Display{LIGHT, DARK}; //black or white background/sprites
 
 //The game engine will have a battle object, accessing everything through there?
@@ -41,6 +41,8 @@ public:
     
     Sprite getCharacterSprite(PlayerID id); //get sprite instead?
 
+    void handleInput();
+
 private:
     Sprite background; //(these can cause hard lag... must be because full screen display?)
     
@@ -56,7 +58,8 @@ private:
     
     Text m_text; //use to announce actions
 
-    Turn m_turn;
+    PlayerID m_turn; //whose turn is active
+
     Display m_display;
     
     Song *m_song;

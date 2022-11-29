@@ -35,6 +35,18 @@ Battle::Battle(Display display, CharacterType p1_type, CharacterType p2_type, st
     //set up CombatMenu
 }
 
+void Battle::update(float dt)
+{
+    m_p1->updateCharacter(dt);
+    m_p2->updateCharacter(dt);
+}
+
+void Battle::handleInput()
+{
+    m_p1->handleInput();
+    m_p2->handleInput();
+}
+
 Sprite Battle::getCharacterSprite(PlayerID id)
 {
     if(id == P1){return m_p1->getSprite();}

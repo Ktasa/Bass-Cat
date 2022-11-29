@@ -25,6 +25,7 @@ void Engine::input()
         }
 
         player1->handleInput();
+        battle->handleInput();
 
     }
     //Example from CH15

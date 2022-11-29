@@ -11,6 +11,10 @@ void Engine::draw()
     Sprite catSprite = player1->getSprite();
     m_Window.draw(catSprite);
 
+    Sprite p2Sprite;
+    p2Sprite = battle->getCharacterSprite(P2);
+    m_Window.draw(p2Sprite);
+
     //depending on game state,
     //set views and draw objects to those views
 

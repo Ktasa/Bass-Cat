@@ -8,6 +8,9 @@ Engine::Engine()
 	resolution.y = VideoMode::getDesktopMode().height;
 
     //set up new battle() instead of character here
+   battle = new Battle(DARK, CAT, CAT, "fileName.wav");
+
+
     player1 = new Character(P1, CAT, Color::White, 150);
     //player2 = new Character(P2, CAT, Color::White, 150);  
     Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
@@ -20,6 +23,9 @@ Engine::Engine()
     //std::cout << "scale: " << catScaleXY << endl;
     Vector2f catScale = {adjustScale,adjustScale};
     player1->setScale(catScale);
+
+
+
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);

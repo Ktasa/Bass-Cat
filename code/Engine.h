@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include "Character.h"
+#include "Battle.h"
 using namespace sf;
 
 class Engine
@@ -9,6 +10,8 @@ class Engine
 private:
     Character* player1;
     //Character* player2;
+
+    Battle* battle;
 
     RenderWindow m_Window;
 
