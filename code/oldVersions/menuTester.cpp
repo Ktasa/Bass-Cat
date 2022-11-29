@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <sstream>
@@ -34,6 +35,12 @@ void menuTest()
     ostringstream displaySelect;
     displaySelect << "Select Display Mode: " << endl
                   << "1. Light" << endl << "2. Dark" << endl;
+
+    vector<string> prompts;
+    prompts.push_back(p1Select.str());
+    prompts.push_back(p2Select.str());
+    prompts.push_back(displaySelect.str());
+    
 
     Font font;
     font.loadFromFile("fonts/DanmarkURWTDem.ttf");
@@ -107,3 +114,4 @@ void menuTest()
         window.display();
     }
 }
+*/

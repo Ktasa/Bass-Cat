@@ -23,10 +23,14 @@ void Engine::input()
         {
             m_Window.close();
         }
-
+    
         //player1->handleInput(); //character class based input
+        //cout << "entering battle input\n";
         battle->handleInput();
-
+        //cout << "exiting battle input\n";
+        
+        if(menu->isActive())
+            menu->handleMenuInput();
     }
     //Example from CH15
     //Not sure why this works outside the while loop?

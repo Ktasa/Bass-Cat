@@ -3,6 +3,8 @@
 #include "TextureHolder.h"
 #include "Character.h"
 #include "Battle.h"
+#include "Menu.h"
+
 using namespace sf;
 
 class Engine
@@ -12,6 +14,7 @@ private:
     //Character* player2;
 
     Battle* battle;
+    Menu* menu;
 
     RenderWindow m_Window;
 

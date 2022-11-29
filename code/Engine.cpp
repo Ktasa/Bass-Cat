@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Character.h"
-
+//////////
 Engine::Engine()
 {
     Vector2f resolution;
@@ -9,6 +9,8 @@ Engine::Engine()
 
     //set up battle manager
     battle = new Battle(DARK, CAT, CAT, "fileName.wav");
+
+    menu = new Menu();
 
     //CHARACTER CLASS BASED CONSTRUCTION FOR TESTING
     //player1 = new Character(P1, CAT, Color::White, 150);
@@ -24,7 +26,7 @@ Engine::Engine()
     //player1->setScale(catScale);
 
 
-
+    m_Playing = false;
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);
