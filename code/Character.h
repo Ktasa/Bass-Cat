@@ -8,7 +8,7 @@
 using namespace sf;
 using namespace std;
 
-enum CharacterType{CAT, DOG};
+enum CharacterType{CAT, PANDA};
 enum PlayerID{P1, P2}; //replacing "side" to be more reusable
 enum AnimationState
 {

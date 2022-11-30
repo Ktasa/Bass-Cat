@@ -19,9 +19,9 @@ void Battle::setChoices(vector<int> choices)
     if(choices.size() == 3)
     {
         if(choices[0] == 1){p1_type = CAT;}
-        else{p1_type = DOG;}
+        else{p1_type = PANDA;}
         if(choices[1] == 1){p2_type = CAT;}
-        else{p2_type = DOG;}
+        else{p2_type = PANDA;}
         if(choices[2] == 1){display = LIGHT;}
         else{display = DARK;}
     }

@@ -12,10 +12,10 @@ Menu::Menu()
     //set up prompts
     ostringstream p1Select;
     p1Select << "Player1 Character Select:" << endl
-               << "1. Cat" << endl << "2. Dog" << endl;
+               << "1. Bass Cat" << endl << "2. Flute Panda" << endl;
     ostringstream p2Select;
     p2Select << "Player2 Character Select:" << endl
-               << "1. Cat" << endl << "2. Dog" << endl;
+               << "1. Bass Cat" << endl << "2. Flute Panda" << endl;
     ostringstream displaySelect;
     displaySelect << "Select Display Mode: " << endl
                   << "1. Light" << endl << "2. Dark" << endl;

@@ -12,7 +12,7 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     //change to use TextureHolder (not working yet)
     string fileName;
     if(type == CAT) {fileName += "graphics/cat.png";}
-    else {fileName += "graphics/dog.png";}
+    else {fileName += "graphics/panda.png";}
     //m_charTexture.loadFromFile(fileName);
     //m_charSprite.setTexture(m_charTexture);
     m_charSprite = Sprite(TextureHolder::GetTexture(fileName));
@@ -29,6 +29,13 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     //std::cout << "scale: " << catScaleXY << endl;
     Vector2f p1Scale = {adjustScale,adjustScale};
     Vector2f p2Scale = {-adjustScale,adjustScale}; //flip sprite
+    
+    //Temporary fix: I accidentally made the panda sprites backwards
+    if(type == PANDA)
+    {
+        p1Scale = {-adjustScale,adjustScale};
+        p2Scale = {adjustScale,adjustScale};
+    }
 
     //set position and scale based on PlayerID
     if(playerID==P1) 
