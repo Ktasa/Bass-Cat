@@ -6,6 +6,7 @@ using namespace std;
 Battle::Battle()
 {
     m_state = INACTIVE;
+    m_combatMenu = new CombatMenu();
  //set up stuff that doesnt require user input
 }
 //void Battle::setChoices(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
@@ -46,11 +47,13 @@ void Battle::setChoices(vector<int> choices)
     {
         outline = Color::White;
         m_display = DARK;
+        m_combatMenu->setColor(Color::White);
     }
     else
     {
         outline = Color::Black;
         m_display = LIGHT;
+        m_combatMenu->setColor(Color::Black);
     }
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
@@ -69,12 +72,22 @@ void Battle::update(float dt)
 {
     m_p1->updateCharacter(dt);
     m_p2->updateCharacter(dt);
+    m_combatMenu->update();
+
+    if(m_state == MENU)
+    {
+        if(m_combatMenu->getIsDone() == true)
+            m_state = INPUT; //if menu is done, next phase
+        else if (m_combatMenu->getIsActive() == false)
+            m_combatMenu->activate(); //if menu hasnt started, start it
+    } 
 }
 
 void Battle::handleInput()
 {
     m_p1->handleInput();
     m_p2->handleInput();
+    m_combatMenu->handleInput();
 }
 
 Sprite Battle::getCharacterSprite(PlayerID id)
@@ -83,9 +96,19 @@ Sprite Battle::getCharacterSprite(PlayerID id)
     else{return m_p2->getSprite();}
 }
 
+Sprite Battle::getCombatMenuSprite()
+{
+    return m_combatMenu->getSprite();
+}
+
 BattleState Battle::getState()
 {
     return m_state;
+}
+
+void Battle::setState(BattleState state)
+{
+    m_state = state;
 }
 
 Color Battle::getBackground()

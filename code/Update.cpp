@@ -19,10 +19,15 @@ void Engine::update(float dtAsSeconds)
     if (m_Playing)
 	{
 		if(battle->getState() == INACTIVE) //set battle options one time
+		{
 			battle->setChoices(menu->getChoices());
+			//Temporary set to MENU for teseting
+			battle->setState(MENU);
+		}
 		//cout << "entering updates\n";
+		//currently updates characters, CombatMenu
 		battle->update(dtAsSeconds);
-		//cout << "exiting character updates\n";
+		//cout << "exiting updates\n";
 	}// End if playing
 
     //update views, other objects depending on the game state

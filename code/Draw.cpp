@@ -22,6 +22,12 @@ void Engine::draw()
         Sprite p2Sprite;
         p2Sprite = battle->getCharacterSprite(P2);
         m_Window.draw(p2Sprite);
+
+        if(battle->getState() == MENU)
+        {
+            Sprite combatMenuSprite = battle->getCombatMenuSprite();
+            m_Window.draw(combatMenuSprite);
+        }
     }
 //cout << "exiting battle draw()\n";
     //

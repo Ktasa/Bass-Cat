@@ -23,7 +23,7 @@ void Engine::input()
         {
             m_Window.close();
         }
-        
+        //NOTE: change to test activity inside the handler
         if(menu->isActive())
             menu->handleInput();
         else

@@ -21,7 +21,7 @@ enum BattleState
     INACTIVE,
     CALIBRATE, //sequence to sync audio with user input if necessary
     MENU, //awaiting user selection of combat options
-    INPUT,
+    INPUT, //rhythm input
     EFFECT,
     ENDSCREEN
 };
@@ -41,7 +41,7 @@ public:
     Color getBackground(); //use in draw()    
     Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
     Sprite getEffectSprite(PlayerID id, EffectType effect);
-    Sprite getCombatMenuSprite(PlayerID id);
+    Sprite getCombatMenuSprite();
     Sprite getHealthBar(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 
@@ -50,6 +50,7 @@ public:
     void drawBattle(RenderWindow &window);
     
     BattleState getState();
+    void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
 private:
     Sprite background; //(these can cause hard lag... must be because full screen display?)
@@ -59,7 +60,7 @@ private:
 
     //all these object pairs for each character, might be best to move to character class
     StatusBar *m_status1, *m_status2;
-    CombatMenu *m_menu1, *m_menu2; //menu specifically for battle options
+    CombatMenu *m_combatMenu; //menu specifically for battle options
     Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
 
     RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
@@ -130,15 +131,20 @@ public:
     void handleInput();
     void update();
     Sprite getSprite();
-    Color setColor(Color color); //change outline color
+    void setColor(Color color); //change outline color
+    bool getIsActive();
+    bool getIsDone();
+    CombatType getChoice(PlayerID id);
 
 private:
     Sprite m_sprite;
     bool m_isActive;
     Color m_color;
+    bool m_isDone; //need another bool to distinguish when to change battle states
 
     bool m_p1Pressed; //change color during input
     bool m_p2Pressed;
+    PlayerID m_current; //which player is inputting
 
     //need to reset these values when done by setting to NO_SELECTION
     CombatType m_p1Choice; //store user input
