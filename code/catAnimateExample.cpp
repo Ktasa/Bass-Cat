@@ -1,5 +1,5 @@
 //EXAMPLE PROGRAM FOR ANIMATING SPRITE SHEETS
-/*
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "HSV.h"
@@ -8,7 +8,7 @@ using namespace sf;
 using namespace std;
 
 //NOTE: CHANGED "AURA" TO "MAGIC" IN FILENAME
-int main()
+void animateTest()
 {
     // Get the screen resolution and create an SFML window
     Vector2f resolution;
@@ -21,8 +21,44 @@ int main()
     View mainView;
     mainView.setSize(resolution);
     window.setView(mainView);
+    //window.setView(window.getDefaultView());
+    View view = window.getDefaultView();
+
+    cout << resolution.x << " " << resolution.y << endl;
+    Vector2f size = view.getSize();
+    cout << size.x << " " << size.y << endl;
+
+    
 
     sf::Clock clock;
+
+    //Rectangle Shape Test ********************************************************
+    RectangleShape health;
+    Vector2f healthSize = {resolution.x * float(0.4), resolution.y * float(0.1)};
+    Vector2f healthPosition = {resolution.x * float(0.1), resolution.y * float(1.0)};
+    //Vector2f healthPosition = {500,657};
+    health.setSize(healthSize);
+    health.setPosition(healthPosition);
+    cout << healthSize.x << " " << healthSize.y << endl;
+    cout << healthPosition.x << " " << healthPosition.y << endl;
+    FloatRect healthRect = health.getGlobalBounds();
+    health.setOrigin(healthRect.width / 2, healthRect.height / 2);
+    cout << healthRect.width / 2 << " " << healthRect.height / 2 << endl;
+    //health.setOrigin(healthRect.left, healthRect.top);
+    
+    health.setFillColor(Color::Black);
+    health.setOutlineColor(Color::White);
+    health.setOutlineThickness(3);
+
+    //adjust scale to screen resolution
+    float defaultSize = healthRect.width / resolution.x;
+    float goalSize = 0.15; 
+    float adjustScale = goalSize / defaultSize;
+    Vector2f healthScale = {adjustScale,adjustScale};
+    health.setScale(healthScale);
+
+   
+    //*****************************************************************************
 
     Texture nebulaTexture;
     nebulaTexture.loadFromFile("graphics/nebula 800.png");
@@ -164,13 +200,14 @@ int main()
         c2Sprite.setTextureRect(rect);
 
         window.clear(Color::Black);
-        //window.draw(nebulaSprite);
-        //window.draw(Character, &characterTexture);
-        window.draw(auraSprite);
-        //window.draw(a2Sprite);
+            //window.draw(nebulaSprite);
+            //window.draw(Character, &characterTexture);
+        //window.draw(auraSprite);
+            //window.draw(a2Sprite);
         window.draw(characterSprite);
-        //window.draw(c2Sprite);
+            //window.draw(c2Sprite);
+        window.draw(health);
+
         window.display();
     }
 }
-*/

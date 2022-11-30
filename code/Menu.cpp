@@ -60,7 +60,7 @@ void Menu::handleInput()
         m_current++;
         //cout << "num 2 entered" << endl;
     }
-    if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num1)))
+    if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num2)))
     {m_validInput = true;}
     else
     {m_validInput = false;} //only allow new input for unique key presses
