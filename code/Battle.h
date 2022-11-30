@@ -128,7 +128,7 @@ public:
     CombatMenu();
     void activate(); //make the menu appear
     void handleInput();
-    void update(float dtAsSeconds);
+    void update();
     Sprite getSprite();
     Color setColor(Color color); //change outline color
 
@@ -137,7 +137,10 @@ private:
     bool m_isActive;
     Color m_color;
 
-    //need to erase these values when done by setting to NO_SELECTION
+    bool m_p1Pressed; //change color during input
+    bool m_p2Pressed;
+
+    //need to reset these values when done by setting to NO_SELECTION
     CombatType m_p1Choice; //store user input
     CombatType m_p2Choice;
 

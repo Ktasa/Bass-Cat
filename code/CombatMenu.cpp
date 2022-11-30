@@ -1,4 +1,5 @@
 #include "Battle.h"
+//if class gets put into a separate header file, add that
 
 CombatMenu::CombatMenu()
 {
@@ -35,6 +36,8 @@ CombatMenu::CombatMenu()
 void CombatMenu::activate()
 {
     m_isActive = true;
+    m_p1Choice = NO_SELECTION;
+    m_p2Choice = NO_SELECTION;
 }
 
 void CombatMenu::handleInput()
@@ -51,6 +54,8 @@ void CombatMenu::handleInput()
                 m_p1Choice = BUILD_METER;
             else if (Keyboard::isKeyPressed(Keyboard::Num1)) 
                 m_p1Choice = MAGIC_ATTACK;
+            
+            m_p1Pressed = true;
         }
         if(m_p2Choice != NO_SELECTION)
         {
@@ -62,10 +67,33 @@ void CombatMenu::handleInput()
                 m_p1Choice = BUILD_METER;
             else if (Keyboard::isKeyPressed(Keyboard::L)) 
                 m_p1Choice = MAGIC_ATTACK;
+
+            m_p2Pressed = true;
         }
         if(m_p1Choice != NO_SELECTION && m_p2Choice != NO_SELECTION)
         {m_isActive = false;}
     }
-
-
 }
+
+void CombatMenu::update()
+{
+    if(m_isActive)
+    {
+        if(m_p1Pressed)
+        {m_color = Color(100,0,255);}
+        if(m_p2Pressed)
+        {m_color = Color(255,0,100);}
+    }
+}
+
+Sprite CombatMenu::getSprite()
+{
+    return m_sprite;
+}
+Color CombatMenu::setColor(Color color)
+{
+    m_color = color;
+}
+
+
+
