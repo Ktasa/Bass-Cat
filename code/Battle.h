@@ -11,7 +11,7 @@ using namespace sf;
 using namespace std;
 
 //forward definitions prevent compile errors in Battle class
-class Healthbar;
+class StatusBar;
 class CombatMenu;
 class Effect;
 class RhythmBar;
@@ -27,7 +27,7 @@ enum BattleState
 };
 
 enum Display{LIGHT, DARK}; //black or white background/sprites
-enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
+enum CombatType{ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
 enum EffectType{MAGIC, DAMAGE};
 
 //The game engine will have a battle object, accessing everything through there?
@@ -58,7 +58,7 @@ private:
     Character *m_p1, *m_p2;
 
     //all these object pairs for each character, might be best to move to character class
-    Healthbar *m_health1, *m_health2;
+    StatusBar *m_status1, *m_status2;
     CombatMenu *m_menu1, *m_menu2; //menu specifically for battle options
     Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
 
@@ -79,20 +79,26 @@ private:
 
 //use int or doubles?
 const int MAX_HEALTH = 100;
-class Healthbar
+const int MAX_METER = 100;
+class StatusBar
 {
 public:
-    Healthbar();
+    StatusBar();
     int getHealth();
-    Color getColor(); //color changes depending on health
-    RectangleShape getBar();
+    int getMeter();
+    vector<RectangleShape*> getBars(); //get the shapes to display
     void addDamage(int damage);
+    void addMeter(int meter);
     
 private:
     int health;
+    int meter;
     //display with SFML rectangles instead of sprite?
-    Sprite m_sprite;
-    RectangleShape m_bar;
+    //Sprite m_sprite;
+    RectangleShape* m_healthBackground;
+    RectangleShape* m_healthBar;
+    RectangleShape* m_meterBackground;
+    RectangleShape* m_meterBar;
 
 };
 
@@ -114,6 +120,26 @@ private:
 
 };
 
+//enum CombatType{ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
+
+class CombatMenu
+{
+public:
+    CombatMenu();
+    void handleInput();
+    void update(float dtAsSeconds);
+    Sprite getSprite();
+    void setPlayer(PlayerID); //position changes depending on whose turn it is
+    Color setColor(Color color); //change outline color
+
+private:
+    Sprite m_sprite;
+    bool m_isActive;
+    Color outlineColor;
+
+    const int NUM_OPTIONS = 4;
+};
+
 
 #include "Song.h"
 class RhythmBar
@@ -129,27 +155,6 @@ private:
     int unitsToDisplay = 100; //range of note units to be displayed
 
 
-};
-
-//enum CombatType{ATTACK, DEFEND, BUILD_MAGIC, MAGIC_ATTACK,};
-
-class CombatMenu
-{
-public:
-    CombatMenu();
-    void handleInput();
-    void update(float dtAsSeconds);
-    Sprite getSprite();
-    void setPlayer(PlayerID); //position changes depending on whose turn it is
-    Color setColor(Color color); //change outline color
-
-private:
-    Sprite m_sprite;
-    Sprite m_selector; //little pointy arrow / transparent box thing
-    bool m_isActive;
-    Color outlineColor;
-
-    const int NUM_OPTIONS = 4;
 };
 
 #endif
