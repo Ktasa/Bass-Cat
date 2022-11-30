@@ -7,6 +7,7 @@
 using namespace sf;
 using namespace std;
 
+//NOTE: CHANGED "AURA" TO "MAGIC" IN FILENAME
 int main()
 {
     // Get the screen resolution and create an SFML window
