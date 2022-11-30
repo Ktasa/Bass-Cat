@@ -63,7 +63,7 @@ int main()
     characterSprite.setColor(Color::White); //set color works with white sprites
 
     Texture auraTexture;
-    auraTexture.loadFromFile("graphics/Aura.png");
+    auraTexture.loadFromFile("graphics/magic.png");
 
     const int AURA_SHEET_WIDTH = 600;
     float auraScale = resolution.y / 700;

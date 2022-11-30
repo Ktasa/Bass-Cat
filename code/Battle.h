@@ -27,7 +27,7 @@ enum BattleState
 };
 
 enum Display{LIGHT, DARK}; //black or white background/sprites
-enum CombatType{ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
+enum CombatType{NO_SELECTION, ATTACK, BLOCK, BUILD_METER, MAGIC_ATTACK,};
 enum EffectType{MAGIC, DAMAGE};
 
 //The game engine will have a battle object, accessing everything through there?
@@ -120,24 +120,29 @@ private:
 
 };
 
-//enum CombatType{ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
+//enum CombatType{NO_SELECTION, ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
 
 class CombatMenu
 {
 public:
     CombatMenu();
+    void activate(); //make the menu appear
     void handleInput();
     void update(float dtAsSeconds);
     Sprite getSprite();
-    void setPlayer(PlayerID); //position changes depending on whose turn it is
     Color setColor(Color color); //change outline color
 
 private:
     Sprite m_sprite;
     bool m_isActive;
-    Color outlineColor;
+    Color m_color;
 
-    const int NUM_OPTIONS = 4;
+    //need to erase these values when done by setting to NO_SELECTION
+    CombatType m_p1Choice; //store user input
+    CombatType m_p2Choice;
+
+    const int COMBAT_MENU_WIDTH = 700;
+    //const int NUM_OPTIONS = 4;
 };
 
 
