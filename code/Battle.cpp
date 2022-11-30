@@ -45,6 +45,7 @@ void Battle::setChoices(vector<int> choices)
     Color outline;
     if(display == DARK)
     {
+        //cout << "Entering battle; if display == DARK" << endl;
         outline = Color::White;
         m_display = DARK;
         m_combatMenu->setColor(Color::White);

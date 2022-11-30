@@ -6,6 +6,7 @@
 #include "TextureHolder.h"
 #include "Song.h"
 #include "Character.h"
+#include "CombatMenu.h"
 
 using namespace sf;
 using namespace std;
@@ -27,7 +28,7 @@ enum BattleState
 };
 
 enum Display{LIGHT, DARK}; //black or white background/sprites
-enum CombatType{NO_SELECTION, ATTACK, BLOCK, BUILD_METER, MAGIC_ATTACK,};
+//enum CombatType{NO_SELECTION, ATTACK, BLOCK, BUILD_METER, MAGIC_ATTACK,}; //moved to CombatMenu.h
 enum EffectType{MAGIC, DAMAGE};
 
 //The game engine will have a battle object, accessing everything through there?
@@ -120,40 +121,6 @@ private:
     Color m_color; //color of effects will be based on health/accuracy stats
 
 };
-
-//enum CombatType{NO_SELECTION, ATTACK, DEFEND, BUILD_METER, MAGIC_ATTACK,};
-
-class CombatMenu
-{
-public:
-    CombatMenu();
-    void activate(); //make the menu appear
-    void handleInput();
-    void update();
-    Sprite getSprite();
-    void setColor(Color color); //change outline color
-    bool getIsActive();
-    bool getIsDone();
-    CombatType getChoice(PlayerID id);
-
-private:
-    Sprite m_sprite;
-    bool m_isActive;
-    Color m_color;
-    bool m_isDone; //need another bool to distinguish when to change battle states
-
-    bool m_p1Pressed; //change color during input
-    bool m_p2Pressed;
-    PlayerID m_current; //which player is inputting
-
-    //need to reset these values when done by setting to NO_SELECTION
-    CombatType m_p1Choice; //store user input
-    CombatType m_p2Choice;
-
-    const int COMBAT_MENU_WIDTH = 700;
-    //const int NUM_OPTIONS = 4;
-};
-
 
 #include "Song.h"
 class RhythmBar

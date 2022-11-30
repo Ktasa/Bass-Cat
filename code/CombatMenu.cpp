@@ -1,5 +1,4 @@
-#include "Battle.h"
-//if class gets put into a separate header file, add that
+#include "CombatMenu.h"
 
 CombatMenu::CombatMenu()
 {
@@ -10,7 +9,7 @@ CombatMenu::CombatMenu()
     m_current = P1;
 
     string fileName = "graphics/combat menu.png";
-    m_color = Color::White;
+    m_color = Color::Green; //a green menu means the program is failing to change its color
     m_sprite = Sprite(TextureHolder::GetTexture(fileName));
     m_sprite.setColor(m_color);
 
@@ -42,7 +41,7 @@ void CombatMenu::activate()
         m_isDone = false;
         m_p1Choice = NO_SELECTION;
         m_p2Choice = NO_SELECTION;
-        cout << "activated" << endl;
+        //cout << "activated" << endl;
     }
 }
 bool CombatMenu::getIsActive()
@@ -60,7 +59,7 @@ void CombatMenu::handleInput()
     {
         if(m_p1Choice == NO_SELECTION)
         {
-            cout << "Inside p1 choice" << endl;
+            //cout << "Inside p1 choice" << endl;
             if (Keyboard::isKeyPressed(Keyboard::Num1)) 
                 m_p1Choice = ATTACK;
             else if (Keyboard::isKeyPressed(Keyboard::Num2)) 
@@ -78,7 +77,7 @@ void CombatMenu::handleInput()
         }
         if(m_p2Choice == NO_SELECTION)
         {
-            cout << "inside p2 choice" << endl;
+            //cout << "inside p2 choice" << endl;
             if (Keyboard::isKeyPressed(Keyboard::H)) 
                 m_p2Choice = ATTACK;
             else if (Keyboard::isKeyPressed(Keyboard::J)) 
@@ -98,7 +97,7 @@ void CombatMenu::handleInput()
         {
             m_isActive = false;
             m_isDone = true;
-            cout << "deactivated" << endl;
+            //cout << "deactivated" << endl;
         }
     }
 }
@@ -121,8 +120,10 @@ Sprite CombatMenu::getSprite()
 }
 void CombatMenu::setColor(Color color)
 {
-    //m_color = color;
+    m_color = color;
     m_sprite.setColor(color);
+    //cout << "Green " << Color::Green.toInteger() << endl;
+    //cout << "Color set to: " << color.toInteger() << endl;
 }
 
 CombatType CombatMenu::getChoice(PlayerID id)
