@@ -1,3 +1,8 @@
+SONG Calibration
+QUARTER_NOTE_TIME 480
+TRACKS
+1 Drums
+
 0, 0, Header, 1, 1, 480
 1, 0, Start_track
 1, 0, Title_t, "Drumset\000"
