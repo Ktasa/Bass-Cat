@@ -16,6 +16,8 @@ public:
     Note(int midiTime);
     void setStart(int midiTime);
     void setDuration(int midiTime);
+    int getStart();
+    int getDuration();
     virtual int checkNoteAccuracy() = 0;
     
 protected:

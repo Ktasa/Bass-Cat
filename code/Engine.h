@@ -4,7 +4,8 @@
 #include "Character.h"
 #include "Battle.h"
 #include "Menu.h"
-#include "Note.h"
+
+//#include "Note.h"
 
 using namespace sf;
 
@@ -16,7 +17,7 @@ private:
 
     Battle* battle;
     Menu* menu;
-    Note* noteTest;
+    //Note* noteTest;
 
     RenderWindow m_Window;
 

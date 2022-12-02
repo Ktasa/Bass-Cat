@@ -1,5 +1,5 @@
 #include "Note.h"
-//
+/// //
 Note::Note()
 {
     m_start = 0;
@@ -17,6 +17,14 @@ void Note::setStart(int midiTime)
 void Note::setDuration(int midiTime)
 {
     m_duration = midiTime;
+}
+int Note::getStart()
+{
+    return m_start;
+}
+int Note::getDuration()
+{
+    return m_duration;
 }
 
 Tapper::Tapper(int midiTime)

@@ -13,9 +13,9 @@ Engine::Engine()
 
     menu = new Menu();
 
-    noteTest = new Tapper(480);
-    vector<Note*> NV;
-    NV.push_back(noteTest);
+    //noteTest = new Tapper(480);
+    //vector<Note*> NV;
+    //NV.push_back(noteTest);
 
 
     m_Playing = false;
