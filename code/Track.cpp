@@ -23,6 +23,7 @@ void Track::setSongDuration(int midiTime)
     //maybe better to only use the range based one
 //}
 //make a version based on current note index for checking accuracy
+//UNFINISHED - its hard to check notes in a range when theres looping values
 vector<Note*> Track::getNotesInRange(int midiTime, int range)
 {
     //FIX: Need to check if the desired range contains notes, or returns an empty vector
