@@ -1,3 +1,4 @@
+/*
 #ifndef NOTE_H
 #define NOTE_H
 
@@ -42,11 +43,8 @@ private:
     //int m_duration; //how many units does this note last
 };
 
-//use to mark empty space in track?
-//probably not using this
-/*
-class Silence : public Note
-{};
-*/
+
 
 #endif
+
+*/

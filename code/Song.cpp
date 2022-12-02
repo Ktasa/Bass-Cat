@@ -13,7 +13,7 @@ Song::Song(string fileName)
 }
 int Song::getBPM()
 {
-    return -1; //temporary definition
+    return 80; //temporary definition
 }
 void Song::loadSong(string fileName)
 {
@@ -22,7 +22,7 @@ void Song::loadSong(string fileName)
 void Song::loadTracks(string fileName)
 {
     //assume CSV will contain data for these instruments in this order
-    ifstream in(fileName);
+    //ifstream in(fileName);
     /*
     Track* sax = new Track();   //MIDI track 1
     Track* piano = new Track(); //MIDI track 2 (track 3 is empty bass cleff data)
@@ -39,4 +39,9 @@ void Song::loadTracks(string fileName)
     //get the BPM
 
 
+}
+Track Song::getTrack(int trackID)
+{
+    Track t;
+    return t; //temp definition
 }

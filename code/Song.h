@@ -9,9 +9,7 @@
 #include <sstream>
 #include <vector>
 #include "Track.h"
-#include "Note.h"
-
-using namespace std;
+//#include "Note.h"
 
 using namespace sf;
 using namespace std;
@@ -36,7 +34,7 @@ public:
 private:
     Music m_music;
 
-    vector<Track*> m_tracks;
+    //vector<Track*> m_tracks;
     double m_duration; //duration in seconds
     int m_totalUnits; //total number of note subunits
     int m_BPM;

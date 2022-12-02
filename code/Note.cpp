@@ -1,3 +1,4 @@
+/*
 #include "Note.h"
 
 Note::Note()
@@ -33,3 +34,4 @@ int Holder::checkNoteAccuracy()
 {
     return 1; //temp
 }
+*/

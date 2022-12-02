@@ -127,7 +127,7 @@ class RhythmBar
 {
 public:
     RhythmBar();
-    void loadNotes(vector<Note*> *notes);
+    //void loadNotes(vector<Note*> notes);
     void setRange(int units);
     vector<RectangleShape*> getRects();
 
