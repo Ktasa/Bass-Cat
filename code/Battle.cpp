@@ -1,5 +1,5 @@
 #include "Battle.h"
-//
+////
 using namespace sf;
 using namespace std;
 
@@ -35,7 +35,7 @@ void Battle::setChoices(vector<int> choices)
     }
 
     //this may be a selectable option in the future
-    string songFileName = "placeholder";
+    string songFileName = "sound/Untitled 05.ogg";
 
     //set up song
     m_song = new Song(songFileName);

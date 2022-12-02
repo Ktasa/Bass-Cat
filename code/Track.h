@@ -29,6 +29,10 @@ private:
     int m_totalUnits; //total number of note subunits
     int m_unit; //identify the current subunit of the song
 };
+Track::Track()
+{
+    //maybe add BPM or something to the constructor
+}
 
 
 
