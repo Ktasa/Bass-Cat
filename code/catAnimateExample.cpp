@@ -78,9 +78,9 @@ void animateTest()
     //use "0, 100, 255" formula to make nice looking colors for Aura
     Color blue = Color(0,100,255);
     Color red = Color(255,0,100);
-    Color green = Color(0,255,100);
-    Color purple = Color(100,0,255);
-    Color orange = Color(255,100,0);
+    //Color green = Color(0,255,100);
+    //Color purple = Color(100,0,255);
+    //Color orange = Color(255,100,0);
 
     const int CHARACTER_SHEET_WIDTH = 1000;
     const float FRAME_TIME_S = 0.15f;
