@@ -1,11 +1,10 @@
-/*
 #ifndef NOTE_H
 #define NOTE_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "Battle.h" 
+//#include "Battle.h" 
 
 using namespace sf;
 using namespace std;
@@ -38,13 +37,10 @@ class Holder : public Note
 public:
     Holder(int midiTime);
     int checkNoteAccuracy() override;
-
-private:
+//private:
     //int m_duration; //how many units does this note last
 };
 
 
 
 #endif
-
-*/

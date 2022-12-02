@@ -1,12 +1,15 @@
-/*
 #include "Note.h"
-
+//
 Note::Note()
-{}
+{
+    m_start = 0;
+    m_duration = 0;
+}
 Note::Note(int midiTime)
 {
     m_start = midiTime;
 }
+
 void Note::setStart(int midiTime)
 {
     m_start = midiTime;
@@ -20,6 +23,7 @@ Tapper::Tapper(int midiTime)
 {
     m_start = midiTime;
 }
+
 int Tapper::checkNoteAccuracy()
 {
     //dont factor duration the same way as Holder
@@ -34,4 +38,3 @@ int Holder::checkNoteAccuracy()
 {
     return 1; //temp
 }
-*/

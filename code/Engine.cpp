@@ -1,6 +1,6 @@
 #include "Engine.h"
 //#include "Character.h"
-////////////
+//////////////
 Engine::Engine()
 {
     Vector2f resolution;
@@ -12,6 +12,10 @@ Engine::Engine()
     battle = new Battle();
 
     menu = new Menu();
+
+    noteTest = new Tapper(480);
+    vector<Note*> NV;
+    NV.push_back(noteTest);
 
 
     m_Playing = false;
