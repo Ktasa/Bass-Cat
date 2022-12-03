@@ -39,6 +39,7 @@ void Battle::setChoices(vector<int> choices)
 
     //this may be a selectable option in the future
     string songFileName = "sound/Untitled 05.ogg";
+    //songFileName = "sound/Calibration.wav";
 
     //set up song
     m_song = new Song(songFileName);
@@ -70,10 +71,13 @@ void Battle::setChoices(vector<int> choices)
     //set up effects
     //set up rhythm bar
     //set up CombatMenu
+
+    m_song->play();
 }
 
 void Battle::update(float dt)
 {
+
     m_p1->updateCharacter(dt);
     m_p2->updateCharacter(dt);
     m_combatMenu->update();

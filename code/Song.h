@@ -23,6 +23,11 @@ public:
     void loadTracks(string fileName);
     double getDuration();
     int getBPM();
+    void play();
+    void pause();
+    void stop();
+    void setOffset(float seconds);
+    bool isPlaying();
 
     //get unit info? (read unit length info from track file when loading)
 

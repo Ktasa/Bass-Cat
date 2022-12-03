@@ -13,7 +13,7 @@ Song::Song(string fileName)
 }
 int Song::getBPM()
 {
-    return 80; //temporary definition
+    return 160; //temporary definition
 }
 void Song::loadSong(string fileName)
 {
@@ -44,4 +44,21 @@ Track Song::getTrack(int trackID)
 {
     Track t;
     return t; //temp definition
+}
+
+void Song::play()
+{
+    m_music.setLoop(true);
+    m_music.play();
+}
+
+//unnecessary since I can loop the song with sf::music settings
+bool Song::isPlaying()
+{
+    bool isPlaying = false;
+    if(m_music.getStatus() == m_music.Playing)
+    {
+        isPlaying = true;
+    }
+    return isPlaying;
 }
