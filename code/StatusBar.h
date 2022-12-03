@@ -27,10 +27,11 @@ public:
     void setPosition(PlayerID id);
     void setUp(PlayerID id, Color color);
     //RectangleShape* getHealthBG(); //test drawing
+
     
 private:
-    int health;
-    int meter;
+    int m_health;
+    int m_meter;
     //display with SFML rectangles instead of sprite?
     //Sprite m_sprite;
     vector<RectangleShape*> m_statusBars;

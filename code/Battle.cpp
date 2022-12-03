@@ -84,10 +84,13 @@ void Battle::setChoices(vector<int> choices)
 
 void Battle::update(float dt)
 {
-
     m_p1->updateCharacter(dt);
     m_p2->updateCharacter(dt);
     m_combatMenu->update();
+
+    //move to the appropriate phase later
+    m_status1->update();
+    m_status2->update();
 
     if(m_state == MENU)
     {
