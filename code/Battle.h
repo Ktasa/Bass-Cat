@@ -5,8 +5,12 @@
 #include <iostream>
 #include "TextureHolder.h"
 #include "Song.h"
+#include "Track.h"
+#include "Note.h"
+#include "Rhythm.h"
 #include "Character.h"
 #include "CombatMenu.h"
+
 
 using namespace sf;
 using namespace std;
@@ -46,6 +50,10 @@ public:
     Sprite getHealthBar(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 
+    int getScore(Track& input, int midiTime); //int score/100 of an input session
+    void setScore(PlayerID id, int score);
+    //void combatAction(CombatType type, PlayerID id);
+
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
     void drawBattle(RenderWindow &window);
@@ -54,7 +62,9 @@ public:
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
 private:
-    Sprite background; //(these can cause hard lag... must be because full screen display?)
+    bool m_recordingInput;
+    
+    //Sprite background; //(these can cause hard lag... must be because full screen display?)
     
     //might be best to use pointers for all these class objects with lots of data
     Character *m_p1, *m_p2;
@@ -75,6 +85,10 @@ private:
     BattleState m_state;
     
     Song *m_song;
+
+    Rhythm *m_input; //store user input as Note data
+    
+    int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase
 
 };
 

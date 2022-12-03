@@ -8,6 +8,14 @@ Track::Track()
     //m_notes.push_back(n);
 
 }
+void Track::clear()
+{
+    for(size_t i=0; i < m_notes.size(); i++)
+    {
+        //delete m_notes[i]; //bad to delete abstract class pointer
+    }
+    m_notes.clear();
+}
 
 void Track::addNote(Note* note)
 {
@@ -17,13 +25,14 @@ void Track::setSongDuration(int midiTime)
 {
     m_songDuration = midiTime;
 }
-//Note* getNote(int unit)
-//{
-    //this is complicated because midi time != vector index
-    //maybe better to only use the range based one
-//}
-//make a version based on current note index for checking accuracy
+vector<Note*> Track::getNotes()
+{
+    return m_notes;
+}
+
+//make a version based on current note index for checking accuracy?
 //UNFINISHED - its hard to check notes in a range when theres looping values
+/*
 vector<Note*> Track::getNotesInRange(int midiTime, int range)
 {
     //FIX: Need to check if the desired range contains notes, or returns an empty vector
@@ -163,3 +172,4 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
 
 
 }
+*/

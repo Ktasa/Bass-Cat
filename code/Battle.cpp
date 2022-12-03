@@ -1,5 +1,5 @@
 #include "Battle.h"
-///////////
+/////////////////
 using namespace sf;
 using namespace std;
 
@@ -7,6 +7,9 @@ Battle::Battle()
 {
     m_state = INACTIVE;
     m_combatMenu = new CombatMenu();
+    m_input = new Rhythm();
+    m_recordingInput = false;
+    m_turn = P1;
  //set up stuff that doesnt require user input
 }
 //void Battle::setChoices(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
@@ -81,7 +84,33 @@ void Battle::update(float dt)
             m_state = INPUT; //if menu is done, next phase
         else if (m_combatMenu->getIsActive() == false)
             m_combatMenu->activate(); //if menu hasnt started, start it
-    } 
+    }
+    else if(m_state == INPUT && m_turn == P1) 
+    {
+        if(m_input->getIsDone() == true)
+        {
+            m_turn = P2; //if recording done, wait. We need two 
+            //do the calculations and send score to the necessary place
+        }
+        else if(m_input->getIsActive() == false)
+        {
+            //convert DT to midi time? Is it better to calculate input in the engine?
+            //calculate midi time in update.cpp and send it here?
+            //m_input->activate(P1, int midiTime, int range);
+        }
+    }
+    else if(m_state == INPUT && m_turn == P2) 
+    {
+        if(m_input->getIsDone() == true)
+        {
+            m_state = EFFECT; //if recording done, wait. We need two 
+            //do the calculations and send score to the necessary place
+        }
+        else if(m_input->getIsActive() == false)
+        {
+            //m_input->activate(P2, int midiTime, int range);
+        }
+    }
 }
 
 void Battle::handleInput()

@@ -14,13 +14,14 @@ class Track
 {
 public:
     //tracks should be set up by Song::loadTracks() by adding notes according to file read
+    //add destructor to free input notes that are no longer relevant?
     Track();
+    void clear();
     void addNote(Note* note);
     void setSongDuration(int midiTime);
-    //Note* getNote(int unit);
+    vector<Note*> getNotes(); //returns all notes. Helper function for Rhythm class
     vector<Note*> getNotesInRange(int unit, int range); //helper function for Song::getNotesInRange
-    //vector<Note*>
-
+   
 private:
     //how to access the right notes if given units
     //Loop through values until you get one that says its unit is in range?
