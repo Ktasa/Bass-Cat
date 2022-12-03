@@ -22,9 +22,10 @@ public:
     vector<RectangleShape*> getBars(); //get the shapes to display
     void addDamage(int damage);
     void addMeter(int meter);
-    void setColor(Display display);
+    //void setColor(Display display);
+    void setColor(Color color);
     void setPosition(PlayerID id);
-    void setUp(PlayerID id, Display display);
+    void setUp(PlayerID id, Color color);
     //RectangleShape* getHealthBG(); //test drawing
     
 private:

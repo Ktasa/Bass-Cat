@@ -10,6 +10,7 @@ StatusBar::StatusBar()
     m_statusBars.push_back(m_healthBG);
     //m_statusBars.push_back(m_healthBar);
 }
+
 int StatusBar::getHealth()
 {
     return health;
@@ -26,9 +27,10 @@ vector<RectangleShape*> StatusBar::getBars()
 //{
 //    return m_healthBG;
 //}
-void StatusBar::setColor(Display display)
+
+void StatusBar::setColor(Color color)
 {
-    if(display == DARK)
+    if(color == Color::Black)
     {
         m_healthBG->setFillColor(Color::Black);
         m_healthBG->setOutlineColor(Color::White);
@@ -38,7 +40,9 @@ void StatusBar::setColor(Display display)
         m_healthBG->setFillColor(Color::White);
         m_healthBG->setOutlineColor(Color::Black);
     }
+    m_healthBG->setOutlineThickness(3);
 }
+
 void StatusBar::setPosition(PlayerID id)
 {
     Vector2f resolution;
@@ -71,8 +75,8 @@ void StatusBar::setPosition(PlayerID id)
     m_healthBG->setScale(healthScale);
 
 }
-void StatusBar::setUp(PlayerID id, Display display)
+void StatusBar::setUp(PlayerID id, Color color)
 {
-    setColor(display);
+    setColor(color);
     setPosition(id);
 }

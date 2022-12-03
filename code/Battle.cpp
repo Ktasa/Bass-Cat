@@ -55,12 +55,15 @@ void Battle::setChoices(vector<int> choices)
         outline = Color::White;
         m_display = DARK;
         m_combatMenu->setColor(Color::White);
+        m_status1->setUp(P1, Color::White);
+        //m_status2->setUp(P2, DARK);
     }
     else
     {
         outline = Color::Black;
         m_display = LIGHT;
         m_combatMenu->setColor(Color::Black);
+        m_status1->setUp(P1, Color::Black);
     }
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
@@ -144,6 +147,7 @@ vector<RectangleShape*> Battle::getStatusBars(PlayerID id)
     else
         return m_status2->getBars();
 }
+
 //RectangleShape* Battle::getStatusBar()
 //{
 //    return m_status1->getHealthBG();
