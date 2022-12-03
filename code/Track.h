@@ -19,7 +19,6 @@ public:
     void clear();
     void addNote(Note* note);
     void setSongDuration(int midiTime);
-    Note* getNote(int index); //
     vector<Note*> getNotes(); //returns all notes. Helper function for Rhythm class
     vector<Note*> getNotesInRange(int unit, int range); //helper function for Song::getNotesInRange
    
