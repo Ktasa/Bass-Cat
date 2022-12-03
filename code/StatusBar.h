@@ -23,7 +23,7 @@ public:
     void addDamage(int damage);
     void addMeter(int meter);
     //void setColor(Display display);
-    void setColor(Color color);
+    void setColor(PlayerID id, Color color);
     void setPosition(PlayerID id);
     void setUp(PlayerID id, Color color);
     //RectangleShape* getHealthBG(); //test drawing
@@ -34,9 +34,8 @@ private:
     //display with SFML rectangles instead of sprite?
     //Sprite m_sprite;
     vector<RectangleShape*> m_statusBars;
-    RectangleShape *m_healthBG; //when adjusting the scale, do it proportional to height
+    //RectangleShape *m_healthBG; //when adjusting the scale, do it proportional to height
     RectangleShape *m_healthBar;
-    RectangleShape *m_meterBG;
     RectangleShape *m_meterBar;
     //Shape* shape;
 

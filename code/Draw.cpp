@@ -27,6 +27,9 @@ void Engine::draw()
         vector<RectangleShape*> statusBarsP2 = battle->getStatusBars(P2);
         m_Window.draw(*statusBarsP1[0]);
         m_Window.draw(*statusBarsP2[0]);
+        m_Window.draw(*statusBarsP1[1]);
+        m_Window.draw(*statusBarsP2[1]);
+        
 
         if(battle->getState() == MENU)
         {
