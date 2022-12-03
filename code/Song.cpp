@@ -147,10 +147,10 @@ void Song::loadTracks(string fileName)
     {
         for(size_t j=0; i<5; i++) //display 5 notes of each track
         {
+            Note* n = m_tracks.at(i)->getNote(j);
             cout << "Note: " << i << endl;
-            cout << "Start time: " << m_tracks.at(i)->getNote(j)->getStart() << endl;
-            cout << "Duration: " << m_tracks.at(i)->getNote(j)->getStart() << endl;
-
+            cout << "Start time: " << n->getStart() << endl;
+            cout << "Duration: " << n->getStart() << endl;
         }
     }
 }
