@@ -11,6 +11,8 @@ Battle::Battle()
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
     m_status2 = new StatusBar();
+    m_magic1 = new Effect();
+    m_magic2 = new Effect();
 
     m_turn = P1;
  //set up stuff that doesnt require user input
@@ -72,13 +74,16 @@ void Battle::setChoices(vector<int> choices)
     m_p2 = new Character(P2, p2_type, outline, BPM);
     //set up all positions here too?
 
-
+    m_magic1->setUp(P1, MAGIC, BPM);
+    m_magic2->setUp(P2, MAGIC, BPM);
+    m_magic1->setActive(true);
+    m_magic2->setActive(true);
     
     //set up health bars
     //set up effects
     //set up rhythm bar
     //set up CombatMenu
-
+//
     m_song->play();
 }
 
@@ -91,6 +96,9 @@ void Battle::update(float dt)
     //move to the appropriate phase later
     m_status1->update();
     m_status2->update();
+
+    m_magic1->update(dt);
+    m_magic2->update(dt);
 
     if(m_state == MENU)
     {
@@ -176,4 +184,26 @@ Color Battle::getBackground()
     else if(m_display == DARK)
     {color = Color::Black;}
     return color;
+}
+
+
+Sprite Battle::getEffectSprite(PlayerID id)
+{
+    //currently magic is the only effect
+    if(id == P1)
+    {
+        return m_magic1->getSprite();
+    }
+    else
+    {
+        return m_magic2->getSprite();
+    }
+}
+void Battle::setEffectActivity(Effect *effect, bool active)
+{
+    effect->setActive(active);
+}
+bool getIsEffectActive(Effect *effect)
+{
+    return effect->getIsActive();
 }

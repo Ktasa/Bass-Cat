@@ -153,6 +153,9 @@ void Character::setFrameTime(int BPM)
 {
     int framesPerBeat = 4;
     m_timePerFrame = (60.0 / BPM) / framesPerBeat;
+    //set double speed if slower tempo
+    if(BPM <= 100)
+        m_timePerFrame /= 2;
     m_timeUntilUpdate = m_timePerFrame; //countdown time
 }
 //use to resync animation

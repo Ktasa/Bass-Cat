@@ -27,7 +27,6 @@ public:
     void updateCharacter(float dtAsSeconds); //use in update()
     Sprite getSprite(); //use in draw()
 
-
     //to be used by Battle.h to set scene
     void setState(AnimationState state);
     void setPosition(Vector2f coord);

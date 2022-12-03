@@ -11,6 +11,7 @@
 #include "Character.h"
 #include "CombatMenu.h"
 #include "StatusBar.h"
+#include "Effect.h"
 
 using namespace sf;
 using namespace std;
@@ -33,7 +34,7 @@ enum BattleState
 
 enum Display{LIGHT, DARK}; //black or white background/sprites
 //enum CombatType{NO_SELECTION, ATTACK, BLOCK, BUILD_METER, MAGIC_ATTACK,}; //moved to CombatMenu.h
-enum EffectType{MAGIC, DAMAGE};
+//enum EffectType{MAGIC, DAMAGE};
 
 //The game engine will have a battle object, accessing everything through there?
 
@@ -45,7 +46,8 @@ public:
 
     Color getBackground(); //use in draw()    
     Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
-    Sprite getEffectSprite(PlayerID id, EffectType effect);
+    //Sprite getEffectSprite(PlayerID id, EffectType effect);
+    Sprite getEffectSprite(PlayerID id);
     Sprite getCombatMenuSprite();
     //Sprite getHealthBar(PlayerID id);
     vector<RectangleShape*> getStatusBars(PlayerID id);
@@ -63,6 +65,10 @@ public:
     BattleState getState();
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
+    //these are kind of bad, not good for working in engine
+    void setEffectActivity(Effect *effect, bool active);
+    bool getIsEffectActive(Effect *effect);
+
 private:
     bool m_recordingInput;
     
@@ -75,6 +81,7 @@ private:
     StatusBar *m_status1, *m_status2;
     CombatMenu *m_combatMenu; //menu specifically for battle options
     Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
+    //Effect *m_effect1, *m_effect2;
 
     RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
     
@@ -94,25 +101,6 @@ private:
 
 };
 
-
-//enum EffectType{MAGIC, DAMAGE};
-class Effect
-{
-public:
-    Effect(Vector2f position, EffectType type, PlayerID id);
-    Sprite getSprite();
-
-    void setPosition(Vector2f coord);
-    void setScale(Vector2f xyScale);
-
-
-private:
-    Sprite m_sprite;
-    Vector2f m_position;
-    Color m_color; //color of effects will be based on health/accuracy stats
-
-};
-
 #include "Song.h"
 class RhythmBar
 {
@@ -125,7 +113,6 @@ public:
 private:
     vector<RectangleShape*> m_rects;
     int unitsToDisplay = 100; //range of note units to be displayed
-
 
 };
 

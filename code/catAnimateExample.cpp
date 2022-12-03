@@ -164,6 +164,7 @@ void animateTest()
             characterFrame %= 4;
             //std::cout << "Frame: " << characterFrame << endl;
             character_animate_time = Time::Zero;
+            
             auraFlip *= -1;
             auraSprite.setScale(auraFlip,auraScale);
             a2Sprite.setScale(auraFlip, auraScale);

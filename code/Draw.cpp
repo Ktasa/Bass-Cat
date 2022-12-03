@@ -16,6 +16,11 @@ void Engine::draw()
     //BATTLE CLASS BASED DRAWING
     if(m_Playing)
     {
+        Sprite magicP1 = battle->getEffectSprite(P1);
+        Sprite magicP2 = battle->getEffectSprite(P2);
+        m_Window.draw(magicP1);
+        m_Window.draw(magicP2);
+
         Sprite p1Sprite;
         p1Sprite = battle->getCharacterSprite(P1);
         m_Window.draw(p1Sprite);
