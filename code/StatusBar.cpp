@@ -49,15 +49,14 @@ void StatusBar::setPosition(PlayerID id)
     resolution.x = VideoMode::getDesktopMode().width;
     resolution.y = VideoMode::getDesktopMode().height;
 
-    Vector2f positionP1 = {resolution.x * float(0.1), resolution.y * float(0.8)};
-    Vector2f positionP2 = {resolution.x * float(0.6), resolution.y * float(0.8)};
+    Vector2f positionP1 = {resolution.x * float(0.1), resolution.y * float(1.05)};
+    Vector2f positionP2 = {resolution.x * float(0.595), resolution.y * float(1.05)};
     Vector2f healthPosition;
     if(id == P1){healthPosition = positionP1;}
     else{healthPosition = positionP2;}
     m_healthBG->setPosition(healthPosition);
 
-    //this only controls the proportions of the object while scale overrides its size
-    Vector2f healthSize = {resolution.x * float(0.4), resolution.y * float(0.1)};
+    Vector2f healthSize = {resolution.x * float(0.4), resolution.y * float(0.02)};
     m_healthBG->setSize(healthSize);
     FloatRect healthRect = m_healthBG->getGlobalBounds();
     //center origin
@@ -65,7 +64,7 @@ void StatusBar::setPosition(PlayerID id)
 
     //adjust scale to screen resolution
     float defaultSize = healthRect.width / resolution.x;
-    float goalSize = 0.15; 
+    float goalSize = 0.24; 
     float adjustScale = goalSize / defaultSize;
     Vector2f scaleP1 = {adjustScale,adjustScale};
     Vector2f scaleP2 = {-adjustScale,adjustScale};

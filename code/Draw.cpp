@@ -23,8 +23,10 @@ void Engine::draw()
         p2Sprite = battle->getCharacterSprite(P2);
         m_Window.draw(p2Sprite);
 
-        vector<RectangleShape*> statusBars = battle->getStatusBars(P1);
-        m_Window.draw(*statusBars[0]);
+        vector<RectangleShape*> statusBarsP1 = battle->getStatusBars(P1);
+        vector<RectangleShape*> statusBarsP2 = battle->getStatusBars(P2);
+        m_Window.draw(*statusBarsP1[0]);
+        m_Window.draw(*statusBarsP2[0]);
 
         if(battle->getState() == MENU)
         {

@@ -10,6 +10,7 @@ Battle::Battle()
     m_input = new Rhythm();
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
+    m_status2 = new StatusBar();
 
     m_turn = P1;
  //set up stuff that doesnt require user input
@@ -56,7 +57,7 @@ void Battle::setChoices(vector<int> choices)
         m_display = DARK;
         m_combatMenu->setColor(Color::White);
         m_status1->setUp(P1, Color::White);
-        //m_status2->setUp(P2, DARK);
+        m_status2->setUp(P2, Color::White);
     }
     else
     {
@@ -64,6 +65,7 @@ void Battle::setChoices(vector<int> choices)
         m_display = LIGHT;
         m_combatMenu->setColor(Color::Black);
         m_status1->setUp(P1, Color::Black);
+        m_status2->setUp(P2, Color::Black);
     }
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
