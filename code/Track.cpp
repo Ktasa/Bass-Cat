@@ -25,6 +25,10 @@ void Track::setSongDuration(int midiTime)
 {
     m_songDuration = midiTime;
 }
+Note* Track::getNote(int index)
+{
+    return m_notes[index];
+}
 vector<Note*> Track::getNotes()
 {
     return m_notes;

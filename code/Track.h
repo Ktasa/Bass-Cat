@@ -19,9 +19,11 @@ public:
     void clear();
     void addNote(Note* note);
     void setSongDuration(int midiTime);
+    Note* getNote(int index); //
     vector<Note*> getNotes(); //returns all notes. Helper function for Rhythm class
     vector<Note*> getNotesInRange(int unit, int range); //helper function for Song::getNotesInRange
    
+    Note* getNote(int index); //for testing CSV reading
 private:
     //how to access the right notes if given units
     //Loop through values until you get one that says its unit is in range?

@@ -39,12 +39,14 @@ public:
 private:
     Music m_music;
 
-    //vector<Track*> m_tracks;
+    vector<Track*> m_tracks;
     double m_duration; //duration in seconds
     int m_totalUnits; //total number of note subunits
     int m_BPM;
+    int m_quarterTime;
     int m_range; //how many notes to display at once in HUD
     int m_unit; //identify the current subunit of the song
+    
     double m_unitLen; //seconds per unit
     double m_currTime; //identify current time playing of song
 
