@@ -1,12 +1,12 @@
 #include "Effect.h"
-
+#include "HSV.h"
 Effect::Effect()
 {
     float m_frameTime = 0.2;
     m_timeUntilUpdate = m_frameTime;
     m_color = Color::White;
     //temp
-    m_rainbow = false;
+    m_rainbow = true;
 }
 
 void Effect::setUp(PlayerID id, EffectType type, int BPM)

@@ -56,7 +56,7 @@ public:
 
     int getScore(Track& input, int midiTime); //int score/100 of an input session
     void setScore(PlayerID id, int score);
-    //void combatAction(CombatType type, PlayerID id);
+    //void combatAction(PlayerID id, CombatType type, int score);
 
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
