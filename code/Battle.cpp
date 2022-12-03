@@ -1,5 +1,5 @@
 #include "Battle.h"
-/////////////////
+///////////////////
 using namespace sf;
 using namespace std;
 
@@ -8,7 +8,9 @@ Battle::Battle()
     m_state = INACTIVE;
     m_combatMenu = new CombatMenu();
     m_input = new Rhythm();
-    m_recordingInput = false;
+    //m_recordingInput = false; //unnecessary from Rhythm testing
+    m_status1 = new StatusBar();
+
     m_turn = P1;
  //set up stuff that doesnt require user input
 }
@@ -134,6 +136,18 @@ Sprite Battle::getCombatMenuSprite()
 {
     return m_combatMenu->getSprite();
 }
+
+vector<RectangleShape*> Battle::getStatusBars(PlayerID id)
+{
+    if(id == P1)
+        return m_status1->getBars();
+    else
+        return m_status2->getBars();
+}
+//RectangleShape* Battle::getStatusBar()
+//{
+//    return m_status1->getHealthBG();
+//}
 
 BattleState Battle::getState()
 {

@@ -23,6 +23,9 @@ void Engine::draw()
         p2Sprite = battle->getCharacterSprite(P2);
         m_Window.draw(p2Sprite);
 
+        vector<RectangleShape*> statusBars = battle->getStatusBars(P1);
+        m_Window.draw(*statusBars[0]);
+
         if(battle->getState() == MENU)
         {
             Sprite combatMenuSprite = battle->getCombatMenuSprite();

@@ -10,7 +10,7 @@
 #include "Rhythm.h"
 #include "Character.h"
 #include "CombatMenu.h"
-
+#include "StatusBar.h"
 
 using namespace sf;
 using namespace std;
@@ -47,7 +47,9 @@ public:
     Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
     Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite getCombatMenuSprite();
-    Sprite getHealthBar(PlayerID id);
+    //Sprite getHealthBar(PlayerID id);
+    vector<RectangleShape*> getStatusBars(PlayerID id);
+    //RectangleShape* getStatusBar();
     vector<RectangleShape*> getRhythmBar();
 
     int getScore(Track& input, int midiTime); //int score/100 of an input session
@@ -56,7 +58,7 @@ public:
 
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
-    void drawBattle(RenderWindow &window);
+    void drawBattle(RenderWindow &window); //probably not using
     
     BattleState getState();
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
@@ -92,31 +94,6 @@ private:
 
 };
 
-
-//use int or doubles?
-const int MAX_HEALTH = 100;
-const int MAX_METER = 100;
-class StatusBar
-{
-public:
-    StatusBar();
-    int getHealth();
-    int getMeter();
-    vector<RectangleShape*> getBars(); //get the shapes to display
-    void addDamage(int damage);
-    void addMeter(int meter);
-    
-private:
-    int health;
-    int meter;
-    //display with SFML rectangles instead of sprite?
-    //Sprite m_sprite;
-    RectangleShape* m_healthBackground;
-    RectangleShape* m_healthBar;
-    RectangleShape* m_meterBackground;
-    RectangleShape* m_meterBar;
-
-};
 
 //enum EffectType{MAGIC, DAMAGE};
 class Effect
