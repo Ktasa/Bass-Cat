@@ -5,6 +5,8 @@ Effect::Effect()
     float m_frameTime = 0.2;
     m_timeUntilUpdate = m_frameTime;
     m_color = Color::White;
+    //temp
+    m_rainbow = false;
 }
 
 void Effect::setUp(PlayerID id, EffectType type, int BPM)
@@ -44,6 +46,7 @@ void Effect::setUp(PlayerID id, EffectType type, int BPM)
     m_sprite.setOrigin(MAGIC_SHEET_WIDTH/2,MAGIC_SHEET_WIDTH*float(0.6));
 
     setFrameTime(BPM);
+    m_playerNum = id;
 }
 
 Sprite Effect::getSprite()
@@ -63,7 +66,40 @@ void Effect::update(float dtAsSeconds)
             magicScale.x *= -1;
             m_sprite.setScale(magicScale);
             m_timeUntilUpdate = m_frameTime;
+            if(m_rainbow)
+            {
+                Color color = m_sprite.getColor();
+                int hueDt = 2.5;
+                tuple<float,float,float> HSV = RGBtoHSV(color);
+                float hue = get<0>(HSV);
+                hue += hueDt;
+                if(hue>360.0){hue=0.0;}
+                color = HSVtoRGB(hue,1,1);
+                m_sprite.setColor(color);
+            }
+            else
+            {
+                Color blue = Color(0,100,255);
+                Color red = Color(255,0,100);
+                if(m_playerNum == P1)
+                    m_sprite.setColor(blue);
+                if(m_playerNum == P2)
+                    m_sprite.setColor(red);
+            }
         }
+        /*
+        if(m_rainbow)
+        {
+            Color color = m_sprite.getColor();
+            int hueDt = 1;
+            tuple<float,float,float> HSV = RGBtoHSV(color);
+            float hue = get<0>(HSV);
+            hue += hueDt;
+            if(hue>360.0){hue=0.0;}
+            color = HSVtoRGB(hue,1,1);
+            m_sprite.setColor(color);
+        }
+        */
 
     }
     //add if Magic attack state, use color shifting

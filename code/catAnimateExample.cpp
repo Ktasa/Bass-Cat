@@ -1,5 +1,5 @@
 //EXAMPLE PROGRAM FOR ANIMATING SPRITE SHEETS
-
+/*
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "HSV.h"
@@ -58,7 +58,7 @@ void animateTest()
     health.setScale(healthScale);
 
    
-    //*****************************************************************************
+    // *****************************************************************************
 
     Texture nebulaTexture;
     nebulaTexture.loadFromFile("graphics/nebula 800.png");
@@ -212,3 +212,4 @@ void animateTest()
         window.display();
     }
 }
+*/
