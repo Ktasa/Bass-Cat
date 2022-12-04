@@ -72,6 +72,8 @@ public:
     void setEffectActivity(Effect *effect, bool active);
     bool getIsEffectActive(Effect *effect);
 
+    CombatType getCombatType(PlayerID id);
+
 private:
     bool m_recordingInput;
     

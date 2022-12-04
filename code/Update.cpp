@@ -40,6 +40,8 @@ void Engine::update(float dtAsSeconds)
 		//cout << "entering updates\n";
 		//currently updates characters, CombatMenu
 		battle->update(dtAsSeconds);
+		BattleState state = battle->getState();
+		//cout << state << endl;
 		//cout << "exiting updates\n";
 	}// End if playing
 

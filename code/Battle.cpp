@@ -235,3 +235,8 @@ bool Battle::getIsCalibrated()
 {
     return m_calibration->getIsDone();
 }
+
+CombatType Battle::getCombatType(PlayerID id)
+{
+    return m_combatMenu->getChoice(id);
+}
