@@ -23,6 +23,7 @@ private:
     Rhythm* rhythm;
     //int m_midiTime;
     Time m_battleTime; //keep track of time from start of battle
+    bool m_battleTimeActive;
     //80bpm is 0.75 seconds per beat
     //midi clock for this song is 480 ticks per beat
     //that means... 640 ticks per second

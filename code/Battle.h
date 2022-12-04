@@ -88,7 +88,7 @@ private:
 
     RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
     
-    Text m_text; //use to announce actions
+    //Text m_text; //use to announce actions
 
     PlayerID m_turn; //whose turn is active
 
@@ -116,7 +116,7 @@ public:
 
 private:
     vector<RectangleShape*> m_rects;
-    int unitsToDisplay = 100; //range of note units to be displayed
+    int unitsToDisplay = 480 * 8; //range of note units to be displayed
 
 };
 

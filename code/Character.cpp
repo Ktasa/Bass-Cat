@@ -13,8 +13,6 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     string fileName;
     if(type == CAT) {fileName += "graphics/cat.png";}
     else {fileName += "graphics/panda.png";}
-    //m_charTexture.loadFromFile(fileName);
-    //m_charSprite.setTexture(m_charTexture);
     m_charSprite = new Sprite(TextureHolder::GetTexture(fileName));
     
     //set sprite texture, position, origin, scale, color

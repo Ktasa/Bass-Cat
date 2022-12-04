@@ -17,6 +17,7 @@ Engine::Engine()
     //cout << "rhythm constructor success" << endl;
     //m_midiTime = 0;
     m_battleTime = Time::Zero;
+    m_battleTimeActive = false;
 
 
     m_Playing = false;
@@ -31,9 +32,8 @@ Engine::Engine()
     //set up HudView
 
     //get background texture from texture holder, set to m_BackgroundSprite
-    m_backgroundSprite = new Sprite();
     string fileName = "graphics/nebula.png";
-    m_backgroundSprite->setTexture(TextureHolder::GetTexture(fileName));
+    m_backgroundSprite = new Sprite(TextureHolder::GetTexture(fileName));
     m_backgroundSprite->setPosition(Vector2f{0,0});
 
 }
@@ -51,8 +51,13 @@ void Engine::run()
         m_GameTimeTotal += dt;
         float dtAsSeconds = dt.asSeconds();
 
-        if(m_Playing)
+        if(m_Playing && m_battleTimeActive)
             m_battleTime += dt;
+        else
+        {
+            m_battleTimeActive = false;
+            m_battleTime = Time::Zero; //reset upon every recalibration
+        }
         /*
         double dtAsTicksDouble = dt.asSeconds() * TICKS_PER_SECOND;
         int dtAsTicks = int(dtAsTicksDouble);

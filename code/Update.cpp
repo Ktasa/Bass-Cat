@@ -18,11 +18,15 @@ void Engine::update(float dtAsSeconds)
 
     if (m_Playing)
 	{
-		//current elapsed ticks in battle
-		int battleTicks = int(m_battleTime.asSeconds() * TICKS_PER_SECOND);
-		//cout << "battle as seconds: " << m_battleTime.asSeconds() << endl;
-		//cout << "battle ticks: " << battleTicks << endl;
-		rhythm->update(battleTicks);
+		if(battle->getIsCalibrated())
+		{
+			//cout << "inside update getiscalibrated" << endl;
+			//calculate current time in ticks, update rhythm
+			m_battleTimeActive = true;
+			int battleTicks = int(m_battleTime.asSeconds() * TICKS_PER_SECOND);
+			rhythm->update(battleTicks);
+			//cout << "battle ticks " << battleTicks << endl;
+		}
 
 		if(battle->getState() == INACTIVE) //set battle options one time
 		{
