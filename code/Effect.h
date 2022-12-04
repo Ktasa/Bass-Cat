@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include "Battle.h"
 
-
 using namespace std;
 using namespace sf;
 
@@ -14,7 +13,7 @@ class Effect
 {
 public:
     Effect();
-    Sprite getSprite();
+    Sprite* getSprite();
     void setUp(PlayerID id, EffectType type, int BPM);
     void setFrameTime(int BPM);
     void update(float dtAsSeconds);
@@ -25,7 +24,7 @@ public:
     //void draw();
 
 private:
-    Sprite m_sprite;
+    Sprite* m_sprite;
     //Vector2f m_position;
     Color m_color; //color of effects will be based on health/accuracy stats?
     EffectType m_type;

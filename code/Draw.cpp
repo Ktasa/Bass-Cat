@@ -19,10 +19,10 @@ void Engine::draw()
     if(m_Playing)
     {
         //cout << "in draw if playing\n";
-        Sprite magicP1 = battle->getEffectSprite(P1);
-        Sprite magicP2 = battle->getEffectSprite(P2);
-        m_Window.draw(magicP1);
-        m_Window.draw(magicP2);
+        Sprite* magicP1 = battle->getEffectSprite(P1);
+        Sprite* magicP2 = battle->getEffectSprite(P2);
+        m_Window.draw(*magicP1);
+        m_Window.draw(*magicP2);
 
         Sprite* p1Sprite;
         p1Sprite = battle->getCharacterSprite(P1);

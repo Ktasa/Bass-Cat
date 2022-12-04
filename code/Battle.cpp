@@ -210,7 +210,7 @@ Color Battle::getBackground()
 }
 
 
-Sprite Battle::getEffectSprite(PlayerID id)
+Sprite* Battle::getEffectSprite(PlayerID id)
 {
     //currently magic is the only effect
     if(id == P1)
