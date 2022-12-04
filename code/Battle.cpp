@@ -85,7 +85,7 @@ void Battle::setChoices(vector<int> choices)
     //set up effects
     //set up rhythm bar
     //set up CombatMenu
-//
+
     m_song->play();
     m_calibration->activate();
 }
@@ -161,7 +161,7 @@ void Battle::handleInput()
     m_calibration->handleInput();
 }
 
-Sprite Battle::getCharacterSprite(PlayerID id)
+Sprite* Battle::getCharacterSprite(PlayerID id)
 {
     if(id == P1){return m_p1->getSprite();}
     else{return m_p2->getSprite();}

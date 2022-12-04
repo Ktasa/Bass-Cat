@@ -39,8 +39,8 @@ private:
     TextureHolder th;
 
     //background sprite/texture
-	Sprite m_BackgroundSprite;
-	Texture m_BackgroundTexture;
+	Sprite *m_backgroundSprite;
+	//Texture m_BackgroundTexture;
 
     //include constants needed throughout the program
 

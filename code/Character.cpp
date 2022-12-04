@@ -15,7 +15,7 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     else {fileName += "graphics/panda.png";}
     //m_charTexture.loadFromFile(fileName);
     //m_charSprite.setTexture(m_charTexture);
-    m_charSprite = Sprite(TextureHolder::GetTexture(fileName));
+    m_charSprite = new Sprite(TextureHolder::GetTexture(fileName));
     
     //set sprite texture, position, origin, scale, color
     //position is relative to resolution. 
@@ -41,21 +41,21 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     if(playerID==P1) 
     {
         m_position = player1Position;
-        m_charSprite.setScale(p1Scale);
+        m_charSprite->setScale(p1Scale);
     }
     else 
     {
         m_position = player2Position;
-        m_charSprite.setScale(p2Scale);
+        m_charSprite->setScale(p2Scale);
     }
-    m_charSprite.setPosition(m_position);
+    m_charSprite->setPosition(m_position);
     //origin is the center of a sprite to help with alignment
-    m_charSprite.setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
+    m_charSprite->setOrigin(CHARACTER_SHEET_WIDTH/2,CHARACTER_SHEET_WIDTH/2);
     //set outline color
-    m_charSprite.setColor(color); //set color works with white sprites
+    m_charSprite->setColor(color); //set color works with white sprites
 
     IntRect rect(0, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
-    m_charSprite.setTextureRect(rect);
+    m_charSprite->setTextureRect(rect);
 
     setFrameTime(BPM);
 
@@ -123,7 +123,7 @@ void Character::updateCharacter(float dtAsSeconds)
         //set texture coords of sprite
         int frameOffset = CHARACTER_SHEET_WIDTH * m_frameID;
         IntRect rect(0 + frameOffset, 0, CHARACTER_SHEET_WIDTH, CHARACTER_SHEET_WIDTH);
-        m_charSprite.setTextureRect(rect);
+        m_charSprite->setTextureRect(rect);
 
         //should the animation sync reset at user input?
         //if(!m_stateChange)
@@ -132,7 +132,7 @@ void Character::updateCharacter(float dtAsSeconds)
         m_stateChange = false;
     }
 }
-Sprite Character::getSprite()
+Sprite* Character::getSprite()
 {
     return m_charSprite;
 }
@@ -143,11 +143,11 @@ void Character::setState(AnimationState state)
 void Character::setPosition(Vector2f coord)
 {
     m_position = coord;
-    m_charSprite.setPosition(m_position); 
+    m_charSprite->setPosition(m_position); 
 }
 void Character::setScale(Vector2f xyScale)
 {
-    m_charSprite.setScale(xyScale);
+    m_charSprite->setScale(xyScale);
 }
 void Character::setFrameTime(int BPM)
 {

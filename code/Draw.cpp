@@ -8,6 +8,8 @@ void Engine::draw()
     if(battle->getState() != INACTIVE)
     {
         m_Window.clear(battle->getBackground());
+        //m_Window.setView(m_mainView);
+        //m_Window.draw(*m_backgroundSprite);
         //cout << "battle background active\n";
     }
 
@@ -22,12 +24,12 @@ void Engine::draw()
         m_Window.draw(magicP1);
         m_Window.draw(magicP2);
 
-        Sprite p1Sprite;
+        Sprite* p1Sprite;
         p1Sprite = battle->getCharacterSprite(P1);
-        m_Window.draw(p1Sprite);
-        Sprite p2Sprite;
+        m_Window.draw(*p1Sprite);
+        Sprite* p2Sprite;
         p2Sprite = battle->getCharacterSprite(P2);
-        m_Window.draw(p2Sprite);
+        m_Window.draw(*p2Sprite);
 
         vector<RectangleShape*> statusBarsP1 = battle->getStatusBars(P1);
         vector<RectangleShape*> statusBarsP2 = battle->getStatusBars(P2);

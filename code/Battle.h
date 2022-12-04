@@ -47,7 +47,7 @@ public:
     void setChoices(vector<int> choices);
 
     Color getBackground(); //use in draw()    
-    Sprite getCharacterSprite(PlayerID id); //better to get sprite pointers?
+    Sprite* getCharacterSprite(PlayerID id); //better to get sprite pointers?
     //Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite getEffectSprite(PlayerID id);
     Sprite getCombatMenuSprite();

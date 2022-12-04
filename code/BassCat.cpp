@@ -2,15 +2,15 @@
 
 #include "Engine.h"
 //#include "Character.h"
-void animateTest(); //testing health bars
+//void animateTest(); //testing health bars
 
 int main()
 {
-    animateTest();
+    //animateTest();
 
     Engine engine;
 
-    //engine.run();
+    engine.run();
 
     return 0;
 }

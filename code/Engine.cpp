@@ -31,6 +31,11 @@ Engine::Engine()
     //set up HudView
 
     //get background texture from texture holder, set to m_BackgroundSprite
+    m_backgroundSprite = new Sprite();
+    string fileName = "graphics/nebula.png";
+    m_backgroundSprite->setTexture(TextureHolder::GetTexture(fileName));
+    m_backgroundSprite->setPosition(Vector2f{0,0});
+
 }
 
 void Engine::run()

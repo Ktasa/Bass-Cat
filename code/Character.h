@@ -25,7 +25,7 @@ public:
     Character(PlayerID playerID, CharacterType type, Color color, int BPM);
     void handleInput(); //use in input()
     void updateCharacter(float dtAsSeconds); //use in update()
-    Sprite getSprite(); //use in draw()
+    Sprite* getSprite(); //use in draw()
 
     //to be used by Battle.h to set scene
     void setState(AnimationState state);
@@ -36,8 +36,8 @@ public:
     void resetTime(); //use to resync animation
 
 private:
-    Texture m_charTexture;
-    Sprite m_charSprite; 
+    //Texture m_charTexture;
+    Sprite *m_charSprite; 
 
     CharacterType m_type; //cat or dog
     Color m_color; //line color
