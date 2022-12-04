@@ -5,6 +5,7 @@ Song::Song(string fileName)
     //load audio file into music object
     //loadSong(fileName);
     loadSong("sound/Untitled Calibration A.ogg");
+    //loadSong("sound/Untitled Calibration B.ogg");
 
     //read in file of same name with track data
     string songName = fileName.substr(0,fileName.length()-3);
