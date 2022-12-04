@@ -23,9 +23,9 @@ Engine::Engine()
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);
-    
-    //m_Window.setFramerateLimit(30);
     //not sure whether to use Fullscreen or Default
+    
+    //m_Window.setFramerateLimit(30); //looks cleaner but less responsive animations
 
     m_mainView.setSize(resolution);
     //set up HudView
