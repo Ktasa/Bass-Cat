@@ -23,6 +23,7 @@ public:
     vector<Note*> getNotesInRange(int unit, int range); //helper function for Song::getNotesInRange
    
     Note* getNote(int index); //for testing CSV reading
+    Note* getNoteFromTick(int midiTime);
 private:
     //how to access the right notes if given units
     //Loop through values until you get one that says its unit is in range?

@@ -29,6 +29,71 @@ Note* Track::getNote(int index)
 {
     return m_notes[index];
 }
+Note* Track::getNoteFromTick(int midiTime)
+{
+    //returns next note after midiTime if nothing found
+    //help to calculate margin of error for slightly early inputs
+    size_t size = m_notes.size();
+    int startSearch;
+    int half = m_notes[size/2]->getStart();
+    int quarter = m_notes[size/4]->getStart();
+    //cout << "Half: " << half << " quarter: " << quarter << endl;
+    if(midiTime < half)
+    {
+        //target is in the 1st half of the vector
+        //target in 1st quater
+        startSearch = size/4;
+        if(midiTime < quarter)
+            startSearch = 0;
+            //target in 2nd quarter
+    }
+    else
+    {
+        //target is in 2nd half
+        startSearch = half;
+        if(midiTime > quarter * 3)
+            startSearch = quarter * 3;
+            //target is in last quarter
+    }
+
+    //note in range
+    cout << "entering find note" << endl;
+    bool found = false;
+    bool outOfRange = false;
+    size_t i = startSearch;
+    int index; //store index of the 1st note in range
+    while(!found && !outOfRange)
+    {
+        int startTime = m_notes[i]->getStart();
+        int duration = m_notes[i]->getDuration();
+        int endOfNote = startTime + duration;
+        //first note searched that contains the target time
+        if(startTime <= midiTime && midiTime <= endOfNote)
+        {
+            index = i;
+            found = true;
+            cout << "index found: " << index << endl;
+        }
+        //if out of range, nothing found
+        if(startTime > midiTime)
+        {
+            outOfRange = true;
+            cout << "search out of range" << endl;
+        }
+        i++;
+    }//endwhile find index
+    Note* note;
+    if(found)
+        note = m_notes[index];
+    else
+    {
+        if(i < size)
+            note = m_notes[i]; //return upcoming note
+        else
+            note = nullptr; //if no more notes in song, return nullptr
+    }
+    return note;
+}
 vector<Note*> Track::getNotes()
 {
     return m_notes;
@@ -40,6 +105,9 @@ vector<Note*> Track::getNotes()
 vector<Note*> Track::getNotesInRange(int midiTime, int range)
 {
     cout << "midiTime: " << midiTime << " range: " << range << endl;
+
+    //FIX: include a way to exclude duplicate notes (important for drums)
+    
     //cout << "entered getNotesInRange" << endl;
     //FIX: Need to check if the desired range contains notes, or returns an empty vector
 
@@ -186,15 +254,41 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         }//endwhile find endIndex
     }//endif (!outOfRange)
 
+    //Move to helper function
     cout << "GetNotesInRange() TEST RESULTS:" << endl;
     //load vector to return
     if(!outOfRange && !endOutOfRange)
     {
-        for(int i=startIndex; i <= endIndex; i++)
+        if(startIndex == endIndex)
         {
-            Note* n = m_notes[i];
-            inRange.push_back(n);
-            //send back a copy of the addresses already stored in this class
+            inRange.push_back(m_notes[startIndex]); //only one note
+        }
+        else
+        {
+            for(int i=startIndex; i < endIndex; i++)
+            {
+                Note* current = m_notes[i];
+                Note* next = m_notes[i+1];
+                //if two notes happen at the same time,
+                //pick the shortest one
+                if(current->getStart() == next->getStart()) 
+                {
+                    if(current->getDuration() <= next->getDuration()) 
+                        inRange.push_back(current);
+                    else
+                    {
+                        inRange.push_back(next);
+                        i++;
+                    }
+                }
+                else
+                    inRange.push_back(current);
+            }
+            if(inRange[inRange.size()-1]->getStart() != m_notes[endIndex]->getStart())
+            {
+                inRange.push_back(m_notes[endIndex]);
+            }
+            
         }
     }
     else
