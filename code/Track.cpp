@@ -39,18 +39,14 @@ vector<Note*> Track::getNotes()
 
 vector<Note*> Track::getNotesInRange(int midiTime, int range)
 {
+    cout << "midiTime: " << midiTime << " range: " << range << endl;
+    //cout << "entered getNotesInRange" << endl;
     //FIX: Need to check if the desired range contains notes, or returns an empty vector
 
     //(give the time to rhythm bar and have it adjust the notes)
     //it might be good to edit note values here to make display easier
     //ie set the start of the 1st note to the start time, cutting off the extra bits at the end
     //set the end of the last note to be the end of range
-
-    //Ex: midi clock is 480 per quarter note, 1 measure of music is 1920 units
-    //left half of rhythm bar represents the past measure
-    //right half represents the current measure
-    //center is the current time
-
 
     //start search from most recent?
     //int i = m_currNote;
@@ -72,51 +68,60 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         }
     }
     */
-
+    //cout << "entering calculate start search index" << endl;
     int startSearch;
     int half = m_notes[size/2]->getStart();
     int quarter = m_notes[size/4]->getStart();
-    if(half > startTimeTarget)
+    cout << "Half: " << half << " quarter: " << quarter << endl;
+    if(startTimeTarget < half)
     {
         //target is in the 1st half of the vector
-        startSearch = 0;
-        if(quarter > midiTime)
-            startSearch = quarter;
+        //target in 1st quater
+        startSearch = size/4;
+        if(startTimeTarget < quarter)
+            startSearch = 0;
+            //target in 2nd quarter
     }
     else
     {
         //target is in 2nd half
         startSearch = half;
-        if(quarter * 3 < midiTime)
+        if(startTimeTarget > quarter * 3)
             startSearch = quarter * 3;
+            //target is in last quarter
     }
 
-
     //find 1st note in range
-
+    cout << "entering find startIndex" << endl;
     //if start time is near the end of the range, need to loop back to check the full range
     //Ex: start time is 50, and the first note is at 0
     bool startFound = false;
     bool outOfRange = false;
-    int i = startSearch;
+    size_t i = startSearch;
     int startIndex; //store index of the 1st note in range
     while(!startFound && !outOfRange)
     {
+        //cout << "entering get start time, etc" << endl;
+        //cout << "Start search value: " << startSearch << endl;
+        //cout << "Notes vector size: " << m_notes.size() << endl;
+        //cout << "Index value: " << i << endl;
         int startTime = m_notes[i]->getStart();
         int duration = m_notes[i]->getDuration();
         int endOfNote = startTime + duration;
-
+        //cout << "Note start: " << startTime << endl;
         //first note searched that starts after the target time
         //or note that is currently playing but hasn't finished
         if(startTime >= startTimeTarget || endOfNote > startTimeTarget)
         {
             startIndex = i;
             startFound = true;
+            cout << "Start index found: " << startIndex << endl;
         }
         //if out of range, nothing found
         if(startTime > startTimeTarget + range)
         {
             outOfRange = true;
+            cout << "startSearch out of range" << endl;
         }
         i++;
     }//endwhile find startIndex
@@ -125,11 +130,12 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     // - have a duration that exceeds the end range
     // - or the next note doesnt start in range
     // - loop back to the start of the song (not possible with current calibration mechanics)
-
+    cout << "entering find end search index" << endl;
     int endIndex;
-    int j = startIndex;
+    size_t j = startIndex;
     //int endTimeTarget = midiTime % m_songDuration + range; //use if looping
     int endTimeTarget = startTimeTarget + range;
+    cout << "endTimeTarget: " << endTimeTarget << endl;
     //bool loopingBack = false; 
     /*
     //is the range looping back to the beginning
@@ -141,7 +147,9 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     }
     */
 
+    //infinite loop...
     bool endFound = false;
+    bool endOutOfRange = false;
     if(!outOfRange)
     {
         while(!endFound)
@@ -149,6 +157,8 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
             int startTime = m_notes[j]->getStart();
             int duration = m_notes[j]->getDuration();
             int endOfNote = startTime + duration;
+            cout << "start: " << startTime << endl;
+            cout << "endOfNote: " << endOfNote << endl;
 
             //range ends in middle of note, must be the last note
             if(startTime <= endTimeTarget && endTimeTarget <= endOfNote)
@@ -162,39 +172,34 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
                 endIndex = j-1; 
                 endFound = true;
             }
-            /*
-            //note ends before range, check if theres a next note in range
-            else if (endOfNote < endTimeTarget)
+            if(endFound)
             {
-                //if next index isnt 
-                if(j >= size-1)
-                {
-                    cout << "Error: endSearch index out of range" << endl;
-                }
-                else
-                {
-                    //its the last note in range if no following notes
-                    int startTime = m_notes[j+1]->getStart();
-                    if(startTime > endTimeTarget)
-                    {
-                        endIndex = j;
-                        endFound = true;
-                    }
-                }
-            }*/
+                cout << "End index found: " << endIndex << endl;
+            }
+            if(j >= size)
+            {
+                endOutOfRange = true;
+                cout << "out of range" << endl;
+            }
+            j++;
 
         }//endwhile find endIndex
     }//endif (!outOfRange)
 
+    cout << "GetNotesInRange() TEST RESULTS:" << endl;
     //load vector to return
-    if(!outOfRange)
+    if(!outOfRange && !endOutOfRange)
     {
-        for(int i=startIndex; i < endIndex; i++)
+        for(int i=startIndex; i <= endIndex; i++)
         {
             Note* n = m_notes[i];
             inRange.push_back(n);
             //send back a copy of the addresses already stored in this class
         }
+    }
+    else
+    {
+        cout << "No notes in range" << endl;
     }
 
     return inRange;

@@ -146,6 +146,17 @@ void Song::loadTracks(string fileName)
         }
     }
     */
+   //TEST Track::getNotesInRange()
+   //get bass notes in the first beat of the song
+   vector<Note*> bassRange = m_tracks[2]->getNotesInRange(0, 480);
+   cout << "Bass data on Beat 1" << endl;
+   for(size_t i=0; i<bassRange.size(); i++)
+    {
+        cout << "Note: " << i << endl;
+        cout << "Start time: " << bassRange[i]->getStart() << endl;
+        cout << "Duration: " << bassRange[i]->getDuration() << endl;
+        cout << endl;
+    }
 }
 Track Song::getTrack(int trackID)
 {
