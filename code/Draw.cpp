@@ -57,18 +57,17 @@ void Engine::draw()
             m_Window.draw(*tester);
         }
 
-        if(battle->getState() == MENU)
+        if(battle->getState() == CALIBRATE)
+        {
+            Sprite *calibrationSprite = battle->getCalibrationSprite();
+            m_Window.draw(*calibrationSprite);
+        }
+        else if(battle->getState() == MENU)
         {
             Sprite combatMenuSprite = battle->getCombatMenuSprite();
-            //m_Window.draw(combatMenuSprite);
+            m_Window.draw(combatMenuSprite);
         }
-
-        if(rhythm->getIsDone())
-        {
-            //playback rhythm by flashing rectangle
-            //RectangleShape* rhythmTest = rhythm->getTester();
-            //m_Window.draw(*rhythmTest);
-        }
+        
     }
 //cout << "exiting battle draw()\n";
     //

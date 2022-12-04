@@ -3,6 +3,8 @@
 Calibration::Calibration()
 {
     m_active = false;
+
+    m_sprite = new Sprite();
     
     string fileName = "graphics/Calibration.png";
     *m_sprite = Sprite(TextureHolder::GetTexture(fileName));
@@ -24,17 +26,9 @@ Calibration::Calibration()
     //center of screen
     m_sprite->setOrigin(CALIBRATION_WIDTH / 2, CALIBRATION_WIDTH / 2);
 }
-void Calibration::activate(Display display)
+void Calibration::activate()
 {
     m_active = true;
-    if(display == DARK)
-    {
-        m_sprite->setColor(Color::White);
-    }
-    else
-    {
-        m_sprite->setColor(Color::Black);
-    }
 }
 void Calibration::handleInput()
 {
@@ -58,4 +52,8 @@ bool Calibration::getIsActive()
 bool Calibration::getIsDone()
 {
     return m_done;
+}
+void Calibration::setColor(Color color)
+{
+    m_sprite->setColor(color);
 }

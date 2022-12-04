@@ -6,6 +6,7 @@ using namespace std;
 Battle::Battle()
 {
     m_state = INACTIVE;
+    m_calibration = new Calibration();
     m_combatMenu = new CombatMenu();
     //m_input = new Rhythm();
     //m_recordingInput = false; //unnecessary from Rhythm testing
@@ -51,16 +52,16 @@ void Battle::setChoices(vector<int> choices)
     m_song = new Song(songFileName);
     int BPM = m_song->getBPM(); //important to set frame time for all animation
 
-    //set up characters
+    //set up colors
     Color outline;
     if(display == DARK)
     {
-        //cout << "Entering battle; if display == DARK" << endl;
         outline = Color::White;
         m_display = DARK;
         m_combatMenu->setColor(Color::White);
         m_status1->setUp(P1, Color::White);
         m_status2->setUp(P2, Color::White);
+        m_calibration->setColor(Color::White);
     }
     else
     {
@@ -69,11 +70,11 @@ void Battle::setChoices(vector<int> choices)
         m_combatMenu->setColor(Color::Black);
         m_status1->setUp(P1, Color::Black);
         m_status2->setUp(P2, Color::Black);
+        m_calibration->setColor(Color::Black);
     }
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
     m_p2 = new Character(P2, p2_type, outline, BPM);
-    //set up all positions here too?
 
     m_magic1->setUp(P1, MAGIC, BPM);
     m_magic2->setUp(P2, MAGIC, BPM);
@@ -86,6 +87,7 @@ void Battle::setChoices(vector<int> choices)
     //set up CombatMenu
 //
     m_song->play();
+    m_calibration->activate();
 }
 
 void Battle::update(float dt)
@@ -100,6 +102,18 @@ void Battle::update(float dt)
 
     m_magic1->update(dt);
     m_magic2->update(dt);
+
+    if(m_state == CALIBRATE)
+    {
+        if(m_calibration->getIsDone() == true) //use is done or is active?
+        {
+            m_state = MENU;
+        }
+        else if(m_calibration->getIsActive() == false)
+        {
+            m_calibration->activate();
+        }
+    }
 
     if(m_state == MENU)
     {
@@ -145,6 +159,7 @@ void Battle::handleInput()
     m_p1->handleInput();
     m_p2->handleInput();
     m_combatMenu->handleInput();
+    m_calibration->handleInput();
 }
 
 Sprite Battle::getCharacterSprite(PlayerID id)
@@ -156,6 +171,10 @@ Sprite Battle::getCharacterSprite(PlayerID id)
 Sprite Battle::getCombatMenuSprite()
 {
     return m_combatMenu->getSprite();
+}
+Sprite* Battle::getCalibrationSprite()
+{
+    return m_calibration->getSprite();
 }
 
 vector<RectangleShape*> Battle::getStatusBars(PlayerID id)

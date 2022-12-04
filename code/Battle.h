@@ -12,6 +12,7 @@
 #include "CombatMenu.h"
 #include "StatusBar.h"
 #include "Effect.h"
+#include "Calibration.h"
 
 using namespace sf;
 using namespace std;
@@ -21,6 +22,7 @@ class StatusBar;
 class CombatMenu;
 class Effect;
 class RhythmBar;
+class Calibration;
 
 enum BattleState
 {
@@ -49,7 +51,7 @@ public:
     //Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite getEffectSprite(PlayerID id);
     Sprite getCombatMenuSprite();
-    //Sprite getHealthBar(PlayerID id);
+    Sprite* getCalibrationSprite();
     vector<RectangleShape*> getStatusBars(PlayerID id);
     //RectangleShape* getStatusBar();
     vector<RectangleShape*> getRhythmBar();
@@ -96,6 +98,7 @@ private:
     Song *m_song;
 
     //Rhythm *m_input; //store user input as Note data
+    Calibration *m_calibration;
     
     int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase
 

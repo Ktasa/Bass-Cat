@@ -12,12 +12,13 @@ class Calibration
 {
 public:
     Calibration();
-    void activate(Display display); 
+    void activate(); 
     void handleInput(); //detect the moment of user calibration
     void update();
     Sprite* getSprite();
     bool getIsActive(); //menu is active
     bool getIsDone(); //choices are ready
+    void setColor(Color color);
 
 private:
     Sprite *m_sprite; //calibration message
