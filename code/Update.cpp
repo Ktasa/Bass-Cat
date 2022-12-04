@@ -8,7 +8,6 @@ using namespace std;
 
 void Engine::update(float dtAsSeconds)
 {
-	
 	//cout << "before update\n";
 	//cout << boolalpha << menu->isActive() << m_Playing << endl;
 	if(menu->isActive())
@@ -40,7 +39,7 @@ void Engine::update(float dtAsSeconds)
 		//cout << "entering updates\n";
 		//currently updates characters, CombatMenu
 		battle->update(dtAsSeconds);
-		BattleState state = battle->getState();
+		//BattleState state = battle->getState();
 		//cout << state << endl;
 		//cout << "exiting updates\n";
 	}// End if playing
