@@ -7,7 +7,7 @@
 #include "Song.h"
 #include "Track.h"
 #include "Note.h"
-#include "Rhythm.h"
+//#include "Rhythm.h"
 #include "Character.h"
 #include "CombatMenu.h"
 #include "StatusBar.h"
@@ -95,7 +95,7 @@ private:
     
     Song *m_song;
 
-    Rhythm *m_input; //store user input as Note data
+    //Rhythm *m_input; //store user input as Note data
     
     int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase
 

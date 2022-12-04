@@ -35,6 +35,8 @@ void Engine::draw()
         m_Window.draw(*statusBarsP1[1]);
         m_Window.draw(*statusBarsP2[1]);
         
+        //RectangleShape* tester = rhythm->getTester();
+        //m_Window.draw(*tester);
 
         if(battle->getState() == MENU)
         {

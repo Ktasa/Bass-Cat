@@ -7,7 +7,7 @@ Battle::Battle()
 {
     m_state = INACTIVE;
     m_combatMenu = new CombatMenu();
-    m_input = new Rhythm();
+    //m_input = new Rhythm();
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
     m_status2 = new StatusBar();
@@ -109,6 +109,7 @@ void Battle::update(float dt)
     }
     else if(m_state == INPUT && m_turn == P1) 
     {
+        /*
         if(m_input->getIsDone() == true)
         {
             m_turn = P2; //if recording done, wait. We need two 
@@ -120,9 +121,11 @@ void Battle::update(float dt)
             //calculate midi time in update.cpp and send it here?
             //m_input->activate(P1, int midiTime, int range);
         }
+        */
     }
     else if(m_state == INPUT && m_turn == P2) 
     {
+        /*
         if(m_input->getIsDone() == true)
         {
             m_state = EFFECT; //if recording done, wait. We need two 
@@ -132,6 +135,7 @@ void Battle::update(float dt)
         {
             //m_input->activate(P2, int midiTime, int range);
         }
+        */
     }
 }
 

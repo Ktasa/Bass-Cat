@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Battle.h"
 #include "Menu.h"
+//#include "Rhythm.h"
 
 //#include "Note.h"
 
@@ -12,18 +13,21 @@ using namespace sf;
 class Engine
 {
 private:
-    Character* player1;
+    //Character* player1;
     //Character* player2;
 
     Battle* battle;
     Menu* menu;
-    //Note* noteTest;
+
+    //for testing rhythm input
+    //Rhythm* rhythm;
+    int midiTime = 0;
 
     RenderWindow m_Window;
 
     View m_mainView; 
-    View m_HudView; //HUD
-    View m_BgView; //background
+    //View m_HudView; //HUD
+    //View m_BgView; //background
 
     TextureHolder th;
 

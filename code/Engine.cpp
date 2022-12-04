@@ -1,5 +1,6 @@
 #include "Engine.h"
 //#include "Character.h"
+//#include "Rhythm.h"
 //////////////
 Engine::Engine()
 {
@@ -8,20 +9,19 @@ Engine::Engine()
 	resolution.y = VideoMode::getDesktopMode().height;
 
     //set up battle manager
-    //battle = new Battle(DARK, CAT, CAT, "fileName.wav");
     battle = new Battle();
 
     menu = new Menu();
-
-    //noteTest = new Tapper(480);
-    //vector<Note*> NV;
-    //NV.push_back(noteTest);
+////
+    //rhythm = new Rhythm();
+    midiTime = 0;
 
 
     m_Playing = false;
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);
+    //m_Window.setFramerateLimit(30);
     //not sure whether to use Fullscreen or Default
 
     m_mainView.setSize(resolution);

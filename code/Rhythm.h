@@ -1,6 +1,6 @@
 #ifndef RHYTHM_H
-#define TRHYTHM_H
-
+#define RHYTHM_H
+/*
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -11,7 +11,7 @@
 
 using namespace sf;
 using namespace std;
-
+*/
 //CLASS HAS NOT BEEN CHECKED FOR ERRORS
 
 class Rhythm
@@ -19,25 +19,33 @@ class Rhythm
 public:
     //add destructor to free input notes that are no longer relevant?
     Rhythm();
-    void activate(PlayerID id, int midiTime, int range); //time of start and range in midi clock units
-    Track getTrack();
-    void handleInput(); 
-    void update(int midiTime);
-    bool getIsDone();
-    bool getIsActive();
+    //void activate(PlayerID id, int midiTime, int range); //time of start and range in midi clock units
+    //Track getTrack();
+    //void handleInput(); 
+    //void update(int midiTime);
+    //bool getIsDone();
+    //bool getIsActive();
+    //void updateTester(int midiTime);
+    //RectangleShape* getTester();
 
 private:
-    Track m_track;
-    Note* m_note; 
-    PlayerID m_player;
+    //Track m_track;
+    //Note* m_note; 
+    //PlayerID m_player;
 
-    int m_startTime; 
-    int m_recordingTime; // how long to record input
+    //RectangleShape *m_tester; //plays back your input rhythms as a series of blinks
+    //int currentTime; //current time within note
+    //int currentNote;
+    //double midiToSeconds; //convert midi time values to seconds
+    //vector<Note*> m_notes;
+
+    //int m_startTime; 
+    //int m_recordingTime; // how long to record input
 
     bool m_active;
-    bool m_isPressed; 
-    bool m_isDone;
-    bool m_stateChange; //check whether an input is starting or ending
+    //bool m_isPressed; 
+    //bool m_isDone;
+    //bool m_stateChange; //check whether an input is starting or ending
 
     //Consider that start and end notes will have lower scores if theyre cut off by the recording
     //adjust calculations of percentage of notes hit

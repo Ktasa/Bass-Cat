@@ -113,7 +113,7 @@ void StatusBar::update()
     float healthPerc = float(m_health) / MAX_HEALTH;
     float meterPerc = float(m_meter) / MAX_METER;
     Vector2f sizeRatio = {0.4,0.02};
-    float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
+    //float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
     float healthWidth = resolution.x * healthPerc * sizeRatio.x;
     float meterWidth = resolution.x * meterPerc * sizeRatio.x;
     Vector2f healthSize = {healthWidth, resolution.y * sizeRatio.y};
