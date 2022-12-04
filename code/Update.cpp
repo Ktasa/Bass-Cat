@@ -27,11 +27,12 @@ void Engine::update(float dtAsSeconds)
 		if(battle->getState() == INACTIVE) //set battle options one time
 		{
 			battle->setChoices(menu->getChoices());
-			//Temporary set to MENU for teseting
-			battle->setState(MENU);
+			//battle->setState(CALIBRATE);
 
-			rhythm->activate(P1, battleTicks, 1920);
+			//rhythm->activate(P1, battleTicks, 1920);
 		}
+		
+
 		//cout << "entering updates\n";
 		//currently updates characters, CombatMenu
 		battle->update(dtAsSeconds);

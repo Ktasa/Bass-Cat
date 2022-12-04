@@ -3,6 +3,7 @@
 Calibration::Calibration()
 {
     m_active = false;
+    m_done = false;
 
     m_sprite = new Sprite();
     
@@ -22,16 +23,16 @@ Calibration::Calibration()
     float adjustScale = goalSize / defaultSize;
     Vector2f menuScale = {adjustScale,adjustScale};
     m_sprite->setScale(menuScale);
-
-    //center of screen
     m_sprite->setOrigin(CALIBRATION_WIDTH / 2, CALIBRATION_WIDTH / 2);
 }
 void Calibration::activate()
 {
     m_active = true;
+    m_done = false;
 }
 void Calibration::handleInput()
 {
+    //Add Escape to reset option. Shouldve used a different key because escape closes the window
     if(m_active)
     {
         if(Keyboard::isKeyPressed(Keyboard::Space))

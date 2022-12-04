@@ -148,8 +148,8 @@ void Rhythm::updateTester(int midiTime)
         }
         int playbackElapsed = midiTime - playbackStartTime;
         readTime = playbackElapsed; //increment by elapsed time
-
-        if(readNote < m_notes.size()) //avoid out of range
+        size_t readNoteSizeT = readNote; //what is the appropriate response to size_t int comparison
+        if(readNoteSizeT < m_notes.size()) //avoid out of range
         {
             //cout << "readNote is in range" << endl;
             int start = m_notes[readNote]->getStart();

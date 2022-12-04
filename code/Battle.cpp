@@ -114,8 +114,7 @@ void Battle::update(float dt)
             m_calibration->activate();
         }
     }
-
-    if(m_state == MENU)
+    else if(m_state == MENU)
     {
         if(m_combatMenu->getIsDone() == true)
             m_state = INPUT; //if menu is done, next phase
