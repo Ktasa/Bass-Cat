@@ -36,7 +36,7 @@ vector<Note*> Track::getNotes()
 
 //make a version based on current note index for checking accuracy?
 //UNFINISHED - its hard to check notes in a range when theres looping values
-/*
+
 vector<Note*> Track::getNotesInRange(int midiTime, int range)
 {
     //FIX: Need to check if the desired range contains notes, or returns an empty vector
@@ -55,12 +55,13 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     //start search from most recent?
     //int i = m_currNote;
 
-    vector<Note*> inRange;
+    vector<Note*> inRange; //maybe return track instead?
     
     size_t size = m_notes.size();
-    bool loop = false;
+    //bool loop = false;
     int startTimeTarget = midiTime; 
 
+    /*
     if(size > 0)
     {
         //a target time greater than duration suggests we are looping
@@ -70,6 +71,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
             startTimeTarget %= m_songDuration; //set it back to equivalent time listed in file
         }
     }
+    */
 
     int startSearch;
     int half = m_notes[size/2]->getStart();
@@ -105,7 +107,8 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         int endOfNote = startTime + duration;
 
         //first note searched that starts after the target time
-        if(startTime >= startTimeTarget)
+        //or note that is currently playing but hasn't finished
+        if(startTime >= startTimeTarget || endOfNote > startTimeTarget)
         {
             startIndex = i;
             startFound = true;
@@ -118,17 +121,17 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         i++;
     }//endwhile find startIndex
 
-    //finding the last note will also need to consider looping
     //Last note requirements:
     // - have a duration that exceeds the end range
-    // - have a duration that stops before the end but the next note doesnt start in range
-    // - loop back to the start of the song
+    // - or the next note doesnt start in range
+    // - loop back to the start of the song (not possible with current calibration mechanics)
 
-//Ending note might be in near the end of duration or at the beginning
     int endIndex;
     int j = startIndex;
-    int endTimeTarget = midiTime % m_songDuration + range;
-    bool loopingBack = false; 
+    //int endTimeTarget = midiTime % m_songDuration + range; //use if looping
+    int endTimeTarget = startTimeTarget + range;
+    //bool loopingBack = false; 
+    /*
     //is the range looping back to the beginning
     if(endTimeTarget > m_songDuration)
     {
@@ -136,44 +139,65 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         j = 0; 
         endTimeTarget %= m_songDuration; //adjust target to be in the beginning of song
     }
+    */
 
     bool endFound = false;
-    while(!endFound)
-    {      
-        int startTime = m_notes[j]->getStart();
-        int duration = m_notes[j]->getDuration();
-        int endOfNote = startTime + duration;
+    if(!outOfRange)
+    {
+        while(!endFound)
+        {      
+            int startTime = m_notes[j]->getStart();
+            int duration = m_notes[j]->getDuration();
+            int endOfNote = startTime + duration;
 
-        //range ends in middle of note
-        if(startTime <= endTimeTarget && endTimeTarget <= endOfNote)
-        {
-            endIndex = j;
-            endFound = true;
-        }
-        //note ends before range, check if theres a next note in range
-        else if (endOfNote < endTimeTarget)
-        {
-            //if next index isnt 
-            if(j >= size-1)
+            //range ends in middle of note, must be the last note
+            if(startTime <= endTimeTarget && endTimeTarget <= endOfNote)
             {
-                //Im pretty sure this is impossible given the loopingBack reset
-                cout << "Error: end search index out of range" << endl;
+                endIndex = j;
+                endFound = true;
             }
-            else
+            //if note out of range, the previous note is the last
+            else if(startTime > endTimeTarget)
             {
-                //its the last note in range if no following notes
-                int startTime = m_notes[j+1]->getStart();
-                if(startTime > endTimeTarget)
+                endIndex = j-1; 
+                endFound = true;
+            }
+            /*
+            //note ends before range, check if theres a next note in range
+            else if (endOfNote < endTimeTarget)
+            {
+                //if next index isnt 
+                if(j >= size-1)
                 {
-                    endIndex = j;
-                    endFound = true;
+                    cout << "Error: endSearch index out of range" << endl;
                 }
-            }
-            
+                else
+                {
+                    //its the last note in range if no following notes
+                    int startTime = m_notes[j+1]->getStart();
+                    if(startTime > endTimeTarget)
+                    {
+                        endIndex = j;
+                        endFound = true;
+                    }
+                }
+            }*/
+
+        }//endwhile find endIndex
+    }//endif (!outOfRange)
+
+    //load vector to return
+    if(!outOfRange)
+    {
+        for(int i=startIndex; i < endIndex; i++)
+        {
+            Note* n = m_notes[i];
+            inRange.push_back(n);
+            //send back a copy of the addresses already stored in this class
         }
+    }
 
-    }//endwhile find endIndex
-
+    return inRange;
 
 }
-*/
+
