@@ -10,8 +10,8 @@ CombatMenu::CombatMenu()
 
     string fileName = "graphics/combat menu.png";
     m_color = Color::Green; //a green menu means the program is failing to change its color
-    m_sprite = Sprite(TextureHolder::GetTexture(fileName));
-    m_sprite.setColor(m_color);
+    m_sprite = new Sprite(TextureHolder::GetTexture(fileName));
+    m_sprite->setColor(m_color);
 
     Vector2f resolution;
     resolution.x = VideoMode::getDesktopMode().width;
@@ -20,17 +20,17 @@ CombatMenu::CombatMenu()
     //Set position
     //Positions of other things - p1: 0.1x, 0.8y; p2: 0.6x, 0.8y
     Vector2f menuPosition = {resolution.x * float(0.35), resolution.y * float(0.8)};
-    m_sprite.setPosition(menuPosition);
+    m_sprite->setPosition(menuPosition);
 
     //adjust scale to screen resolution
     float defaultSize = COMBAT_MENU_WIDTH / resolution.y;
     float goalSize = 0.80; //about half the height of screen
     float adjustScale = goalSize / defaultSize;
     Vector2f menuScale = {adjustScale,adjustScale};
-    m_sprite.setScale(menuScale);
+    m_sprite->setScale(menuScale);
 
     //center of screen
-    m_sprite.setOrigin(COMBAT_MENU_WIDTH / 2, COMBAT_MENU_WIDTH / 2);
+    m_sprite->setOrigin(COMBAT_MENU_WIDTH / 2, COMBAT_MENU_WIDTH / 2);
 }
 
 void CombatMenu::activate()
@@ -110,18 +110,18 @@ void CombatMenu::update()
         {m_color = Color(100,0,255);}
         if(m_p2Pressed && m_current == P2)
         {m_color = Color(255,0,100);}
-        m_sprite.setColor(m_color);
+        m_sprite->setColor(m_color);
     }
 }
 
-Sprite CombatMenu::getSprite()
+Sprite* CombatMenu::getSprite()
 {
     return m_sprite;
 }
 void CombatMenu::setColor(Color color)
 {
     m_color = color;
-    m_sprite.setColor(color);
+    m_sprite->setColor(color);
 }
 
 CombatType CombatMenu::getChoice(PlayerID id)

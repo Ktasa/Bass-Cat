@@ -61,13 +61,13 @@ void Engine::draw()
 
         if(battle->getState() == CALIBRATE)
         {
-            Sprite *calibrationSprite = battle->getCalibrationSprite();
+            Sprite* calibrationSprite = battle->getCalibrationSprite();
             m_Window.draw(*calibrationSprite);
         }
         else if(battle->getState() == MENU)
         {
-            Sprite combatMenuSprite = battle->getCombatMenuSprite();
-            m_Window.draw(combatMenuSprite);
+            Sprite* combatMenuSprite = battle->getCombatMenuSprite();
+            m_Window.draw(*combatMenuSprite);
         }
         
     }

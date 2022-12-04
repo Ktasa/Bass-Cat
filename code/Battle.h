@@ -50,7 +50,7 @@ public:
     Sprite* getCharacterSprite(PlayerID id); //better to get sprite pointers?
     //Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite* getEffectSprite(PlayerID id);
-    Sprite getCombatMenuSprite();
+    Sprite* getCombatMenuSprite();
     Sprite* getCalibrationSprite();
     vector<RectangleShape*> getStatusBars(PlayerID id);
     //RectangleShape* getStatusBar();
@@ -60,6 +60,7 @@ public:
     void setScore(PlayerID id, int score);
     //void combatAction(PlayerID id, CombatType type, int score);
 
+    bool getIsCalibrated();
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
     void drawBattle(RenderWindow &window); //probably not using

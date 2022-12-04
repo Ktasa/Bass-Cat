@@ -17,14 +17,14 @@ public:
     void activate(); //make the menu appear
     void handleInput(); //get choices
     void update(); 
-    Sprite getSprite();
+    Sprite* getSprite();
     void setColor(Color color); //change outline color
     bool getIsActive(); //menu is active
     bool getIsDone(); //choices are ready
     CombatType getChoice(PlayerID id);
 
 private:
-    Sprite m_sprite;
+    Sprite* m_sprite;
     bool m_isActive;
     Color m_color;
     bool m_isDone; //need another bool to distinguish when to change battle states

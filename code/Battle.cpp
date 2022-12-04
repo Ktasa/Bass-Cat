@@ -167,7 +167,7 @@ Sprite* Battle::getCharacterSprite(PlayerID id)
     else{return m_p2->getSprite();}
 }
 
-Sprite Battle::getCombatMenuSprite()
+Sprite* Battle::getCombatMenuSprite()
 {
     return m_combatMenu->getSprite();
 }
@@ -226,7 +226,12 @@ void Battle::setEffectActivity(Effect *effect, bool active)
 {
     effect->setActive(active);
 }
-bool getIsEffectActive(Effect *effect)
+bool Battle::getIsEffectActive(Effect *effect)
 {
     return effect->getIsActive();
+}
+
+bool Battle::getIsCalibrated()
+{
+    return m_calibration->getIsDone();
 }
