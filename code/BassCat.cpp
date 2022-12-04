@@ -6,11 +6,11 @@ void animateTest(); //testing health bars
 
 int main()
 {
-    //animateTest();
+    animateTest();
 
     Engine engine;
 
-    engine.run();
+    //engine.run();
 
     return 0;
 }

@@ -1,5 +1,5 @@
 //EXAMPLE PROGRAM FOR ANIMATING SPRITE SHEETS
-/*
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "HSV.h"
@@ -61,12 +61,12 @@ void animateTest()
     // *****************************************************************************
 
     Texture nebulaTexture;
-    nebulaTexture.loadFromFile("graphics/nebula 800.png");
-    Sprite nebulaSprite;
-    nebulaSprite.setTexture(nebulaTexture);
-    nebulaSprite.setScale(2,2);
-    nebulaSprite.setPosition(-200,0);
-    nebulaSprite.setOrigin(0,0);
+    nebulaTexture.loadFromFile("graphics/nebula.png");
+    Sprite *nebulaSprite = new Sprite();
+    nebulaSprite->setTexture(nebulaTexture);
+    nebulaSprite->setScale(1,1);
+    nebulaSprite->setPosition(-200,0);
+    nebulaSprite->setOrigin(0,0);
 
     Texture characterTexture;
     characterTexture.loadFromFile("graphics/cat.png");
@@ -171,7 +171,7 @@ void animateTest()
 
             //if(characterFrame%2==0)
             {
-                int hueDt = 10;
+                int hueDt = 2;
                 tuple<float,float,float> HSV = RGBtoHSV(color1);
                 float hue = get<0>(HSV);
                 hue += hueDt;
@@ -185,6 +185,8 @@ void animateTest()
                 if(hue>360.0){hue=0.0;}
                 color2 = HSVtoRGB(hue,1,1);
                 a2Sprite.setColor(color2);
+
+                nebulaSprite->setColor(color1);
             }
 
         }
@@ -201,7 +203,7 @@ void animateTest()
         c2Sprite.setTextureRect(rect);
 
         window.clear(Color::Black);
-            //window.draw(nebulaSprite);
+        window.draw(*nebulaSprite);
             //window.draw(Character, &characterTexture);
         //window.draw(auraSprite);
             //window.draw(a2Sprite);
@@ -212,4 +214,3 @@ void animateTest()
         window.display();
     }
 }
-*/
