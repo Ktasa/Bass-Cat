@@ -18,8 +18,8 @@ class Rhythm
 {
 public:
     //add destructor to free input notes that are no longer relevant?
-    Rhythm();
-    void activate(PlayerID id, int midiTime, int range); //time of start and range in midi clock units
+    Rhythm(PlayerID id);
+    void activate(int midiTime, int range); //time of start and range in midi clock units
     Track getTrack();
     void handleInput(); 
     void update(int midiTime);

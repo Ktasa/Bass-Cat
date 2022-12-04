@@ -2,8 +2,9 @@
 
 #include <iostream>
 using namespace std;
-Rhythm::Rhythm()
+Rhythm::Rhythm(PlayerID id)
 {
+    m_player = id;
     m_active = false;
     m_active = false;
     m_isPressed = false; 
@@ -17,23 +18,26 @@ Rhythm::Rhythm()
 	resolution.y = VideoMode::getDesktopMode().height;
 
     m_tester = new RectangleShape();
-    m_tester->setSize(Vector2f(resolution.x / 5, resolution.y / 40));
+    m_tester->setSize(Vector2f(resolution.x / 10, resolution.y / 40));
     m_tester->setFillColor(Color::Black);
-    m_tester->setPosition(resolution.x *float(0.25), resolution.y *float(0.3));
+    if(id==P1)
+        m_tester->setPosition(resolution.x *float(0.28), resolution.y *float(0.3));
+    else
+        m_tester->setPosition(resolution.x *float(0.33), resolution.y *float(0.3));
     readTime = 0;
     readNote = 0;
     playbackStartTime = 0;
     //80BPM at 480 clocks per second
 }
 
-void Rhythm::activate(PlayerID id, int startMidiTime, int range)
+void Rhythm::activate(int startMidiTime, int range)
 {
     cout << "Rhythm activated" << endl;
     m_startTime = startMidiTime;
     m_recordingTime = range;
-    m_player = id;
     m_active = true;
-    m_track.clear(); //empty vector for new inputs
+    m_track.clear(); //empty vector for new inputs, use track destructor though
+    m_tester->setFillColor(Color::Red); //red represents recording
 }
 
 void Rhythm::handleInput()

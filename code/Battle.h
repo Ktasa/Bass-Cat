@@ -7,7 +7,7 @@
 #include "Song.h"
 #include "Track.h"
 #include "Note.h"
-//#include "Rhythm.h"
+#include "Rhythm.h"
 #include "Character.h"
 #include "CombatMenu.h"
 #include "StatusBar.h"
@@ -23,6 +23,7 @@ class CombatMenu;
 class Effect;
 class RhythmBar;
 class Calibration;
+class Rhythm;
 
 enum BattleState
 {
@@ -53,10 +54,11 @@ public:
     Sprite* getCombatMenuSprite();
     Sprite* getCalibrationSprite();
     vector<RectangleShape*> getStatusBars(PlayerID id);
-    //RectangleShape* getStatusBar();
     vector<RectangleShape*> getRhythmBar();
 
-    int getScore(Track& input, int midiTime); //int score/100 of an input session
+    int getScore(Track& input, int midiTime); //return int score/100 of an input session
+    //^^param midiTime unecessary bevause input will include start val?
+    //^^need to store recording time somewhere
     void setScore(PlayerID id, int score);
     //void combatAction(PlayerID id, CombatType type, int score);
 
@@ -72,7 +74,15 @@ public:
     void setEffectActivity(Effect *effect, bool active);
     bool getIsEffectActive(Effect *effect);
 
-    CombatType getCombatType(PlayerID id);
+    //CombatType getCombatType(PlayerID id);
+
+    //functions to handle rhythm input stuff
+    //put handleInput inside battle::handleInput
+    //activate from inside
+    //update from inside
+    //void getIsInputDone(); //[done for both players]
+    //void getIsInputActive(); 
+    //RectangleShape* getRhythmTester();
 
 private:
     bool m_recordingInput;
@@ -100,7 +110,8 @@ private:
     
     Song *m_song;
 
-    //Rhythm *m_input; //store user input as Note data
+    //Rhythm *m_input1, *m_input2; //store user input as Note data
+
     Calibration *m_calibration;
     
     int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase

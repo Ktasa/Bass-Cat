@@ -38,26 +38,7 @@ void Engine::draw()
         m_Window.draw(*statusBarsP1[1]);
         m_Window.draw(*statusBarsP2[1]);
         
-        //put into separate function? (not in battle class)
-        if(rhythm->getIsActive())
-        {
-            //display red when recording
-            RectangleShape* tester = rhythm->getTester();
-            tester->setFillColor(Color::Red);
-            m_Window.draw(*tester);
-        }
-        if(rhythm->getIsDone())
-        {
-            //display rhythm playback via flashing rectangle
-            RectangleShape* tester = rhythm->getTester();
-            m_Window.draw(*tester);
-        }
-        else if(!rhythm->getIsActive())
-        {
-            RectangleShape* tester = rhythm->getTester();
-            tester->setFillColor(Color::Black);
-            m_Window.draw(*tester);
-        }
+        displayRhythmTester();
 
         if(battle->getState() == CALIBRATE)
         {
@@ -87,4 +68,39 @@ void Engine::draw()
     //m_Window.setView(m_HudView);
 
     m_Window.display();
+}
+
+void Engine::displayRhythmTester()
+{
+    if(rhythm1->getIsActive() || rhythm1->getIsDone() || rhythm2->getIsDone())
+    {
+        //display red when recording
+        RectangleShape* tester1 = rhythm1->getTester();
+        RectangleShape* tester2 = rhythm2->getTester();
+
+        Vector2f resolution;
+        resolution.x = VideoMode::getDesktopMode().width;
+        resolution.y = VideoMode::getDesktopMode().height;
+        tester1->setPosition(resolution.x *float(0.28), resolution.y *float(0.3));
+        tester2->setPosition(resolution.x *float(0.33), resolution.y *float(0.3));
+
+        m_Window.draw(*tester1);
+        m_Window.draw(*tester2);
+    }
+    /*
+    else if(rhythm1->getIsDone() || rhythm2->getIsDone())
+    {
+        //display rhythm playback via flashing rectangle
+        RectangleShape* tester1 = rhythm1->getTester();
+        RectangleShape* tester2 = rhythm2->getTester();
+        m_Window.draw(*tester1);
+        m_Window.draw(*tester2);
+    }
+    else if(!rhythm1->getIsActive())
+    {
+        RectangleShape* tester = rhythm1->getTester();
+        tester->setFillColor(Color::Black);
+        m_Window.draw(*tester);
+    }
+    */
 }

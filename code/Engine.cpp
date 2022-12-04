@@ -1,6 +1,7 @@
 #include "Engine.h"
-//#include "Character.h"
+#include "Character.h"
 #include "Rhythm.h"
+#include "Battle.h"
 ////////////////////////
 Engine::Engine()
 {
@@ -13,7 +14,8 @@ Engine::Engine()
 
     menu = new Menu();
 
-    rhythm = new Rhythm();
+    rhythm1 = new Rhythm(P1);
+    rhythm2 = new Rhythm(P2);
     //cout << "rhythm constructor success" << endl;
     //m_midiTime = 0;
     m_battleTime = Time::Zero;

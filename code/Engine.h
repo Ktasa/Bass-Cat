@@ -20,7 +20,7 @@ private:
     Menu* menu;
 
     //for testing rhythm input
-    Rhythm* rhythm;
+    Rhythm *rhythm1, *rhythm2;
     //int m_midiTime;
     Time m_battleTime; //keep track of time from start of battle
     bool m_battleTimeActive;
@@ -56,6 +56,9 @@ private:
     void input();
     void update(float dtAsSeconds);
     void draw();
+
+    //private helper for draw - displays rhythm tester that flashes back recorded input
+    void displayRhythmTester();
 
 public:
     Engine();

@@ -8,7 +8,8 @@ Battle::Battle()
     m_state = INACTIVE;
     m_calibration = new Calibration();
     m_combatMenu = new CombatMenu();
-    //m_input = new Rhythm();
+    //m_input1 = new Rhythm();
+    //m_input2 = new Rhythm();
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
     m_status2 = new StatusBar();
@@ -235,8 +236,9 @@ bool Battle::getIsCalibrated()
 {
     return m_calibration->getIsDone();
 }
-
+/*
 CombatType Battle::getCombatType(PlayerID id)
 {
     return m_combatMenu->getChoice(id);
 }
+*/
