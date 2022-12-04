@@ -34,9 +34,9 @@ private:
     PlayerID m_player;
 
     RectangleShape *m_tester; //plays back your input rhythms as a series of blinks
-    int currentTime; //current time within note
-    int currentNote;
-    double midiToSeconds; //convert midi time values to seconds
+    int readTime; //what time of the rhythm is the tester reading
+    int readNote;
+    int playbackStartTime; //what tick did playback start
     vector<Note*> m_notes;
 
     int m_startTime; 

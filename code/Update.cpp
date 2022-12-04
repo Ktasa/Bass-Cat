@@ -18,11 +18,19 @@ void Engine::update(float dtAsSeconds)
 
     if (m_Playing)
 	{
+		//current elapsed ticks in battle
+		int battleTicks = int(m_battleTime.asSeconds() * TICKS_PER_SECOND);
+		//cout << "battle as seconds: " << m_battleTime.asSeconds() << endl;
+		//cout << "battle ticks: " << battleTicks << endl;
+		rhythm->update(battleTicks);
+
 		if(battle->getState() == INACTIVE) //set battle options one time
 		{
 			battle->setChoices(menu->getChoices());
 			//Temporary set to MENU for teseting
 			battle->setState(MENU);
+
+			rhythm->activate(P1, battleTicks, 1920);
 		}
 		//cout << "entering updates\n";
 		//currently updates characters, CombatMenu

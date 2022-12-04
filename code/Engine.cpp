@@ -15,7 +15,8 @@ Engine::Engine()
 
     rhythm = new Rhythm();
     //cout << "rhythm constructor success" << endl;
-    //midiTime = 0;
+    //m_midiTime = 0;
+    m_battleTime = Time::Zero;
 
 
     m_Playing = false;
@@ -38,15 +39,31 @@ void Engine::run()
     cout << "in run" << endl;
     while(m_Window.isOpen())
     {  
+        //Store game time as seconds to avoid loss of precision
+        //only convert to ticks at the point of calculation
+
         Time dt = clock.restart();
         m_GameTimeTotal += dt;
         float dtAsSeconds = dt.asSeconds();
 
+        if(m_Playing)
+            m_battleTime += dt;
+        /*
+        double dtAsTicksDouble = dt.asSeconds() * TICKS_PER_SECOND;
+        int dtAsTicks = int(dtAsTicksDouble);
+        if(m_GameTimeTotal < seconds(5))
+        {
+            cout << "dt seconds: " << dtAsSeconds << endl;
+            cout << "dt ticks double: " << dtAsTicksDouble << endl;
+            cout << "dt ticks int: " << dtAsTicks << endl;
+        }
+        */
+
         input();
-        cout << "input done" << endl;
+        //cout << "input done" << endl;
         update(dtAsSeconds);
-        cout << "update done" << endl;
+        //cout << "update done" << endl;
         draw();
-        cout << "draw done" << endl;
+        //cout << "draw done" << endl;
     }
 }
