@@ -6,7 +6,7 @@
 Menu::Menu()
 {
     m_current = 0;
-    m_validInput = false;
+    m_validInput = true;
     m_isActive = true;
 
     //set up prompts
@@ -45,6 +45,8 @@ Menu::Menu()
 
 void Menu::handleInput()
 {
+    //cout << "inside menu handle input" << endl;
+    //cout << "m_current: " << m_current << endl;
     //prevent extra values from being added
     if(m_current >= NUM_OPTIONS)
         m_validInput = false;

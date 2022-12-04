@@ -1,7 +1,7 @@
 #include "Engine.h"
 //#include "Character.h"
-//#include "Rhythm.h"
-//////////////
+#include "Rhythm.h"
+////////////////////////
 Engine::Engine()
 {
     Vector2f resolution;
@@ -12,15 +12,17 @@ Engine::Engine()
     battle = new Battle();
 
     menu = new Menu();
-////
-    //rhythm = new Rhythm();
-    midiTime = 0;
+
+    rhythm = new Rhythm();
+    //cout << "rhythm constructor success" << endl;
+    //midiTime = 0;
 
 
     m_Playing = false;
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Default);
+    
     //m_Window.setFramerateLimit(30);
     //not sure whether to use Fullscreen or Default
 
@@ -33,7 +35,7 @@ Engine::Engine()
 void Engine::run()
 {
     Clock clock;
-
+    cout << "in run" << endl;
     while(m_Window.isOpen())
     {  
         Time dt = clock.restart();
@@ -41,7 +43,10 @@ void Engine::run()
         float dtAsSeconds = dt.asSeconds();
 
         input();
+        cout << "input done" << endl;
         update(dtAsSeconds);
+        cout << "update done" << endl;
         draw();
+        cout << "draw done" << endl;
     }
 }

@@ -4,7 +4,7 @@
 #include "Character.h"
 #include "Battle.h"
 #include "Menu.h"
-//#include "Rhythm.h"
+#include "Rhythm.h"
 
 //#include "Note.h"
 
@@ -20,7 +20,7 @@ private:
     Menu* menu;
 
     //for testing rhythm input
-    //Rhythm* rhythm;
+    Rhythm* rhythm;
     int midiTime = 0;
 
     RenderWindow m_Window;

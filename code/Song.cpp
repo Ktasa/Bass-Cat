@@ -11,7 +11,7 @@ Song::Song(string fileName)
     string csvFileName = "game data/";
     csvFileName += songName;
     csvFileName += "csv";
-    cout << "CSV FILE NAME: " << csvFileName << endl;
+    //cout << "CSV FILE NAME: " << csvFileName << endl;
     loadTracks(csvFileName);
 }
 int Song::getBPM()
@@ -131,6 +131,7 @@ void Song::loadTracks(string fileName)
     }//end while (!eof)
     
     //output results
+    /*
     for(size_t i=0; i<m_tracks.size(); i++)
     {
         for(size_t j=0; j<5; j++) //display 5 notes of each track
@@ -142,6 +143,7 @@ void Song::loadTracks(string fileName)
             cout << "Duration: " << n->getDuration() << endl;
         }
     }
+    */
 }
 Track Song::getTrack(int trackID)
 {

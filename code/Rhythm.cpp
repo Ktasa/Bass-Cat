@@ -1,26 +1,29 @@
 #include "Rhythm.h"
-//
+
+#include <iostream>
+using namespace std;
 Rhythm::Rhythm()
 {
     m_active = false;
-    //m_isPressed = false; 
-    //m_isDone = false;
-    //m_stateChange = false; 
+    m_active = false;
+    m_isPressed = false; 
+    m_isDone = false;
+    m_stateChange = false; 
 
     //set up rectangle display for testing
-    //Vector2f resolution;
-	//resolution.x = VideoMode::getDesktopMode().width;
-	//resolution.y = VideoMode::getDesktopMode().height;
+    Vector2f resolution;
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
 
-    //m_tester->setSize(Vector2f(resolution.x / 5, resolution.y / 5));
-    //m_tester->setFillColor(Color::Black);
-    //m_tester->setPosition(resolution.x / 2, resolution.y / 2);
-    //currentTime = 0;
-    //currentNote = 0;
+    m_tester = new RectangleShape();
+    m_tester->setSize(Vector2f(resolution.x / 5, resolution.y / 5));
+    m_tester->setFillColor(Color::Black);
+    m_tester->setPosition(resolution.x / 2, resolution.y / 2);
+    currentTime = 0;
+    currentNote = 0;
     //80BPM at 480 clocks per second
-
 }
-/*
+
 void Rhythm::activate(PlayerID id, int midiTime, int range)
 {
     m_startTime = midiTime;
@@ -136,4 +139,3 @@ RectangleShape* Rhythm::getTester()
 {
     return m_tester;
 }
-*/

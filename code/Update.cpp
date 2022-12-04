@@ -10,11 +10,11 @@ void Engine::update(float dtAsSeconds)
 {
 	
 	//cout << "before update\n";
+	//cout << boolalpha << menu->isActive() << m_Playing << endl;
 	if(menu->isActive())
 		menu->update();
 	else
 		m_Playing = true;
-	//cout << "update good\n";
 
     if (m_Playing)
 	{

@@ -16,6 +16,7 @@ void Engine::draw()
     //BATTLE CLASS BASED DRAWING
     if(m_Playing)
     {
+        //cout << "in draw if playing\n";
         Sprite magicP1 = battle->getEffectSprite(P1);
         Sprite magicP2 = battle->getEffectSprite(P2);
         m_Window.draw(magicP1);
@@ -46,7 +47,7 @@ void Engine::draw()
     }
 //cout << "exiting battle draw()\n";
     //
-    //cout << "entering draw\n";
+    //cout << "entering draw menu\n";
     if(menu->isActive())
     {
         menu->drawText(m_Window);

@@ -2,6 +2,7 @@
 //
 void Engine::input()
 {
+    //cout << "in input" << endl;
     Event event;
     while(m_Window.pollEvent(event))
     {
@@ -24,9 +25,14 @@ void Engine::input()
             m_Window.close();
         }
         //NOTE: change to test activity inside the handler
+        //cout << "entering menu is active" << endl;
         if(menu->isActive())
             menu->handleInput();
         else
+        {
+            //cout << "entering handle input" << endl;
             battle->handleInput();
+            //rhythm->handleInput();
+        }
     }
 }
