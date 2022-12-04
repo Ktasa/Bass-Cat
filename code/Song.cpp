@@ -3,7 +3,8 @@
 Song::Song(string fileName)
 {
     //load audio file into music object
-    loadSong(fileName);
+    //loadSong(fileName);
+    loadSong("sound/Untitled Calibration A.ogg");
 
     //read in file of same name with track data
     string songName = fileName.substr(0,fileName.length()-3);
@@ -24,7 +25,7 @@ void Song::loadSong(string fileName)
 }
 void Song::loadTracks(string fileName)
 {
-    cout << "Entering Song::loadTracks()" << endl;
+    //cout << "Entering Song::loadTracks()" << endl;
     //assume CSV will contain data for these instruments in this order
     ifstream in(fileName);
     

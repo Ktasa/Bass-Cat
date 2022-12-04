@@ -45,6 +45,7 @@ void Battle::setChoices(vector<int> choices)
     //this may be a selectable option in the future
     string songFileName = "sound/Untitled 05.ogg";
     //songFileName = "sound/Calibration.wav";
+    //songFileName = "sound/Untitled Calibrtion B.ogg";
 
     //set up song
     m_song = new Song(songFileName);

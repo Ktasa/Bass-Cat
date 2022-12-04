@@ -122,8 +122,6 @@ void CombatMenu::setColor(Color color)
 {
     m_color = color;
     m_sprite.setColor(color);
-    //cout << "Green " << Color::Green.toInteger() << endl;
-    //cout << "Color set to: " << color.toInteger() << endl;
 }
 
 CombatType CombatMenu::getChoice(PlayerID id)
