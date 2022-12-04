@@ -72,7 +72,7 @@ void Song::loadTracks(string fileName)
                 int uSecondsBeat;
                 s >> uSecondsBeat;
                 m_BPM = (60 * 1000 * 1000) / uSecondsBeat;
-                cout << "Bpm: " << m_BPM << endl;
+                //cout << "Bpm: " << m_BPM << endl;
             }
             found = line.find("QUARTER_NOTE_TIME");
             if (found!=std::string::npos)
@@ -80,7 +80,7 @@ void Song::loadTracks(string fileName)
                 string field;
                 s >> field;
                 s >> m_quarterTime;
-                cout << "Quarter time: " << m_quarterTime << endl;
+                //cout << "Quarter time: " << m_quarterTime << endl;
             }
         }
 

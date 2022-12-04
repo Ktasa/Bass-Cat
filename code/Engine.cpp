@@ -36,7 +36,7 @@ Engine::Engine()
 void Engine::run()
 {
     Clock clock;
-    cout << "in run" << endl;
+
     while(m_Window.isOpen())
     {  
         //Store game time as seconds to avoid loss of precision

@@ -81,7 +81,7 @@ void Rhythm::update(int midiTime)
             //if holding note when expired, set duration and add it to track
             if(m_isPressed)
             {
-                cout << "last note added" << endl;
+                //cout << "last note added" << endl;
                 int duration = midiTime - m_note->getStart();
                 m_note->setDuration(duration);
                 m_track.addNote(m_note);
@@ -142,7 +142,7 @@ void Rhythm::updateTester(int midiTime)
             }
             else
             {
-                cout << "Empty vector: isDone set to false" << endl;
+                //cout << "Empty vector: isDone set to false" << endl;
                 m_isDone = false; //if empty, finish by reseting isDone
             }
         }
@@ -177,6 +177,7 @@ void Rhythm::updateTester(int midiTime)
         {
             //cout << "Read note > notes.size(): done set to false" << endl;
             m_isDone = false;
+            /*
             cout << "Table of notes displayed via rectangle" << endl;
             cout << "Index, Start, Duration, End" << endl;
             for(size_t i = 0; i< m_notes.size(); i++)
@@ -189,6 +190,7 @@ void Rhythm::updateTester(int midiTime)
                 cout << "duration " << duration << endl;
                 cout << "end: " << end << endl;
             }
+            */
 
             //clear note vector
             m_notes.clear(); //******memory leak********?
