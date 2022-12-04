@@ -38,6 +38,7 @@ private:
     int readNote;
     int playbackStartTime; //what tick did playback start
     vector<Note*> m_notes;
+    //int noteTimeElapsed; //measure how much the display is working
 
     int m_startTime; 
     int m_recordingTime; // how long to record input

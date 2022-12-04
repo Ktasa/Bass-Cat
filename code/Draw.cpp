@@ -19,26 +19,27 @@ void Engine::draw()
         //cout << "in draw if playing\n";
         Sprite magicP1 = battle->getEffectSprite(P1);
         Sprite magicP2 = battle->getEffectSprite(P2);
-        //m_Window.draw(magicP1);
-        //m_Window.draw(magicP2);
+        m_Window.draw(magicP1);
+        m_Window.draw(magicP2);
 
         Sprite p1Sprite;
-        //p1Sprite = battle->getCharacterSprite(P1);
-        //m_Window.draw(p1Sprite);
+        p1Sprite = battle->getCharacterSprite(P1);
+        m_Window.draw(p1Sprite);
         Sprite p2Sprite;
-        //p2Sprite = battle->getCharacterSprite(P2);
-        //m_Window.draw(p2Sprite);
+        p2Sprite = battle->getCharacterSprite(P2);
+        m_Window.draw(p2Sprite);
 
         vector<RectangleShape*> statusBarsP1 = battle->getStatusBars(P1);
         vector<RectangleShape*> statusBarsP2 = battle->getStatusBars(P2);
-        //m_Window.draw(*statusBarsP1[0]);
-        //m_Window.draw(*statusBarsP2[0]);
-        //m_Window.draw(*statusBarsP1[1]);
-        //m_Window.draw(*statusBarsP2[1]);
+        m_Window.draw(*statusBarsP1[0]);
+        m_Window.draw(*statusBarsP2[0]);
+        m_Window.draw(*statusBarsP1[1]);
+        m_Window.draw(*statusBarsP2[1]);
         
+        //put into separate function? (not in battle class)
         if(rhythm->getIsActive())
         {
-            //display rhythm playback via flashing rectangle
+            //display red when recording
             RectangleShape* tester = rhythm->getTester();
             tester->setFillColor(Color::Red);
             m_Window.draw(*tester);
@@ -52,7 +53,7 @@ void Engine::draw()
         else if(!rhythm->getIsActive())
         {
             RectangleShape* tester = rhythm->getTester();
-            tester->setFillColor(Color::Blue);
+            tester->setFillColor(Color::Black);
             m_Window.draw(*tester);
         }
 
