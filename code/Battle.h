@@ -52,7 +52,6 @@ public:
 
     Color getBackground(); //use in draw()    
     Sprite* getCharacterSprite(PlayerID id); //better to get sprite pointers?
-    //Sprite getEffectSprite(PlayerID id, EffectType effect);
     Sprite* getEffectSprite(PlayerID id);
     Sprite* getCombatMenuSprite();
     Sprite* getCalibrationSprite();
@@ -65,7 +64,7 @@ public:
     bool getIsCalibrated();
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
-    void drawBattle(RenderWindow &window); //probably not using
+    //void drawBattle(RenderWindow &window); //probably not using
     
     BattleState getState();
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
@@ -89,38 +88,35 @@ public:
     int getCurrentTicks();
 
 private:
-    bool m_recordingInput;
+    //bool m_recordingInput;
     
-    //Sprite background; //(these can cause hard lag... must be because full screen display?)
-    
-    //might be best to use pointers for all these class objects with lots of data
+    //Sprite* background; 
     Character *m_p1, *m_p2;
-
-    //all these object pairs for each character, might be best to move to character class
-    StatusBar *m_status1, *m_status2;
-    CombatMenu *m_combatMenu; //menu specifically for battle options
     Effect *m_magic1, *m_magic2, *m_damage1, *m_damage2;
     //Effect *m_effect1, *m_effect2;
-
-    RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
-    
-    //Text m_text; //use to announce actions
-
-    PlayerID m_turn; //whose turn is active
-
-    Display m_display;
-
-    BattleState m_state;
-    
-    Song *m_song;
-
-    Rhythm *m_input1, *m_input2; //store user input as Note data
+    StatusBar *m_status1, *m_status2;
 
     Calibration *m_calibration;
+    CombatMenu *m_combatMenu; //menu specifically for battle options
 
-    CombatType m_combat1, m_combat2;
-    
-    int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase
+    CombatType m_combat1, m_combat2; //player action choices
+    int m_actionScoreP1, m_actionScoreP2; //store scores for the turn
+
+    Song *m_song;
+    Rhythm *m_input1, *m_input2; //store user input as Note data
+    RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
+
+    Display m_display;
+    BattleState m_state;
+    //PlayerID m_turn; //whose turn is active
+
+    //helper functions for update() based on BattleState
+    void updateTime();
+    void updateEndScreen();
+    void updateCalibrate();
+    void updateMenu();
+    void updateInput();
+    void updateEffect();
 };
 
 #include "Song.h"
