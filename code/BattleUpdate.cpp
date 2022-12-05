@@ -117,8 +117,8 @@ void Battle::updateInput()
     {
         //maybe only activate rhythm input at a certain time like at the start of a measure
         //set effect on or to rainbow if combat option is magic related
-        int recordTime = m_song->TICKS_PER_MEASURE * 2; //2 measures
-        //int recordTime = m_song->TICKS_PER_MEASURE;
+        //int recordTime = m_song->TICKS_PER_MEASURE * 2; //2 measures
+        int recordTime = m_song->TICKS_PER_MEASURE;
         //cout << "recordTime: " << recordTime << endl;
         m_input1->activate(getCurrentTicks(), recordTime);
         m_input2->activate(getCurrentTicks(), recordTime);
@@ -129,10 +129,12 @@ void Battle::updateInput()
         // m_input1->activate(int midiTime, int range);
     }
 }
+
 void Battle::updateEffect()
 {
-    //cout << "entered effect state" << endl;
-    void combatAction();
+    cout << "entered effect state" << endl;
+    combatAction();
+    cout << "After combatAction" << endl;
     //itd be nice to have some kind of pause / damage animation here
     //when battleticks goes by like 2 beats, set character animation states to action?
     m_state = MENU;

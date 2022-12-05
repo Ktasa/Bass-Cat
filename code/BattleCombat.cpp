@@ -2,7 +2,15 @@
 
 void Battle::combatAction()
 {
-    //really should make this system based on doubles
+    cout << "Entered CombatAction" << endl;
+    //make this system based on doubles?
+    cout << "P1 score: " << m_actionScoreP1 << endl;
+    cout << "P2 score: " << m_actionScoreP2 << endl;
+    cout << "P1 health: " << m_status1->getHealth() << endl;
+    cout << "P2 health: " << m_status2->getHealth() << endl;
+    cout << "P1 meter: " << m_status1->getMeter() << endl;
+    cout << "P2 meter: " << m_status2->getMeter() << endl;
+
     const double DEFAULT_MULTIPLIER = 0.25;
     const double MAGIC_ATTACK_MULTIPLIER = DEFAULT_MULTIPLIER * 1.5;
     int effectP1 = 0;
@@ -90,4 +98,11 @@ void Battle::combatAction()
         cout << "Error: NO_SELECTION combat action" << endl;
     }
 
+    cout << "P1 effect: " << effectP1 << endl;
+    cout << "P2 effect: " << effectP2 << endl;
+
+    cout << "P1 health: " << m_status1->getHealth() << endl;
+    cout << "P2 health: " << m_status2->getHealth() << endl;
+    cout << "P1 meter: " << m_status1->getMeter() << endl;
+    cout << "P2 meter: " << m_status2->getMeter() << endl;
 }
