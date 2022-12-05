@@ -107,34 +107,6 @@ int Battle::getCurrentTicks()
     return battleTicks;
 }
 
-Sprite* Battle::getCharacterSprite(PlayerID id)
-{
-    if(id == P1){return m_p1->getSprite();}
-    else{return m_p2->getSprite();}
-}
-
-Sprite* Battle::getCombatMenuSprite()
-{
-    return m_combatMenu->getSprite();
-}
-Sprite* Battle::getCalibrationSprite()
-{
-    return m_calibration->getSprite();
-}
-
-vector<RectangleShape*> Battle::getStatusBars(PlayerID id)
-{
-    if(id == P1)
-        return m_status1->getBars();
-    else
-        return m_status2->getBars();
-}
-
-//RectangleShape* Battle::getStatusBar()
-//{
-//    return m_status1->getHealthBG();
-//}
-
 BattleState Battle::getState()
 {
     return m_state;
@@ -154,7 +126,26 @@ Color Battle::getBackground()
     {color = Color::Black;}
     return color;
 }
-
+Sprite* Battle::getCalibrationSprite()
+{
+    return m_calibration->getSprite();
+}
+Sprite* Battle::getCombatMenuSprite()
+{
+    return m_combatMenu->getSprite();
+}
+Sprite* Battle::getCharacterSprite(PlayerID id)
+{
+    if(id == P1){return m_p1->getSprite();}
+    else{return m_p2->getSprite();}
+}
+vector<RectangleShape*> Battle::getStatusBars(PlayerID id)
+{
+    if(id == P1)
+        return m_status1->getBars();
+    else
+        return m_status2->getBars();
+}
 
 Sprite* Battle::getEffectSprite(PlayerID id)
 {
@@ -164,97 +155,6 @@ Sprite* Battle::getEffectSprite(PlayerID id)
     else
         return m_magic2->getSprite();
 }
-void Battle::setEffectActivity(PlayerID id, EffectType effect, bool active, bool rainbow)
-{
-    if(id==P1)
-    {
-        if(effect==MAGIC)
-        {
-            m_magic1->setActive(active);
-            m_magic1->setRainbow(rainbow);
-        }
-        else
-            m_damage1->setActive(active);
-    }
-    else
-    {
-        if(effect==MAGIC)
-        {
-            m_magic2->setActive(active);
-            m_magic2->setRainbow(rainbow);
-        }
-        else
-            m_damage2->setActive(active);
-    }
-}
-bool Battle::getIsEffectActive(PlayerID id, EffectType effect)
-{
-    if(id==P1)
-    {
-        if(effect==MAGIC)
-            return m_magic1->getIsActive();
-        else
-            return m_damage1->getIsActive();
-    }
-    else
-    {
-        if(effect==MAGIC)
-            return m_magic2->getIsActive();
-        else
-           return m_damage2->getIsActive();
-    }
-}
-void Battle::setEffects()
-{
-    bool active1, rainbow1;
-    bool active2, rainbow2;
-    if(m_combat1 == BUILD_METER)
-    {
-        active1 = true;
-        rainbow1 = false;
-    }
-    else if(m_combat1 == MAGIC_ATTACK)
-    {
-        active1 = true;
-        rainbow1 = true;
-    }
-    else
-    {
-        active1 = false;
-        rainbow1 = false;
-    }
-    if(m_combat2 == BUILD_METER)
-    {
-        active2 = true;
-        rainbow2 = false;
-    }
-    else if(m_combat2 == MAGIC_ATTACK)
-    {
-        active2 = true;
-        rainbow2 = true;
-    }
-    else
-    {
-        active2 = false;
-        rainbow2 = false;
-    }
-    //cout << boolalpha << "active1: " << rainbow1 << endl;
-    //cout << "active2: " << active2 << endl;
-    //cout << boolalpha << "rainbow1: " << rainbow1 << endl;
-    //cout << "rainbow2: " << active2 << endl;
-    setEffectActivity(P1, MAGIC, active1, rainbow1);
-    setEffectActivity(P2, MAGIC, active2, rainbow2);
-}
-bool Battle::getIsCalibrated()
-{
-    return m_calibration->getIsDone();
-}
-
-CombatType Battle::getCombatType(PlayerID id)
-{
-    return m_combatMenu->getChoice(id);
-}
-
 RectangleShape* Battle::getRhythmTester(PlayerID id)
 {
     if(id==P1)
@@ -263,6 +163,12 @@ RectangleShape* Battle::getRhythmTester(PlayerID id)
         return m_input2->getTester();
 }
 
+// ************************* Functions mostly for internal use
+bool Battle::getIsCalibrated()
+{
+    return m_calibration->getIsDone();
+}
+//check state of rhythm input
 bool Battle::getIsInputDone() //[done for both players]
 {
     bool done = (m_input1->getIsDone() || m_input2->getIsDone());
@@ -272,99 +178,10 @@ bool Battle::getIsInputActive()
 {
     return m_input1->getIsActive(); //both will be active at the same time
 }
-
-void Battle::combatAction()
+CombatType Battle::getCombatType(PlayerID id)
 {
-    //really should make this system based on doubles
-    const double DEFAULT_MULTIPLIER = 0.25;
-    const double MAGIC_ATTACK_MULTIPLIER = DEFAULT_MULTIPLIER * 1.5;
-    int effectP1 = 0;
-    int effectP2 = 0;
-    if(m_combat1 == ATTACK || m_combat1 == BLOCK || m_combat1 == BUILD_METER)
-    {
-        effectP1 = m_actionScoreP1 * DEFAULT_MULTIPLIER;
-    }
-    else if(m_combat1 == MAGIC_ATTACK)
-    {
-        effectP1 = m_actionScoreP1 * MAGIC_ATTACK_MULTIPLIER;
-    }
-    if(m_combat2 == ATTACK || m_combat2 == BLOCK || m_combat2 == BUILD_METER)
-    {
-        effectP2 = m_actionScoreP2 * DEFAULT_MULTIPLIER;
-    }
-    else if(m_combat1 == MAGIC_ATTACK)
-    {
-        effectP2 = m_actionScoreP2 * MAGIC_ATTACK_MULTIPLIER;
-    }
-
-    if(m_combat1 == ATTACK || m_combat1 == MAGIC_ATTACK) //make magic attack even more effective on block?
-    {
-        if(m_combat2 == BLOCK)
-        {
-            effectP1 -= effectP2;
-            if(effectP1 < 0)
-                effectP1 = 0;
-        }
-    }
-    else if(m_combat2 == ATTACK || m_combat2 == MAGIC_ATTACK)
-    {
-        if(m_combat2 == BLOCK)
-        {
-            effectP1 -= effectP2;
-            if(effectP1 < 0)
-                effectP1 = 0;
-        }
-    }
-
-    if(m_combat1 == BUILD_METER)
-    {
-        m_status1->addMeter(effectP1);
-    }
-    else
-    {
-        m_status2->addDamage(effectP1);
-    }
-    if(m_combat2 == BUILD_METER)
-    {
-        m_status2->addMeter(effectP2);
-    }
-    else
-    {
-        m_status1->addDamage(effectP2);
-    }
-
-    if(m_combat1 == MAGIC_ATTACK)
-    {
-        int meterDrain = m_status1->getMeter() - effectP1;
-        if(meterDrain < 0)
-        {
-            //reset meter
-            m_status1->addMeter(-m_status1->getMeter());
-            m_status1->addDamage(meterDrain*-1);
-        }
-        else
-            m_status1->addMeter(-effectP1);
-    }
-    if(m_combat2 == MAGIC_ATTACK)
-    {
-        int meterDrain = m_status2->getMeter() - effectP2;
-        if(meterDrain < 0)
-        {
-            //reset meter
-            m_status2->addMeter(-m_status1->getMeter());
-            m_status2->addDamage(meterDrain*-1);
-        }
-        else
-            m_status2->addMeter(-effectP1);
-    }
-
-    if(m_combat1 == NO_SELECTION || m_combat2 == NO_SELECTION)
-    {
-        cout << "Error: NO_SELECTION combat action" << endl;
-    }
-
+    return m_combatMenu->getChoice(id);
 }
-
 int Battle::getScore(PlayerID id) //return int score/100 of an input session
 {
     //change to store scores as Battle data members
@@ -376,3 +193,5 @@ int Battle::getScore(PlayerID id) //return int score/100 of an input session
     else    
         return 50;
 }
+
+

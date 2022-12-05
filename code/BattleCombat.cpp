@@ -1,0 +1,93 @@
+#include "Battle.h"
+
+void Battle::combatAction()
+{
+    //really should make this system based on doubles
+    const double DEFAULT_MULTIPLIER = 0.25;
+    const double MAGIC_ATTACK_MULTIPLIER = DEFAULT_MULTIPLIER * 1.5;
+    int effectP1 = 0;
+    int effectP2 = 0;
+    if(m_combat1 == ATTACK || m_combat1 == BLOCK || m_combat1 == BUILD_METER)
+    {
+        effectP1 = m_actionScoreP1 * DEFAULT_MULTIPLIER;
+    }
+    else if(m_combat1 == MAGIC_ATTACK)
+    {
+        effectP1 = m_actionScoreP1 * MAGIC_ATTACK_MULTIPLIER;
+    }
+    if(m_combat2 == ATTACK || m_combat2 == BLOCK || m_combat2 == BUILD_METER)
+    {
+        effectP2 = m_actionScoreP2 * DEFAULT_MULTIPLIER;
+    }
+    else if(m_combat1 == MAGIC_ATTACK)
+    {
+        effectP2 = m_actionScoreP2 * MAGIC_ATTACK_MULTIPLIER;
+    }
+
+    if(m_combat1 == ATTACK || m_combat1 == MAGIC_ATTACK) //make magic attack even more effective on block?
+    {
+        if(m_combat2 == BLOCK)
+        {
+            effectP1 -= effectP2;
+            if(effectP1 < 0)
+                effectP1 = 0;
+        }
+    }
+    else if(m_combat2 == ATTACK || m_combat2 == MAGIC_ATTACK)
+    {
+        if(m_combat2 == BLOCK)
+        {
+            effectP1 -= effectP2;
+            if(effectP1 < 0)
+                effectP1 = 0;
+        }
+    }
+
+    if(m_combat1 == BUILD_METER)
+    {
+        m_status1->addMeter(effectP1);
+    }
+    else
+    {
+        m_status2->addDamage(effectP1);
+    }
+    if(m_combat2 == BUILD_METER)
+    {
+        m_status2->addMeter(effectP2);
+    }
+    else
+    {
+        m_status1->addDamage(effectP2);
+    }
+
+    if(m_combat1 == MAGIC_ATTACK)
+    {
+        int meterDrain = m_status1->getMeter() - effectP1;
+        if(meterDrain < 0)
+        {
+            //reset meter
+            m_status1->addMeter(-m_status1->getMeter());
+            m_status1->addDamage(meterDrain*-1);
+        }
+        else
+            m_status1->addMeter(-effectP1);
+    }
+    if(m_combat2 == MAGIC_ATTACK)
+    {
+        int meterDrain = m_status2->getMeter() - effectP2;
+        if(meterDrain < 0)
+        {
+            //reset meter
+            m_status2->addMeter(-m_status1->getMeter());
+            m_status2->addDamage(meterDrain*-1);
+        }
+        else
+            m_status2->addMeter(-effectP1);
+    }
+
+    if(m_combat1 == NO_SELECTION || m_combat2 == NO_SELECTION)
+    {
+        cout << "Error: NO_SELECTION combat action" << endl;
+    }
+
+}
