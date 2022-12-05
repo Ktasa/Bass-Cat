@@ -58,6 +58,8 @@ private:
     void draw();
 
     //private helpers for draw 
+    void displayBackground();
+    void displayEffects();
     void displayCharacters();
     void displayStatusBars();
     void displayRhythmTester();

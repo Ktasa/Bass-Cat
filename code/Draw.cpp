@@ -3,29 +3,17 @@
 
 void Engine::draw()
 {
-	m_Window.clear(Color::Black);
-    if(battle->getState() != INACTIVE)
-    {
-        m_Window.clear(battle->getBackground());
-        //m_Window.setView(m_mainView);
-        //m_Window.draw(*m_backgroundSprite);
-    }
+    displayBackground();
 
     m_Window.setView(m_mainView);
 
     if(m_Playing)
     {
-        //not always displaying both effects
-        Sprite* magicP1 = battle->getEffectSprite(P1);
-        Sprite* magicP2 = battle->getEffectSprite(P2);
-        m_Window.draw(*magicP1);
-        m_Window.draw(*magicP2);
-
+        displayEffects();
         displayCharacters();
         displayStatusBars();
         displayRhythmTester();
         displayInterface();
-        
     }
 
     if(menu->isActive())
@@ -37,6 +25,32 @@ void Engine::draw()
     //set views and draw objects to those views
 
     m_Window.display();
+}
+
+void Engine::displayBackground()
+{
+    m_Window.clear(Color::Black);
+    if(battle->getState() != INACTIVE)
+    {
+        m_Window.clear(battle->getBackground());
+        //m_Window.setView(m_mainView);
+        //m_Window.draw(*m_backgroundSprite);
+    }
+}
+
+void Engine::displayEffects()
+{
+    //not always displaying both effects
+    if(battle->getIsEffectActive(P1, MAGIC))
+    {
+        Sprite* magicP1 = battle->getEffectSprite(P1);
+        m_Window.draw(*magicP1);
+    }
+    if(battle->getIsEffectActive(P2, MAGIC))
+    {
+        Sprite* magicP2 = battle->getEffectSprite(P2);
+        m_Window.draw(*magicP2);
+    }
 }
 
 void Engine::displayCharacters()

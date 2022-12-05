@@ -71,8 +71,8 @@ public:
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
     //these are kind of bad, not good for working in engine
-    void setEffectActivity(Effect *effect, bool active);
-    bool getIsEffectActive(Effect *effect);
+    void setEffectActivity(PlayerID id, EffectType effect, bool active);
+    bool getIsEffectActive(PlayerID id, EffectType effect);
 
     //CombatType getCombatType(PlayerID id);
 

@@ -223,15 +223,40 @@ Sprite* Battle::getEffectSprite(PlayerID id)
         return m_magic2->getSprite();
     }
 }
-void Battle::setEffectActivity(Effect *effect, bool active)
+void Battle::setEffectActivity(PlayerID id, EffectType effect, bool active)
 {
-    effect->setActive(active);
+    if(id==P1)
+    {
+        if(effect==MAGIC)
+            m_magic1->setActive(active);
+        else
+            m_damage1->setActive(active);
+    }
+    else
+    {
+        if(effect==MAGIC)
+            m_magic2->setActive(active);
+        else
+            m_damage2->setActive(active);
+    }
 }
-bool Battle::getIsEffectActive(Effect *effect)
+bool Battle::getIsEffectActive(PlayerID id, EffectType effect)
 {
-    return effect->getIsActive();
+    if(id==P1)
+    {
+        if(effect==MAGIC)
+            return m_magic1->getIsActive();
+        else
+            return m_damage1->getIsActive();
+    }
+    else
+    {
+        if(effect==MAGIC)
+            return m_magic2->getIsActive();
+        else
+           return m_damage2->getIsActive();
+    }
 }
-
 bool Battle::getIsCalibrated()
 {
     return m_calibration->getIsDone();
