@@ -27,10 +27,12 @@ public:
     void setColor(PlayerID id, Color color);
     void setPosition(PlayerID id);
     void setUp(PlayerID id, Color color);
+    void activateUpdate();
     
 private:
     int m_health;
     int m_meter;
+    bool m_update;
     vector<RectangleShape*> m_statusBars;
     RectangleShape *m_healthBar;
     RectangleShape *m_meterBar;

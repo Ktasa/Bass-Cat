@@ -132,9 +132,10 @@ void Battle::updateInput()
 
 void Battle::updateEffect()
 {
-    cout << "entered effect state" << endl;
+    //cout << "entered effect state" << endl;
     combatAction();
-    cout << "After combatAction" << endl;
+    m_status1->activateUpdate();
+    m_status2->activateUpdate();
     //itd be nice to have some kind of pause / damage animation here
     //when battleticks goes by like 2 beats, set character animation states to action?
     m_state = MENU;

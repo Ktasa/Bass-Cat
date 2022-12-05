@@ -11,13 +11,14 @@ void Battle::combatAction()
     cout << "P1 meter: " << m_status1->getMeter() << endl;
     cout << "P2 meter: " << m_status2->getMeter() << endl;
 
-    const double DEFAULT_MULTIPLIER = 0.25;
+    const double DEFAULT_MULTIPLIER = 0.5;
     const double MAGIC_ATTACK_MULTIPLIER = DEFAULT_MULTIPLIER * 1.5;
     int effectP1 = 0;
     int effectP2 = 0;
     if(m_combat1 == ATTACK || m_combat1 == BLOCK || m_combat1 == BUILD_METER)
     {
         effectP1 = m_actionScoreP1 * DEFAULT_MULTIPLIER;
+        cout << "Effect p1: " << effectP1 << endl;
     }
     else if(m_combat1 == MAGIC_ATTACK)
     {
@@ -51,6 +52,7 @@ void Battle::combatAction()
         }
     }
 
+    //FIX: check what to do for BLOCK
     if(m_combat1 == BUILD_METER)
     {
         m_status1->addMeter(effectP1);

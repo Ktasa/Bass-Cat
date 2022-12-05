@@ -9,28 +9,41 @@ StatusBar::StatusBar()
     m_meterBar = new RectangleShape();
     m_statusBars.push_back(m_healthBar);
     m_statusBars.push_back(m_meterBar);
+    m_update = true;
 }
 void StatusBar::setUp(PlayerID id, Color color)
 {
     setColor(id, color);
     setPosition(id);
 }
+void StatusBar::activateUpdate()
+{
+    m_update = true;
+}
 void StatusBar::update()
 {
-    Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    if(m_update)
+    {
+        Vector2f resolution;
+        resolution.x = VideoMode::getDesktopMode().width;
+        resolution.y = VideoMode::getDesktopMode().height;
 
-    float healthPerc = float(m_health) / MAX_HEALTH;
-    float meterPerc = float(m_meter) / MAX_METER;
-    Vector2f sizeRatio = {0.4,0.02};
-    //float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
-    float healthWidth = resolution.x * healthPerc * sizeRatio.x;
-    float meterWidth = resolution.x * meterPerc * sizeRatio.x;
-    Vector2f healthSize = {healthWidth, resolution.y * sizeRatio.y};
-    Vector2f meterSize = {meterWidth, resolution.y * sizeRatio.y};
-    m_healthBar->setSize(healthSize);
-    m_meterBar->setSize(meterSize);
+        float healthPerc = float(m_health) / MAX_HEALTH;
+        float meterPerc = float(m_meter) / MAX_METER;
+        //cout << "healthPerc: " << healthPerc << endl;
+        //cout << "meterPerc: " << meterPerc << endl;
+        Vector2f sizeRatio = {0.4,0.02};
+        //float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
+        float healthWidth = resolution.x * healthPerc * sizeRatio.x;
+        float meterWidth = resolution.x * meterPerc * sizeRatio.x;
+        //cout << "healthWidth: " << healthWidth << endl;
+        //cout << "meterWidth: " << meterWidth << endl;
+        Vector2f healthSize = {healthWidth, resolution.y * sizeRatio.y};
+        Vector2f meterSize = {meterWidth, resolution.y * sizeRatio.y};
+        m_healthBar->setSize(healthSize);
+        m_meterBar->setSize(meterSize);
+        m_update = false;
+    }
 }
 
 void StatusBar::setColor(PlayerID id, Color color)
