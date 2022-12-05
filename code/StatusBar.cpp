@@ -10,23 +10,28 @@ StatusBar::StatusBar()
     m_statusBars.push_back(m_healthBar);
     m_statusBars.push_back(m_meterBar);
 }
+void StatusBar::setUp(PlayerID id, Color color)
+{
+    setColor(id, color);
+    setPosition(id);
+}
+void StatusBar::update()
+{
+    Vector2f resolution;
+    resolution.x = VideoMode::getDesktopMode().width;
+    resolution.y = VideoMode::getDesktopMode().height;
 
-int StatusBar::getHealth()
-{
-    return m_health;
+    float healthPerc = float(m_health) / MAX_HEALTH;
+    float meterPerc = float(m_meter) / MAX_METER;
+    Vector2f sizeRatio = {0.4,0.02};
+    //float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
+    float healthWidth = resolution.x * healthPerc * sizeRatio.x;
+    float meterWidth = resolution.x * meterPerc * sizeRatio.x;
+    Vector2f healthSize = {healthWidth, resolution.y * sizeRatio.y};
+    Vector2f meterSize = {meterWidth, resolution.y * sizeRatio.y};
+    m_healthBar->setSize(healthSize);
+    m_meterBar->setSize(meterSize);
 }
-int StatusBar::getMeter()
-{
-    return m_meter;
-}
-vector<RectangleShape*> StatusBar::getBars()
-{
-    return m_statusBars;
-}
-//RectangleShape* StatusBar::getHealthBG()
-//{
-//    return m_healthBG;
-//}
 
 void StatusBar::setColor(PlayerID id, Color color)
 {
@@ -99,29 +104,15 @@ void StatusBar::setPosition(PlayerID id)
     m_meterBar->setScale(barScale);
 
 }
-void StatusBar::setUp(PlayerID id, Color color)
-{
-    setColor(id, color);
-    setPosition(id);
-}
-void StatusBar::update()
-{
-    Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
 
-    float healthPerc = float(m_health) / MAX_HEALTH;
-    float meterPerc = float(m_meter) / MAX_METER;
-    Vector2f sizeRatio = {0.4,0.02};
-    //float healthMagicRatio = 0.5; //maybe make magic meter half the width of health?
-    float healthWidth = resolution.x * healthPerc * sizeRatio.x;
-    float meterWidth = resolution.x * meterPerc * sizeRatio.x;
-    Vector2f healthSize = {healthWidth, resolution.y * sizeRatio.y};
-    Vector2f meterSize = {meterWidth, resolution.y * sizeRatio.y};
-    m_healthBar->setSize(healthSize);
-    m_meterBar->setSize(meterSize);
+int StatusBar::getHealth()
+{
+    return m_health;
 }
-
+int StatusBar::getMeter()
+{
+    return m_meter;
+}
 void StatusBar::addDamage(int damage)
 {
     m_health -= damage;
@@ -129,4 +120,16 @@ void StatusBar::addDamage(int damage)
 void StatusBar::addMeter(int meter)
 {
     m_meter += meter;
+}
+void StatusBar::setHealth(int health)
+{
+    m_health = health;
+}
+void StatusBar::setMeter(int meter)
+{
+    m_meter = meter;
+}
+vector<RectangleShape*> StatusBar::getBars()
+{
+    return m_statusBars;
 }

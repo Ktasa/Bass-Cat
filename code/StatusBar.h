@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Battle.h"
 #include "Character.h"
 
 using namespace sf;
@@ -20,25 +19,21 @@ public:
     int getHealth();
     int getMeter();
     vector<RectangleShape*> getBars(); //get the shapes to display
-    void addDamage(int damage);
+    void addDamage(int damage); //maybe better to use setHealth/Meter
     void addMeter(int meter);
-    //void setColor(Display display);
+    void setHealth(int health); 
+    void setMeter(int meter);
+    //void setColor(Display display); //recursive include error because Display is in Battle
     void setColor(PlayerID id, Color color);
     void setPosition(PlayerID id);
     void setUp(PlayerID id, Color color);
-    //RectangleShape* getHealthBG(); //test drawing
-
     
 private:
     int m_health;
     int m_meter;
-    //display with SFML rectangles instead of sprite?
-    //Sprite m_sprite;
     vector<RectangleShape*> m_statusBars;
-    //RectangleShape *m_healthBG; //when adjusting the scale, do it proportional to height
     RectangleShape *m_healthBar;
     RectangleShape *m_meterBar;
-    //Shape* shape;
 
 };
 
