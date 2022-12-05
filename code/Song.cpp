@@ -148,6 +148,7 @@ void Song::loadTracks(string fileName)
     */
    //TEST Track::getNotesInRange()
    //get bass notes in the first beat of the song
+   /*
    vector<Note*> bassRange = m_tracks[3]->getNotesInRange(9600, 480);
    cout << "Drum data at 9600" << endl;
    for(size_t i=0; i<bassRange.size(); i++)
@@ -157,6 +158,7 @@ void Song::loadTracks(string fileName)
         cout << "Duration: " << bassRange[i]->getDuration() << endl;
         cout << endl;
     }
+    */
 }
 Track Song::getTrack(int trackID)
 {

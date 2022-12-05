@@ -19,6 +19,7 @@ private:
     Battle* battle;
     Menu* menu;
 
+/*
     //for testing rhythm input
     Rhythm *rhythm1, *rhythm2;
     //int m_midiTime;
@@ -30,6 +31,7 @@ private:
     //*ticks per second is not always consistent between midi files with different tempos
     const double TICKS_PER_SECOND = 640.0;
     const double SECONDS_PER_TICK = 1.0 / 640.0;
+    */
 
     RenderWindow m_Window;
 

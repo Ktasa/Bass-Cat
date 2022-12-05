@@ -6,7 +6,6 @@ Rhythm::Rhythm(PlayerID id)
 {
     m_player = id;
     m_active = false;
-    m_active = false;
     m_isPressed = false; 
     m_isDone = false;
     m_stateChange = false; 

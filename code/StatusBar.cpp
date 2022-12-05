@@ -121,3 +121,12 @@ void StatusBar::update()
     m_healthBar->setSize(healthSize);
     m_meterBar->setSize(meterSize);
 }
+
+void StatusBar::addDamage(int damage)
+{
+    m_health -= damage;
+}
+void StatusBar::addMeter(int meter)
+{
+    m_meter += meter;
+}

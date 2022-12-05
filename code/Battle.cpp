@@ -8,8 +8,8 @@ Battle::Battle()
     m_state = INACTIVE;
     m_calibration = new Calibration();
     m_combatMenu = new CombatMenu();
-    //m_input1 = new Rhythm();
-    //m_input2 = new Rhythm();
+    m_input1 = new Rhythm(P1);
+    m_input2 = new Rhythm(P2);
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
     m_status2 = new StatusBar();
@@ -17,8 +17,15 @@ Battle::Battle()
     m_magic2 = new Effect();
 
     m_turn = P1;
+    m_display = DARK;
+    m_combat1 = NO_SELECTION;
+    m_combat2 = NO_SELECTION;
+    
+    m_actionScoreP1 = 0;
+    m_actionScoreP2 = 0;
  //set up stuff that doesnt require user input
 }
+
 //void Battle::setChoices(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
 void Battle::setChoices(vector<int> choices)
 {
@@ -97,6 +104,8 @@ void Battle::handleInput()
     m_p2->handleInput();
     m_combatMenu->handleInput();
     m_calibration->handleInput();
+    m_input1->handleInput();
+    m_input2->handleInput();
 }
 
 void Battle::update(float dt)
@@ -112,9 +121,40 @@ void Battle::update(float dt)
     m_magic1->update(dt);
     m_magic2->update(dt);
 
-    if(m_state == CALIBRATE)
+    int battleTicks = getCurrentTicks();
+    if(getIsCalibrated())
     {
-        if(m_calibration->getIsDone() == true) //use is done or is active?
+        //calculate current time in ticks, update rhythm
+        m_activeTime = true;
+        m_input1->update(battleTicks);
+        m_input2->update(battleTicks);
+        //cout << "battle ticks " << battleTicks << endl;
+    }
+    if(battleTicks > m_song->SONG_DURATION_TICKS)
+    {
+        //if song loops, need to recalibrate
+        m_battleTime = Time::Zero;
+        m_activeTime = false;
+        m_calibration->activate();
+    }
+
+    if(m_status1->getHealth() <= 0 || m_status2->getHealth() <= 0)
+    {
+        m_state = ENDSCREEN;
+        //display win results / animation
+        if(m_status1->getHealth() <= 0)
+        {
+            m_p1->setState(VICTORY);
+        }
+        if(m_status2->getHealth() <= 0)
+        {
+            m_p2->setState(VICTORY);
+        }
+        //have some kind of input handler that lets you hit space to restart back to menu
+    }
+    else if(m_state == CALIBRATE)
+    {
+        if(m_calibration->getIsDone() == true) 
         {
             m_state = MENU;
         }
@@ -126,36 +166,54 @@ void Battle::update(float dt)
     else if(m_state == MENU)
     {
         if(m_combatMenu->getIsDone() == true)
+        {
+            m_combat1 =  m_combatMenu->getChoice(P1);
+            m_combat2 =  m_combatMenu->getChoice(P2);
+            setEffects();
             m_state = INPUT; //if menu is done, next phase
+        }
         else if (m_combatMenu->getIsActive() == false)
             m_combatMenu->activate(); //if menu hasnt started, start it
     }
     else if(m_state == INPUT) 
-    {
-        //maybe only activate rhythm input at a certain time like at the start of a measure
-        //set effect on or to rainbow if combat option is magic related
-        /*
-        if(m_input->getIsDone() == true)
+    {   
+        if(getIsInputDone() == true) //both players input done
         {
-            m_turn = P2; //if recording done, wait. We need two 
-            //do the calculations and send score to the necessary place
+            //calculate scores, change state
+            m_actionScoreP1 = getScore(P1);
+            m_actionScoreP2 = getScore(P2);
+            m_state = EFFECT;
+            //probably also set the rhythm bar to deactivate or change color here
         }
-        else if(m_input->getIsActive() == false)
+        else if(getIsInputActive() == false)
         {
+            //maybe only activate rhythm input at a certain time like at the start of a measure
+            //set effect on or to rainbow if combat option is magic related
+            int recordTime = m_song->TICKS_PER_MEASURE * 2;
+            m_input1->activate(getCurrentTicks(), recordTime);
+            m_input2->activate(getCurrentTicks(), recordTime);
+
             //convert DT to midi time? Is it better to calculate input in the engine?
             //calculate midi time in update.cpp and send it here?
-            //m_input->activate(P1, int midiTime, int range);
+            // m_input1->activate(int midiTime, int range);
         }
-        */
     }
     else if(m_state == EFFECT) 
     {
+        void combatAction();
+        //itd be nice to have some kind of pause / damage animation here
+        //when battleticks goes by like 2 beats, set character animation states to action?
+        m_state = MENU;
         //calculate effects from rhythm objects, apply damage
         //set back to menu unless the song has ended, then set to calibration somehow
-
     }
 }
 
+int Battle::getCurrentTicks()
+{
+    int battleTicks = int(m_battleTime.asSeconds() * m_song->TICKS_PER_SECOND);
+    return battleTicks;
+}
 
 Sprite* Battle::getCharacterSprite(PlayerID id)
 {
@@ -258,13 +316,171 @@ bool Battle::getIsEffectActive(PlayerID id, EffectType effect)
            return m_damage2->getIsActive();
     }
 }
+void Battle::setEffects()
+{
+    bool active1, rainbow1;
+    bool active2, rainbow2;
+    if(m_combat1 == BUILD_METER)
+    {
+        active1 = true;
+        rainbow1 = false;
+    }
+    else if(m_combat1 == MAGIC_ATTACK)
+    {
+        active1 = true;
+        rainbow1 = true;
+    }
+    else
+    {
+        active1 = false;
+        rainbow1 = false;
+    }
+    if(m_combat2 == BUILD_METER)
+    {
+        active2 = true;
+        rainbow2 = false;
+    }
+    else if(m_combat2 == MAGIC_ATTACK)
+    {
+        active2 = true;
+        rainbow2 = true;
+    }
+    else
+    {
+        active2 = true;
+        rainbow2 = false;
+    }
+    setEffectActivity(P1, MAGIC, active1, rainbow1);
+    setEffectActivity(P2, MAGIC, active2, rainbow2);
+}
 bool Battle::getIsCalibrated()
 {
     return m_calibration->getIsDone();
 }
-/*
+
 CombatType Battle::getCombatType(PlayerID id)
 {
     return m_combatMenu->getChoice(id);
 }
-*/
+
+RectangleShape* Battle::getRhythmTester(PlayerID id)
+{
+    if(id==P1)
+        return m_input1->getTester();
+    else
+        return m_input2->getTester();
+}
+
+bool Battle::getIsInputDone() //[done for both players]
+{
+    bool done = (m_input1->getIsDone() || m_input2->getIsDone());
+    return done; //only move on when both are done
+}
+bool Battle::getIsInputActive()
+{
+    return m_input1->getIsActive(); //both will be active at the same time
+}
+
+void Battle::combatAction()
+{
+    //really should make this system based on doubles
+    const double DEFAULT_MULTIPLIER = 0.25;
+    const double MAGIC_ATTACK_MULTIPLIER = DEFAULT_MULTIPLIER * 1.5;
+    int effectP1 = 0;
+    int effectP2 = 0;
+    if(m_combat1 == ATTACK || m_combat1 == BLOCK || m_combat1 == BUILD_METER)
+    {
+        effectP1 = m_actionScoreP1 * DEFAULT_MULTIPLIER;
+    }
+    else if(m_combat1 == MAGIC_ATTACK)
+    {
+        effectP1 = m_actionScoreP1 * MAGIC_ATTACK_MULTIPLIER;
+    }
+    if(m_combat2 == ATTACK || m_combat2 == BLOCK || m_combat2 == BUILD_METER)
+    {
+        effectP2 = m_actionScoreP2 * DEFAULT_MULTIPLIER;
+    }
+    else if(m_combat1 == MAGIC_ATTACK)
+    {
+        effectP2 = m_actionScoreP2 * MAGIC_ATTACK_MULTIPLIER;
+    }
+
+    if(m_combat1 == ATTACK || m_combat1 == MAGIC_ATTACK) //make magic attack even more effective on block?
+    {
+        if(m_combat2 == BLOCK)
+        {
+            effectP1 -= effectP2;
+            if(effectP1 < 0)
+                effectP1 = 0;
+        }
+    }
+    else if(m_combat2 == ATTACK || m_combat2 == MAGIC_ATTACK)
+    {
+        if(m_combat2 == BLOCK)
+        {
+            effectP1 -= effectP2;
+            if(effectP1 < 0)
+                effectP1 = 0;
+        }
+    }
+
+    if(m_combat1 == BUILD_METER)
+    {
+        m_status1->addMeter(effectP1);
+    }
+    else
+    {
+        m_status2->addDamage(effectP1);
+    }
+    if(m_combat2 == BUILD_METER)
+    {
+        m_status2->addMeter(effectP2);
+    }
+    else
+    {
+        m_status1->addDamage(effectP2);
+    }
+
+    if(m_combat1 == MAGIC_ATTACK)
+    {
+        int meterDrain = m_status1->getMeter() - effectP1;
+        if(meterDrain < 0)
+        {
+            //reset meter
+            m_status1->addMeter(-m_status1->getMeter());
+            m_status1->addDamage(meterDrain*-1);
+        }
+        else
+            m_status1->addMeter(-effectP1);
+    }
+    if(m_combat2 == MAGIC_ATTACK)
+    {
+        int meterDrain = m_status2->getMeter() - effectP2;
+        if(meterDrain < 0)
+        {
+            //reset meter
+            m_status2->addMeter(-m_status1->getMeter());
+            m_status2->addDamage(meterDrain*-1);
+        }
+        else
+            m_status2->addMeter(-effectP1);
+    }
+
+    if(m_combat1 == NO_SELECTION || m_combat2 == NO_SELECTION)
+    {
+        cout << "Error: NO_SELECTION combat action" << endl;
+    }
+
+}
+
+int Battle::getScore(PlayerID id) //return int score/100 of an input session
+{
+    //change to store scores as Battle data members
+    //use helper function to process the rhythm analysis
+    if(id == P1)
+    {
+        return 50;
+    }
+    else    
+        return 50;
+}

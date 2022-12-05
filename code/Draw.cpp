@@ -73,11 +73,11 @@ void Engine::displayStatusBars()
 }
 void Engine::displayRhythmTester()
 {
-    if(rhythm1->getIsActive() || rhythm1->getIsDone() || rhythm2->getIsDone())
+    if(battle->getIsInputActive() || battle->getIsInputActive())
     {
         //display red when recording
-        RectangleShape* tester1 = rhythm1->getTester();
-        RectangleShape* tester2 = rhythm2->getTester();
+        RectangleShape* tester1 = battle->getRhythmTester(P1);
+        RectangleShape* tester2 = battle->getRhythmTester(P2);
 
         Vector2f resolution;
         resolution.x = VideoMode::getDesktopMode().width;

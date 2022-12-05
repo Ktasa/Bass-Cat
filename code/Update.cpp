@@ -17,6 +17,7 @@ void Engine::update(float dtAsSeconds)
 
     if (m_Playing)
 	{
+		/*
 		//current elapsed time in midi ticks
 		int battleTicks = int(m_battleTime.asSeconds() * TICKS_PER_SECOND);
 		if(battle->getIsCalibrated())
@@ -28,14 +29,15 @@ void Engine::update(float dtAsSeconds)
 			rhythm2->update(battleTicks);
 			//cout << "battle ticks " << battleTicks << endl;
 		}
+		*/
 
 		if(battle->getState() == INACTIVE) //set battle options one time
 		{
 			battle->setChoices(menu->getChoices());
 			//battle->setState(CALIBRATE);
 
-			rhythm1->activate(battleTicks, 1920);
-			rhythm2->activate(battleTicks, 1920);
+			//rhythm1->activate(battleTicks, 1920);
+			//rhythm2->activate(battleTicks, 1920);
 		}
 		
 

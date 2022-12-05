@@ -32,8 +32,8 @@ void Engine::input()
         {
             //cout << "entering handle input" << endl;
             battle->handleInput();
-            rhythm1->handleInput(); //record user input 
-            rhythm2->handleInput();
+            //rhythm1->handleInput(); //record user input 
+            //rhythm2->handleInput();
         }
     }
 }

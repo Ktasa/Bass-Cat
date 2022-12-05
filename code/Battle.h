@@ -44,6 +44,9 @@ enum Display{LIGHT, DARK}; //black or white background/sprites
 class Battle
 {
 public:
+    Time m_battleTime; //keep track of time from start of battle
+    bool m_activeTime;
+
     Battle();
     void setChoices(vector<int> choices);
 
@@ -56,11 +59,8 @@ public:
     vector<RectangleShape*> getStatusBars(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 
-    int getScore(Track& input, int midiTime); //return int score/100 of an input session
-    //^^param midiTime unecessary bevause input will include start val?
-    //^^need to store recording time somewhere
-    void setScore(PlayerID id, int score);
-    //void combatAction(PlayerID id, CombatType type, int score);
+    int getScore(PlayerID player); //return int score/100 of an input session
+    //void setScore(PlayerID id, int score);
 
     bool getIsCalibrated();
     void handleInput();
@@ -70,19 +70,23 @@ public:
     BattleState getState();
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
-    //these are kind of bad, not good for working in engine
+    //move to private
     void setEffectActivity(PlayerID id, EffectType effect, bool active, bool rainbow);
     bool getIsEffectActive(PlayerID id, EffectType effect);
+    void setEffects(); //use in Battle::update()
 
     CombatType getCombatType(PlayerID id);
+    void combatAction();
 
     //functions to handle rhythm input stuff
     //put handleInput inside battle::handleInput
     //activate from inside
     //update from inside
-    //void getIsInputDone(); //[done for both players]
-    //void getIsInputActive(); 
-    //RectangleShape* getRhythmTester();
+    bool getIsInputDone(); //[done for both players]
+    bool getIsInputActive(); 
+    RectangleShape* getRhythmTester(PlayerID id);
+
+    int getCurrentTicks();
 
 private:
     bool m_recordingInput;
@@ -110,12 +114,13 @@ private:
     
     Song *m_song;
 
-    //Rhythm *m_input1, *m_input2; //store user input as Note data
+    Rhythm *m_input1, *m_input2; //store user input as Note data
 
     Calibration *m_calibration;
+
+    CombatType m_combat1, m_combat2;
     
     int m_actionScoreP1, m_actionScoreP2; //store scores for the turn here to be used in EFFECT phase
-
 };
 
 #include "Song.h"
