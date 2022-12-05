@@ -6,7 +6,7 @@ Effect::Effect()
     m_timeUntilUpdate = m_frameTime;
     m_color = Color::White;
     //temp
-    m_rainbow = true;
+    m_rainbow = false;
 }
 
 void Effect::setUp(PlayerID id, EffectType type, int BPM)

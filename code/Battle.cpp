@@ -86,8 +86,8 @@ void Battle::setChoices(vector<int> choices)
 
     m_magic1->setUp(P1, MAGIC, BPM);
     m_magic2->setUp(P2, MAGIC, BPM);
-    m_magic1->setActive(true);
-    m_magic2->setActive(true);
+    //m_magic1->setActive(true);
+    //m_magic2->setActive(true);
 
     m_song->play();
     m_calibration->activate();
@@ -153,6 +153,8 @@ void Battle::update(float dt)
         {
             m_state = MENU;
             cout << "calibration done" << endl;
+            m_magic1->setActive(true);
+            m_magic2->setActive(true);
         }
         else if(m_calibration->getIsActive() == false)
         {
@@ -361,10 +363,10 @@ void Battle::setEffects()
         active2 = false;
         rainbow2 = false;
     }
-    cout << boolalpha << "active1: " << rainbow1 << endl;
-    cout << "active2: " << active2 << endl;
-    cout << boolalpha << "rainbow1: " << rainbow1 << endl;
-    cout << "rainbow2: " << active2 << endl;
+    //cout << boolalpha << "active1: " << rainbow1 << endl;
+    //cout << "active2: " << active2 << endl;
+    //cout << boolalpha << "rainbow1: " << rainbow1 << endl;
+    //cout << "rainbow2: " << active2 << endl;
     setEffectActivity(P1, MAGIC, active1, rainbow1);
     setEffectActivity(P2, MAGIC, active2, rainbow2);
 }
