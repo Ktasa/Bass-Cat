@@ -2,7 +2,7 @@
 #define EFFECT_H
 
 #include <SFML/Graphics.hpp>
-#include "Battle.h"
+#include "Character.h"
 
 using namespace std;
 using namespace sf;
@@ -19,7 +19,7 @@ public:
     void update(float dtAsSeconds);
     void setActive(bool active);
     bool getIsActive();
-    void setRainbow();
+    void setRainbow(bool active);
     void resetColor();
     //void draw();
 

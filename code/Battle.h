@@ -71,10 +71,10 @@ public:
     void setState(BattleState state); //maybe have an outside function that manages the battle loop
 
     //these are kind of bad, not good for working in engine
-    void setEffectActivity(PlayerID id, EffectType effect, bool active);
+    void setEffectActivity(PlayerID id, EffectType effect, bool active, bool rainbow);
     bool getIsEffectActive(PlayerID id, EffectType effect);
 
-    //CombatType getCombatType(PlayerID id);
+    CombatType getCombatType(PlayerID id);
 
     //functions to handle rhythm input stuff
     //put handleInput inside battle::handleInput

@@ -1,5 +1,5 @@
 #include "Battle.h"
-///////////////////
+/////////////////////
 using namespace sf;
 using namespace std;
 
@@ -91,6 +91,14 @@ void Battle::setChoices(vector<int> choices)
     m_calibration->activate();
 }
 
+void Battle::handleInput()
+{
+    m_p1->handleInput();
+    m_p2->handleInput();
+    m_combatMenu->handleInput();
+    m_calibration->handleInput();
+}
+
 void Battle::update(float dt)
 {
     m_p1->updateCharacter(dt);
@@ -122,8 +130,10 @@ void Battle::update(float dt)
         else if (m_combatMenu->getIsActive() == false)
             m_combatMenu->activate(); //if menu hasnt started, start it
     }
-    else if(m_state == INPUT && m_turn == P1) 
+    else if(m_state == INPUT) 
     {
+        //maybe only activate rhythm input at a certain time like at the start of a measure
+        //set effect on or to rainbow if combat option is magic related
         /*
         if(m_input->getIsDone() == true)
         {
@@ -138,29 +148,14 @@ void Battle::update(float dt)
         }
         */
     }
-    else if(m_state == INPUT && m_turn == P2) 
+    else if(m_state == EFFECT) 
     {
-        /*
-        if(m_input->getIsDone() == true)
-        {
-            m_state = EFFECT; //if recording done, wait. We need two 
-            //do the calculations and send score to the necessary place
-        }
-        else if(m_input->getIsActive() == false)
-        {
-            //m_input->activate(P2, int midiTime, int range);
-        }
-        */
+        //calculate effects from rhythm objects, apply damage
+        //set back to menu unless the song has ended, then set to calibration somehow
+
     }
 }
 
-void Battle::handleInput()
-{
-    m_p1->handleInput();
-    m_p2->handleInput();
-    m_combatMenu->handleInput();
-    m_calibration->handleInput();
-}
 
 Sprite* Battle::getCharacterSprite(PlayerID id)
 {
@@ -223,19 +218,25 @@ Sprite* Battle::getEffectSprite(PlayerID id)
         return m_magic2->getSprite();
     }
 }
-void Battle::setEffectActivity(PlayerID id, EffectType effect, bool active)
+void Battle::setEffectActivity(PlayerID id, EffectType effect, bool active, bool rainbow)
 {
     if(id==P1)
     {
         if(effect==MAGIC)
+        {
             m_magic1->setActive(active);
+            m_magic1->setRainbow(rainbow);
+        }
         else
             m_damage1->setActive(active);
     }
     else
     {
         if(effect==MAGIC)
+        {
             m_magic2->setActive(active);
+            m_magic2->setRainbow(rainbow);
+        }
         else
             m_damage2->setActive(active);
     }

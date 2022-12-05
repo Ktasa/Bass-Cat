@@ -1,7 +1,7 @@
 #ifndef COMBATMENU_H
 #define COMBATMENU_H
 
-#include "Battle.h"
+#include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 

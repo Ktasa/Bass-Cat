@@ -124,3 +124,7 @@ bool Effect::getIsActive()
 {
     return m_active;
 }
+void Effect::setRainbow(bool active)
+{
+    m_rainbow = active;
+}
