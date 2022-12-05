@@ -35,6 +35,7 @@ void Rhythm::activate(int startMidiTime, int range)
     m_startTime = startMidiTime;
     m_recordingTime = range;
     m_active = true;
+    m_isDone = false;
     m_track.clear(); //empty vector for new inputs, use track destructor though
     m_tester->setFillColor(Color::Red); //red represents recording
 }
@@ -122,7 +123,13 @@ bool Rhythm::getIsDone()
     //cout << "returning " << boolalpha << m_isDone << "to update" << endl;
     return m_isDone;
 }
-
+void Rhythm::reset()
+{
+    m_active = false;
+    m_isDone = false;
+    //resetting isDone from outside is necessary to determine when scores have already been input
+    //other stuff gets reset at activation
+}
 void Rhythm::updateTester(int midiTime)
 {
 

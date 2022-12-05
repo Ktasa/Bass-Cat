@@ -25,6 +25,7 @@ public:
     void update(int midiTime);
     bool getIsDone();
     bool getIsActive();
+    void reset(); //reset isDone and isActive in Battle::update()
     void updateTester(int midiTime);
     RectangleShape* getTester();
 

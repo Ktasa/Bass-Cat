@@ -88,11 +88,6 @@ void Battle::setChoices(vector<int> choices)
     m_magic2->setUp(P2, MAGIC, BPM);
     m_magic1->setActive(true);
     m_magic2->setActive(true);
-    
-    //set up health bars
-    //set up effects
-    //set up rhythm bar
-    //set up CombatMenu
 
     m_song->play();
     m_calibration->activate();
@@ -157,10 +152,12 @@ void Battle::update(float dt)
         if(m_calibration->getIsDone() == true) 
         {
             m_state = MENU;
+            cout << "calibration done" << endl;
         }
         else if(m_calibration->getIsActive() == false)
         {
             m_calibration->activate();
+            cout << "calibration activated" << endl;
         }
     }
     else if(m_state == MENU)
@@ -171,9 +168,13 @@ void Battle::update(float dt)
             m_combat2 =  m_combatMenu->getChoice(P2);
             setEffects();
             m_state = INPUT; //if menu is done, next phase
+            cout << "Menu done" << endl;
         }
         else if (m_combatMenu->getIsActive() == false)
+        {
             m_combatMenu->activate(); //if menu hasnt started, start it
+            cout << "combat menu activated" << endl;
+        }
     }
     else if(m_state == INPUT) 
     {   
@@ -183,6 +184,9 @@ void Battle::update(float dt)
             m_actionScoreP1 = getScore(P1);
             m_actionScoreP2 = getScore(P2);
             m_state = EFFECT;
+            m_input1->reset();
+            m_input2->reset();
+            //cout << "input is done" << endl;
             //probably also set the rhythm bar to deactivate or change color here
         }
         else if(getIsInputActive() == false)
@@ -190,8 +194,10 @@ void Battle::update(float dt)
             //maybe only activate rhythm input at a certain time like at the start of a measure
             //set effect on or to rainbow if combat option is magic related
             int recordTime = m_song->TICKS_PER_MEASURE * 2;
+            //cout << "recordTime: " << recordTime << endl;
             m_input1->activate(getCurrentTicks(), recordTime);
             m_input2->activate(getCurrentTicks(), recordTime);
+            //cout << "Input activated" << endl;
 
             //convert DT to midi time? Is it better to calculate input in the engine?
             //calculate midi time in update.cpp and send it here?
@@ -200,6 +206,7 @@ void Battle::update(float dt)
     }
     else if(m_state == EFFECT) 
     {
+        //cout << "entered effect state" << endl;
         void combatAction();
         //itd be nice to have some kind of pause / damage animation here
         //when battleticks goes by like 2 beats, set character animation states to action?
