@@ -166,8 +166,11 @@ void Battle::update(float dt)
         {
             m_combat1 =  m_combatMenu->getChoice(P1);
             m_combat2 =  m_combatMenu->getChoice(P2);
+            cout << "Choice 1: " << m_combat1 << endl;
+            cout << "Choice 2: " << m_combat2 << endl;
             setEffects();
             m_state = INPUT; //if menu is done, next phase
+            m_combatMenu->reset();
             cout << "Menu done" << endl;
         }
         else if (m_combatMenu->getIsActive() == false)
@@ -193,7 +196,8 @@ void Battle::update(float dt)
         {
             //maybe only activate rhythm input at a certain time like at the start of a measure
             //set effect on or to rainbow if combat option is magic related
-            int recordTime = m_song->TICKS_PER_MEASURE * 2;
+            int recordTime = m_song->TICKS_PER_MEASURE * 2; //2 measures
+            //int recordTime = m_song->TICKS_PER_MEASURE;
             //cout << "recordTime: " << recordTime << endl;
             m_input1->activate(getCurrentTicks(), recordTime);
             m_input2->activate(getCurrentTicks(), recordTime);
@@ -354,9 +358,13 @@ void Battle::setEffects()
     }
     else
     {
-        active2 = true;
+        active2 = false;
         rainbow2 = false;
     }
+    cout << boolalpha << "active1: " << rainbow1 << endl;
+    cout << "active2: " << active2 << endl;
+    cout << boolalpha << "rainbow1: " << rainbow1 << endl;
+    cout << "rainbow2: " << active2 << endl;
     setEffectActivity(P1, MAGIC, active1, rainbow1);
     setEffectActivity(P2, MAGIC, active2, rainbow2);
 }

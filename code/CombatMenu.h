@@ -21,6 +21,7 @@ public:
     void setColor(Color color); //change outline color
     bool getIsActive(); //menu is active
     bool getIsDone(); //choices are ready
+    void reset(); //reset isDone and isActive from outside
     CombatType getChoice(PlayerID id);
 
 private:

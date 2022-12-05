@@ -52,6 +52,12 @@ bool CombatMenu::getIsDone()
 {
     return m_isDone;
 }
+void CombatMenu::reset()
+{
+    m_isActive = false;
+    m_isDone = false;
+    //setColor(Color::White);
+}
 void CombatMenu::handleInput()
 {
     //cout <<"in combatMenu handleInput" << endl;
@@ -66,7 +72,7 @@ void CombatMenu::handleInput()
                 m_p1Choice = BLOCK;
             else if (Keyboard::isKeyPressed(Keyboard::Num3)) 
                 m_p1Choice = BUILD_METER;
-            else if (Keyboard::isKeyPressed(Keyboard::Num1)) 
+            else if (Keyboard::isKeyPressed(Keyboard::Num4)) 
                 m_p1Choice = MAGIC_ATTACK;
             
             if(m_p1Choice != NO_SELECTION)
@@ -106,11 +112,15 @@ void CombatMenu::update()
 {
     if(m_isActive)
     {
+        //change color of menu depending on who pressed it
+        //planning to change it so that the menu color stays constant
+        /*
         if(m_p1Pressed && m_current == P1)
         {m_color = Color(100,0,255);}
         if(m_p2Pressed && m_current == P2)
         {m_color = Color(255,0,100);}
         m_sprite->setColor(m_color);
+        */
     }
 }
 
