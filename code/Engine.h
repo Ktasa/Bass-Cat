@@ -57,8 +57,12 @@ private:
     void update(float dtAsSeconds);
     void draw();
 
-    //private helper for draw - displays rhythm tester that flashes back recorded input
+    //private helpers for draw 
+    void displayCharacters();
+    void displayStatusBars();
     void displayRhythmTester();
+    void displayInterface();
+
 
 public:
     Engine();
