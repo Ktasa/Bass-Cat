@@ -24,6 +24,16 @@ void StatusBar::update()
 {
     if(m_update)
     {
+        //enforce ceiling to max health / meter values
+        if(m_health < 0)
+            m_health = 0;
+        if(m_health > MAX_HEALTH)
+            m_health = MAX_HEALTH;
+        if(m_meter < 0)
+            m_meter = 0;
+        if(m_meter > MAX_METER)
+            m_meter = MAX_METER;
+
         Vector2f resolution;
         resolution.x = VideoMode::getDesktopMode().width;
         resolution.y = VideoMode::getDesktopMode().height;
