@@ -7,7 +7,14 @@ void Engine::draw()
 
     m_Window.setView(m_mainView);
 
-    if(m_Playing)
+    if(battle->getState() == ENDSCREEN)
+    {
+        //displayEffects();
+        displayCharacters();
+        Sprite* endscreen = battle->getEndScreenSprite();
+        m_Window.draw(*endscreen);
+    }
+    else if(m_Playing)
     {
         displayEffects();
         displayCharacters();

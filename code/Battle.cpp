@@ -8,6 +8,7 @@ Battle::Battle()
     m_state = INACTIVE;
     m_calibration = new Calibration();
     m_combatMenu = new CombatMenu();
+    m_endScreen = new EndScreen();
     m_input1 = new Rhythm(P1);
     m_input2 = new Rhythm(P2);
     //m_recordingInput = false; //unnecessary from Rhythm testing
@@ -30,6 +31,10 @@ Battle::Battle()
 void Battle::setChoices(vector<int> choices)
 {
     m_state = CALIBRATE; //1st step of actual battle 
+    
+    //TESTING ENDSCREEN
+    //m_state = ENDSCREEN;
+    //m_endScreen->activate(P2);
     //I dont like these magic numbers but Im testing the menu
     CharacterType p1_type, p2_type;
     Display display;
@@ -196,5 +201,8 @@ double Battle::getScore(PlayerID id) //return int score/100 of an input session
 
     return score;
 }
-
+Sprite* Battle::getEndScreenSprite()
+{
+    return m_endScreen->getSprite();
+}
 

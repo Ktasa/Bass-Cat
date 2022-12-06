@@ -14,16 +14,12 @@ public:
     EndScreen();
     void activate(PlayerID victor); 
     void handleInput(); //detect input to reset game
-    void update();
     Sprite* getSprite();
-    bool getIsActive(); 
-    bool getIsDone(); 
     void setColor(Color color);
 
 private:
     Sprite *m_sprite;
     bool m_active;
-    bool m_done;
 
     const int SCREEN_WIDTH = 1920;
 };

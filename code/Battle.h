@@ -13,6 +13,7 @@
 #include "StatusBar.h"
 #include "Effect.h"
 #include "Calibration.h"
+#include "EndScreen.h"
 
 using namespace sf;
 using namespace std;
@@ -24,6 +25,7 @@ class Effect;
 class RhythmBar;
 class Calibration;
 class Rhythm;
+class EndScreen;
 
 enum BattleState
 {
@@ -55,6 +57,7 @@ public:
     Sprite* getEffectSprite(PlayerID id);
     Sprite* getCombatMenuSprite();
     Sprite* getCalibrationSprite();
+    Sprite* getEndScreenSprite();
     vector<RectangleShape*> getStatusBars(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 
@@ -94,6 +97,7 @@ private:
 
     Calibration *m_calibration;
     CombatMenu *m_combatMenu; //menu specifically for battle options
+    EndScreen *m_endScreen;
 
     CombatType m_combat1, m_combat2; //player action choices
     double m_scoreP1, m_scoreP2; //store scores for the turn

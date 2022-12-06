@@ -58,11 +58,13 @@ void Battle::updateEndScreen()
     //display win results / animation
     if(m_status1->getHealth() <= 0)
     {
-        m_p1->setState(VICTORY);
+        m_p2->setState(VICTORY);
+        m_endScreen->activate(P2);
     }
     if(m_status2->getHealth() <= 0)
     {
-        m_p2->setState(VICTORY);
+        m_p1->setState(VICTORY);
+        m_endScreen->activate(P1);
     }
     //have some kind of input handler that lets you hit space to restart back to menu
 }
