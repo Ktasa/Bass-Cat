@@ -114,7 +114,7 @@ void Battle::updateInput()
         m_scoreP1 = getScore(P1);
         m_scoreP2 = getScore(P2);
         m_state = EFFECT;
-        m_input1->reset();
+        m_input1->reset(); //rhythm tester wont work if reset immediately, change for testing
         m_input2->reset();
         //cout << "input is done" << endl;
         //probably also set the rhythm bar to deactivate or change color here

@@ -21,7 +21,7 @@ void Engine::draw()
         displayEffects();
         displayCharacters();
         displayStatusBars();
-        displayRhythmTester();
+        //displayRhythmTester();
         displayInterface();
     }
 
@@ -82,7 +82,7 @@ void Engine::displayStatusBars()
 }
 void Engine::displayRhythmTester()
 {
-    if(battle->getIsInputActive() || battle->getIsInputActive())
+    if(battle->getIsInputActive() || battle->getIsInputDone())
     {
         //display red when recording
         RectangleShape* tester1 = battle->getRhythmTester(P1);
