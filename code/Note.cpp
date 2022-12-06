@@ -35,15 +35,14 @@ Tapper::Tapper(int midiTime)
 
 double Tapper::checkNoteAccuracy(Note* input)
 {
-    //Tappers ignore duration
+    //Tappers ignore duration of input
 
     double score; 
 
     int inputStart = input->getStart();
-    int inputDuration = input->getDuration();
-    int inputEnd = inputStart + inputDuration;
 
     //calculate margin of error for early/late inputs
+    //shorter notes have lower error margins
 
     int quarter = 480; //480 ticks per beat in current song (change to be more reusable later)
     int eighth = quarter / 2;
@@ -60,7 +59,7 @@ double Tapper::checkNoteAccuracy(Note* input)
     }
     else
     {
-        score = 100 * (1 - double(inputError) / margin); //percentage within range
+        score = 1 - (double(inputError) / margin); //ratio within range
     }
 
     return score;
@@ -77,7 +76,7 @@ double Holder::checkNoteAccuracy(Note* input)
     // - score is reduced if input starts early or ends late
     // - score is maxScore - (start error + end error)?
 
-    double score = 100; 
+    double score; 
 
     int inputStart = input->getStart();
     int inputDuration = input->getDuration();
@@ -90,7 +89,7 @@ double Holder::checkNoteAccuracy(Note* input)
     //error relative to total duration of note
     double proportionalError = double(totalError) / m_duration;
 
-    score = 100 * (1 - proportionalError); 
+    score = 1 - proportionalError; 
 
     return score;
 }

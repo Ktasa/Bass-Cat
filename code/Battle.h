@@ -75,15 +75,11 @@ public:
     void combatAction();
 
     //functions to handle rhythm input stuff
-    //put handleInput inside battle::handleInput
-    //activate from inside
-    //update from inside
     bool getIsInputDone(); //[done for both players]
     bool getIsInputActive(); 
     RectangleShape* getRhythmTester(PlayerID id);
 
-    int getScore(PlayerID player); //return int score/100 of an input session
-    //void setScore(PlayerID id, int score);
+    double getScore(PlayerID player); //return score/100.0 of an input session
 
     int getCurrentTicks();
 
@@ -100,7 +96,7 @@ private:
     CombatMenu *m_combatMenu; //menu specifically for battle options
 
     CombatType m_combat1, m_combat2; //player action choices
-    int m_scoreP1, m_scoreP2; //store scores for the turn
+    double m_scoreP1, m_scoreP2; //store scores for the turn
 
     Song *m_song;
     Rhythm *m_input1, *m_input2; //store user input as Note data
@@ -120,7 +116,7 @@ private:
 
     //functions to calculate input scores
     void calculateScores();
-    int calculateScore(Rhythm* input, int track);
+    double calculateScore(Rhythm* input, int track);
 };
 
 #include "Song.h"

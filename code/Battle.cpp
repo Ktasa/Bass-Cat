@@ -21,8 +21,8 @@ Battle::Battle()
     m_combat1 = NO_SELECTION;
     m_combat2 = NO_SELECTION;
     
-    m_scoreP1 = 0;
-    m_scoreP2 = 0;
+    m_scoreP1 = 0.0;
+    m_scoreP2 = 0.0;
  //set up stuff that doesnt require user input
 }
 
@@ -182,11 +182,11 @@ CombatType Battle::getCombatType(PlayerID id)
 {
     return m_combatMenu->getChoice(id);
 }
-int Battle::getScore(PlayerID id) //return int score/100 of an input session
+double Battle::getScore(PlayerID id) //return int score/100 of an input session
 {
     //change to store scores as Battle data members
     //use helper function to process the rhythm analysis
-    int score = 0;
+    double score = 0.0;
     if(id == P1)
     {
         score = m_scoreP1;

@@ -2,8 +2,9 @@
 
 void Battle::combatAction()
 {
+    //change to use double values for effectP1/P2
     cout << "Entered CombatAction" << endl;
-    //make this system based on doubles?
+
     cout << "P1 score: " << m_scoreP1 << endl;
     cout << "P2 score: " << m_scoreP2 << endl;
     cout << "P1 health: " << m_status1->getHealth() << endl;
