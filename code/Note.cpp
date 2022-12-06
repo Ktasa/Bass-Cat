@@ -71,6 +71,7 @@ double Tapper::checkNoteAccuracy(Note* input)
     {
         cout << "Holder score < 0" << endl;
     }
+    //cout << "returned score: " << score << endl;
     return score;
 }
 
@@ -107,6 +108,6 @@ double Holder::checkNoteAccuracy(Note* input)
     {
         cout << "Holder score < 0" << endl;
     }
-
+    //cout << "returned score: " << score << endl;
     return score;
 }

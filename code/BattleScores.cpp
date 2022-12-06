@@ -60,6 +60,8 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
     {
         //score of each note stored as percentage of note time played
         double noteScores[notesSize];
+        for(int i=0; i<notesSize; i++)
+            noteScores[i] = 0.0;
 
         for(int i=0; i<inputSize; i++)
         {
@@ -84,6 +86,7 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
             double notePerc = notes.at(closestIndex)->checkNoteAccuracy(input.at(i));
             noteScores[closestIndex] = notePerc;
             
+            
         }
 
         //compute avg of note scores
@@ -92,8 +95,12 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
         for(int k=0; k<notesSize; k++)
         {
             total += noteScores[k];
+            //cout << k << ": " << noteScores[k] << endl;
         }
+        
         avgScore = total / notesSize;
+        cout << "total of note scores: " << total << endl;
+        cout << "avg note score: " << avgScore << endl;
 
         //score is proportional to avg note score
         score = avgScore * 100;
