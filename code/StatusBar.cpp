@@ -1,5 +1,5 @@
 #include "StatusBar.h"
-
+//
 //set position in the same place you set postion the characters
 StatusBar::StatusBar()
 {
