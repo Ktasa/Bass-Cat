@@ -32,7 +32,7 @@ Rhythm::Rhythm(PlayerID id)
 
 void Rhythm::activate(int startMidiTime, int range)
 {
-    cout << "Rhythm activated" << endl;
+    //cout << "Rhythm activated" << endl;
     m_startTime = startMidiTime;
     m_recordingTime = range;
     m_active = true;
@@ -137,7 +137,7 @@ void Rhythm::updateTester(int midiTime)
     //cout << "Entering rhythm updateTester" << endl;
     if (m_isDone)
     {
-        cout << "Entering updateTester (isDone)" << endl;
+        //cout << "Entering updateTester (isDone)" << endl;
         if(m_notes.size() == 0)
         {
             //cout << "initializing playback" << endl;
@@ -153,7 +153,7 @@ void Rhythm::updateTester(int midiTime)
             }
             else
             {
-                cout << "Empty vector: isDone set to false" << endl;
+                //cout << "Empty vector: isDone set to false" << endl;
                 m_isDone = false; //if empty, finish by reseting isDone
             }
         }
@@ -162,31 +162,31 @@ void Rhythm::updateTester(int midiTime)
         size_t readNoteSizeT = readNote; //what is the appropriate response to size_t int comparison
         if(readNoteSizeT < m_notes.size()) //avoid out of range
         {
-            cout << "readNote is in range" << endl;
+            //cout << "readNote is in range" << endl;
             int start = m_notes[readNote]->getStart();
             int end = start + m_notes[readNote]->getDuration();
-            cout << "start time: " << start << endl;
-            cout << "read time: " << readTime << endl;
-            cout << "end time: " << end << endl << endl;
+            //cout << "start time: " << start << endl;
+            //cout << "read time: " << readTime << endl;
+           // cout << "end time: " << end << endl << endl;
             if(start <= readTime && readTime <= end)
             {
-                cout << "note is active; flash green" << endl;
+                //cout << "note is active; flash green" << endl;
                 m_tester->setFillColor(Color::Green); //flash white to represent user input
             }
             else
             {
-                cout << "note is inactive; flash black" << endl;
+                //cout << "note is inactive; flash black" << endl;
                 m_tester->setFillColor(Color(0,0,0,0)); //consider making this clear
                 if(readTime > end) //if current note ended
                 {
                     readNote++; //move on to the next note
-                    cout << "increment note" << endl;
+                    //cout << "increment note" << endl;
                 }
             }
         }
         else
         {
-            cout << "Read note > notes.size(): done set to false" << endl;
+            //cout << "Read note > notes.size(): done set to false" << endl;
             m_isDone = false;
             /*
             cout << "Table of notes displayed via rectangle" << endl;
