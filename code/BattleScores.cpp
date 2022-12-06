@@ -3,6 +3,7 @@
 //functions to calculate scores
 void Battle::calculateScores()
 {
+    cout << "entering calculateScores()" << endl;
     Rhythm* input = m_input1;
     int track;
 
@@ -32,6 +33,7 @@ void Battle::calculateScores()
 }
 double Battle::calculateScore(Rhythm* inputRhythm, int track)
 {
+    cout << "entering calculateScore()" << endl;
     double score = 100.0; //max score value
 
     //get times to get the right range of notes
@@ -64,12 +66,12 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
             
             //find index of the closest note for comparison
             //if two inputs are close to the same note, keep the closest
-            int inputStart = input[i]->getStart();
+            int inputStart = input.at(i)->getStart();
             int closestIndex = 0;
-            int minDistance = abs(inputStart - notes[closestIndex]->getStart());
+            int minDistance = abs(inputStart - notes.at(closestIndex)->getStart());
             for(int j=0; j<notesSize; j++)
             {
-                int currentDistance = abs(inputStart - notes[j]->getStart());
+                int currentDistance = abs(inputStart - notes.at(j)->getStart());
                 if(currentDistance < minDistance)
                 {
                     minDistance = currentDistance;
@@ -79,7 +81,7 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
             //value between 0-1 of note accuracy
 // **************************POLYMORPHISM REQUIREMENT*******************************
 //checkNoteAccuracy depends on the note type, Tapper or Holder
-            double notePerc = notes[closestIndex]->checkNoteAccuracy(input[i]);
+            double notePerc = notes.at(closestIndex)->checkNoteAccuracy(input.at(i));
             noteScores[closestIndex] = notePerc;
             
         }
@@ -111,6 +113,10 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
     //for 1st and last note
 
     }
+    cout << "exiting calculateScore()" << endl;
+
+    if(score < 1.0)
+        score = 0.0;
 
     return score; //return score out of 100.0
 

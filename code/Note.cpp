@@ -61,7 +61,11 @@ double Tapper::checkNoteAccuracy(Note* input)
     {
         score = 1 - (double(inputError) / margin); //ratio within range
     }
-
+    
+    if(score > 1)
+    {
+        cout << "Tapper score greater than expected" << endl;
+    }
     return score;
 }
 
@@ -90,6 +94,10 @@ double Holder::checkNoteAccuracy(Note* input)
     double proportionalError = double(totalError) / m_duration;
 
     score = 1 - proportionalError; 
+    if(score > 1)
+    {
+        cout << "Holder score greater than expected" << endl;
+    }
 
     return score;
 }

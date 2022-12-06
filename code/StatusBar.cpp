@@ -30,6 +30,10 @@ void StatusBar::update()
 
         float healthPerc = float(m_health) / MAX_HEALTH;
         float meterPerc = float(m_meter) / MAX_METER;
+        if(healthPerc < 0)
+            healthPerc = 0;
+        if(meterPerc < 0)
+            meterPerc = 0;
         //cout << "healthPerc: " << healthPerc << endl;
         //cout << "meterPerc: " << meterPerc << endl;
         Vector2f sizeRatio = {0.4,0.02};

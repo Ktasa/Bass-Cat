@@ -24,6 +24,8 @@ Battle::Battle()
     
     m_scoreP1 = 0.0;
     m_scoreP2 = 0.0;
+    
+    m_battleTime = Time::Zero;
  //set up stuff that doesnt require user input
 }
 

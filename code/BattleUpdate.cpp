@@ -107,6 +107,7 @@ void Battle::updateInput()
     if(getIsInputDone() == true) //both players input done
     {
         //calculate scores, change state
+        cout << "Rhythm input done" << endl;
         calculateScores();
         m_scoreP1 = getScore(P1);
         m_scoreP2 = getScore(P2);
@@ -125,7 +126,7 @@ void Battle::updateInput()
         //cout << "recordTime: " << recordTime << endl;
         m_input1->activate(getCurrentTicks(), recordTime);
         m_input2->activate(getCurrentTicks(), recordTime);
-        //cout << "Input activated" << endl;
+        //cout << "exit rhythm activation" << endl;
 
         //convert DT to midi time? Is it better to calculate input in the engine?
         //calculate midi time in update.cpp and send it here?
