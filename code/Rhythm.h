@@ -32,7 +32,7 @@ public:
     int getRecordingTime();
 
 private:
-    Track* m_track; //make track*
+    Track* m_track; 
     Note* m_note; 
     PlayerID m_player;
 

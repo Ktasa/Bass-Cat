@@ -14,14 +14,6 @@ Engine::Engine()
 
     menu = new Menu();
 
-    //rhythm1 = new Rhythm(P1);
-    //rhythm2 = new Rhythm(P2);
-    //cout << "rhythm constructor success" << endl;
-    //m_midiTime = 0;
-    //m_battleTime = Time::Zero;
-    //m_battleTimeActive = false;
-
-
     m_Playing = false;
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
@@ -31,7 +23,6 @@ Engine::Engine()
     //m_Window.setFramerateLimit(30); //looks cleaner but less responsive animations
 
     m_mainView.setSize(resolution);
-    //set up HudView
 
     //get background texture from texture holder, set to m_BackgroundSprite
     string fileName = "graphics/nebula.png";
@@ -50,17 +41,8 @@ void Engine::run()
         //only convert to ticks at the point of calculation
 
         Time dt = clock.restart();
-        m_GameTimeTotal += dt;
         float dtAsSeconds = dt.asSeconds();
 
-        /*
-        if(m_Playing && m_battleTimeActive)
-            m_battleTime += dt;
-        else
-        {
-            m_battleTimeActive = false;
-            m_battleTime = Time::Zero; //reset upon every recalibration
-        }*/
         if(m_Playing && battle->m_activeTime)
             battle->m_battleTime += dt;
         else
@@ -68,22 +50,9 @@ void Engine::run()
             battle->m_activeTime = false;
             battle->m_battleTime = Time::Zero; //reset upon every recalibration
         }
-        /*
-        double dtAsTicksDouble = dt.asSeconds() * TICKS_PER_SECOND;
-        int dtAsTicks = int(dtAsTicksDouble);
-        if(m_GameTimeTotal < seconds(5))
-        {
-            cout << "dt seconds: " << dtAsSeconds << endl;
-            cout << "dt ticks double: " << dtAsTicksDouble << endl;
-            cout << "dt ticks int: " << dtAsTicks << endl;
-        }
-        */
 
         input();
-        //cout << "input done" << endl;
         update(dtAsSeconds);
-        //cout << "update done" << endl;
         draw();
-        //cout << "draw done" << endl;
     }
 }

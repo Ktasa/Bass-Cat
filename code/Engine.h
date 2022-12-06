@@ -53,8 +53,6 @@ private:
     //include any basic variables to determine
     //the state of the program
 
-    Time m_GameTimeTotal;
-
     void input();
     void update(float dtAsSeconds);
     void draw();

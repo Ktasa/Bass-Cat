@@ -2,7 +2,6 @@
 
 void Battle::combatAction()
 {
-    //change to use double values for effectP1/P2
     cout << "Entered CombatAction" << endl;
 
     cout << "P1 score: " << m_scoreP1 << endl;

@@ -4,6 +4,7 @@
 using namespace std;
 Rhythm::Rhythm(PlayerID id)
 {
+    m_track = new Track();
     m_player = id;
     m_active = false;
     m_isPressed = false; 

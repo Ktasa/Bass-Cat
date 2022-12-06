@@ -77,6 +77,8 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
                 }
             }
             //value between 0-1 of note accuracy
+// **************************POLYMORPHISM REQUIREMENT*******************************
+//checkNoteAccuracy depends on the note type, Tapper or Holder
             double notePerc = notes[closestIndex]->checkNoteAccuracy(input[i]);
             noteScores[closestIndex] = notePerc;
             
@@ -113,3 +115,4 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
     return score; //return score out of 100.0
 
 }
+
