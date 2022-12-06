@@ -155,7 +155,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
         //target is in 2nd half
         startSearch = half;
         if(startTimeTarget > quarter * 3)
-            startSearch = quarter * 3;
+            startSearch = size * 3/4;
             //target is in last quarter
     }
 
