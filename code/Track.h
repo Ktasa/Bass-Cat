@@ -16,6 +16,7 @@ public:
     //tracks should be set up by Song::loadTracks() by adding notes according to file read
     //add destructor to free input notes that are no longer relevant?
     Track();
+    //~Track();
     void clear();
     void addNote(Note* note);
     void setSongDuration(int midiTime);

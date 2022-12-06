@@ -12,8 +12,6 @@
 using namespace sf;
 using namespace std;
 
-//CLASS HAS NOT BEEN CHECKED FOR ERRORS
-
 class Rhythm
 {
 public:
