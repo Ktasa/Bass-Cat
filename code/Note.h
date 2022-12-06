@@ -13,7 +13,7 @@ class Note
 {
 public:
     Note();
-    virtual ~Note() = default;
+    //virtual ~Note() = default;
     Note(int midiTime);
     void setStart(int midiTime);
     void setDuration(int midiTime);

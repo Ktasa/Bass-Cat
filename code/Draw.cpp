@@ -1,6 +1,13 @@
 #include "Engine.h"
 #include <iostream>
 
+//William:
+//Battle, Song, Track, Note, Rhythm, Calibration, HSV, Endscreen,
+
+//Ben:
+//Input, Draw, Update
+//Character, combatMenu, Effect, StatusBar, TextureHolder
+
 void Engine::draw()
 {
     displayBackground();

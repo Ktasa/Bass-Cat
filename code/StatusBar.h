@@ -9,7 +9,7 @@ using namespace sf;
 using namespace std;
 
 //use int or doubles?
-const int MAX_HEALTH = 10; //TEMPORARY HEALTH FOR PRESENTATION
+const int MAX_HEALTH = 30; //TEMPORARY HEALTH FOR PRESENTATION
 const int MAX_METER = 100;
 class StatusBar
 {
