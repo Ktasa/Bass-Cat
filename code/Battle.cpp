@@ -37,7 +37,7 @@ void Battle::setChoices(vector<int> choices)
     //TESTING ENDSCREEN
     //m_state = ENDSCREEN;
     //m_endScreen->activate(P2);
-    //I dont like these magic numbers but Im testing the menu
+
     CharacterType p1_type, p2_type;
     Display display;
     if(choices.size() == 3)
@@ -49,19 +49,9 @@ void Battle::setChoices(vector<int> choices)
         if(choices[2] == 1){display = LIGHT;}
         else{display = DARK;}
     }
-    else
-    {
-        cout << "invalid choices vector size" << endl;
-        for(size_t i = 0; i<choices.size();i++)
-        {
-            cout << "choice " << i << ": " << choices[i] << endl;
-        }
-    }
 
     //this may be a selectable option in the future
     string songFileName = "sound/Untitled 05.ogg";
-    //songFileName = "sound/Calibration.wav";
-    //songFileName = "sound/Untitled Calibrtion B.ogg";
 
     //set up song
     m_song = new Song(songFileName);
@@ -141,6 +131,15 @@ Sprite* Battle::getCombatMenuSprite()
 {
     return m_combatMenu->getSprite();
 }
+Sprite* Battle::getEndScreenSprite()
+{
+    return m_endScreen->getSprite();
+}
+Sprite* Battle::getEndScreenText()
+{
+    return m_endScreen->getVictorySprite();
+}
+
 Sprite* Battle::getCharacterSprite(PlayerID id)
 {
     if(id == P1){return m_p1->getSprite();}
@@ -202,9 +201,5 @@ double Battle::getScore(PlayerID id) //return int score/100 of an input session
         score = m_scoreP2;
 
     return score;
-}
-Sprite* Battle::getEndScreenSprite()
-{
-    return m_endScreen->getSprite();
 }
 

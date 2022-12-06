@@ -15,10 +15,12 @@ public:
     void activate(PlayerID victor); 
     void handleInput(); //detect input to reset game
     Sprite* getSprite();
+    Sprite* getVictorySprite();
     void setColor(Color color);
 
 private:
     Sprite *m_sprite;
+    Sprite *m_victory; //victory text 
     bool m_active;
 
     const int SCREEN_WIDTH = 1920;

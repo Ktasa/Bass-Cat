@@ -13,6 +13,8 @@ void Engine::draw()
         displayCharacters();
         Sprite* endscreen = battle->getEndScreenSprite();
         m_Window.draw(*endscreen);
+        Sprite* victoryText = battle->getEndScreenText();
+        m_Window.draw(*victoryText);
     }
     else if(m_Playing)
     {

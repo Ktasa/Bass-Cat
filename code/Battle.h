@@ -58,6 +58,7 @@ public:
     Sprite* getCombatMenuSprite();
     Sprite* getCalibrationSprite();
     Sprite* getEndScreenSprite();
+    Sprite* getEndScreenText();
     vector<RectangleShape*> getStatusBars(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 

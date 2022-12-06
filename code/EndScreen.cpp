@@ -5,6 +5,8 @@ EndScreen::EndScreen()
     m_active = false;
     string fileName = "graphics/end splash.png";
     m_sprite = new Sprite(TextureHolder::GetTexture(fileName));
+    fileName = "graphics/victory.png";
+    m_victory = new Sprite(TextureHolder::GetTexture(fileName));
     
     Vector2f resolution;
     resolution.x = VideoMode::getDesktopMode().width;
@@ -21,6 +23,19 @@ EndScreen::EndScreen()
 
     m_sprite->setScale(scale);
     m_sprite->setOrigin(SCREEN_WIDTH / 2, SCREEN_WIDTH / 2);
+
+    //set victory text sprite
+    position = {resolution.x * float(0.16), resolution.y * float(1.1)};
+    m_victory->setPosition(position);
+
+    //adjust scale to screen resolution
+    defaultSize = SCREEN_WIDTH / resolution.x;
+    goalSize = 1.4; 
+    adjustScale = goalSize / defaultSize;
+    scale = {adjustScale,adjustScale};
+
+    m_victory->setScale(scale);
+    m_victory->setOrigin(SCREEN_WIDTH / 2, SCREEN_WIDTH / 2);
 
 }
 void EndScreen::activate(PlayerID victor)
@@ -47,6 +62,9 @@ void EndScreen::activate(PlayerID victor)
             Vector2f scale = {-adjustScale,adjustScale};
             m_sprite->setScale(scale);
             m_sprite->setColor(Color(255,0,100));
+
+            position = {resolution.x * float(0.16), resolution.y * float(1.1)};
+            m_victory->setPosition(position);
         }
     }
     m_active = true;
@@ -55,4 +73,9 @@ void EndScreen::activate(PlayerID victor)
 Sprite* EndScreen::getSprite()
 {
     return m_sprite;
+}
+
+Sprite* EndScreen::getVictorySprite()
+{
+    return m_victory;
 }
