@@ -152,7 +152,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     int startSearch;
     int half = m_notes[size/2]->getStart();
     int quarter = m_notes[size/4]->getStart();
-    cout << "Half: " << half << " quarter: " << quarter << endl;
+    //cout << "Half: " << half << " quarter: " << quarter << endl;
     if(startTimeTarget < half)
     {
         //target is in the 1st half of the vector
@@ -172,8 +172,8 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     }
 
     //find 1st note in range
-    cout << "entering find startIndex" << endl;
-    cout << "start index: " << startSearch << endl;
+    //cout << "entering find startIndex" << endl;
+    //cout << "start index: " << startSearch << endl;
 
     //if start time is near the end of the range, need to loop back to check the full range
     //Ex: start time is 50, and the first note is at 0
@@ -245,36 +245,41 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     bool endOutOfRange = false;
     if(!outOfRange)
     {
-        while(!endFound)
-        {      
-            int startTime = m_notes[j]->getStart();
-            int duration = m_notes[j]->getDuration();
-            int endOfNote = startTime + duration;
-            //cout << "start: " << startTime << endl;
-            //cout << "endOfNote: " << endOfNote << endl;
-
-            //range ends in middle of note, must be the last note
-            if(startTime <= endTimeTarget && endTimeTarget <= endOfNote)
-            {
-                endIndex = j;
-                endFound = true;
-            }
-            //if note out of range, the previous note is the last
-            else if(startTime > endTimeTarget)
-            {
-                endIndex = j-1; 
-                endFound = true;
-            }
-            if(endFound)
-            {
-                cout << "End index found: " << endIndex << endl;
-            }
+        while(!endFound && !endOutOfRange)
+        {   
             if(j >= size)
             {
                 endOutOfRange = true;
                 cout << "out of range" << endl;
             }
-            j++;
+            else
+            {
+
+            
+                int startTime = m_notes[j]->getStart();
+                int duration = m_notes[j]->getDuration();
+                int endOfNote = startTime + duration;
+                //cout << "start: " << startTime << endl;
+                //cout << "endOfNote: " << endOfNote << endl;
+
+                //range ends in middle of note, must be the last note
+                if(startTime <= endTimeTarget && endTimeTarget <= endOfNote)
+                {
+                    endIndex = j;
+                    endFound = true;
+                }
+                //if note out of range, the previous note is the last
+                else if(startTime > endTimeTarget)
+                {
+                    endIndex = j-1; 
+                    endFound = true;
+                }
+                if(endFound)
+                {
+                    cout << "End index found: " << endIndex << endl;
+                }
+                j++;
+            }
 
         }//endwhile find endIndex
     }//endif (!outOfRange)
