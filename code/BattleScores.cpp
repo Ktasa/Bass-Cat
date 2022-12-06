@@ -116,7 +116,15 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
     cout << "exiting calculateScore()" << endl;
 
     if(score < 1.0)
+    {
+        cout << "Error: score < 1 deteced: " <<  score << endl;
         score = 0.0;
+    }
+    else if(score > 100.0)
+    {
+        cout << "Error: score > 100 deteced: " <<  score << endl;
+        score = 100.0;
+    }
 
     return score; //return score out of 100.0
 
