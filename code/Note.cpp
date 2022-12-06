@@ -50,7 +50,8 @@ double Tapper::checkNoteAccuracy(Note* input)
     int margin = eighth; //default max margin is 8th
     if(m_duration <= eighth) 
     {
-        margin = m_duration / 2; //for short notes, margin changes to duration / 2
+        //margin = m_duration / 2; //for short notes, margin changes to duration / 2
+        margin = eighth / 2;
     }
     int inputError = abs(inputStart - m_start); //difference in start time
     if(inputError >= margin)
@@ -65,6 +66,10 @@ double Tapper::checkNoteAccuracy(Note* input)
     if(score > 1)
     {
         cout << "Tapper score greater than expected" << endl;
+    }
+    else if(score < 0)
+    {
+        cout << "Holder score < 0" << endl;
     }
     return score;
 }
@@ -97,6 +102,10 @@ double Holder::checkNoteAccuracy(Note* input)
     if(score > 1)
     {
         cout << "Holder score greater than expected" << endl;
+    }
+    else if(score < 0)
+    {
+        cout << "Holder score < 0" << endl;
     }
 
     return score;
