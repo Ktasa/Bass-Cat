@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Battle.h"
+#include "TextureHolder.h"
 
 using namespace sf;
 using namespace std;

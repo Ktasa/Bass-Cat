@@ -161,6 +161,8 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
 
     //find 1st note in range
     cout << "entering find startIndex" << endl;
+    //FIX: Accessing index out of range error is happening somewhere around here
+
     //if start time is near the end of the range, need to loop back to check the full range
     //Ex: start time is 50, and the first note is at 0
     bool startFound = false;
