@@ -124,7 +124,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     size_t size = m_notes.size();
     //bool loop = false;
     int startTimeTarget = midiTime; 
-    cout << "StartTimeTarget: " << startTimeTarget << endl;
+    //cout << "StartTimeTarget: " << startTimeTarget << endl;
     /*
     if(size > 0)
     {
@@ -140,7 +140,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     int startSearch;
     int half = m_notes[size/2]->getStart();
     int quarter = m_notes[size/4]->getStart();
-    cout << "Half: " << half << " quarter: " << quarter << endl;
+    //cout << "Half: " << half << " quarter: " << quarter << endl;
     if(startTimeTarget < half)
     {
         //target is in the 1st half of the vector
@@ -160,8 +160,8 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     }
 
     //find 1st note in range
-    cout << "entering find startIndex" << endl;
-    cout << "start index: " << startSearch << endl;
+    //cout << "entering find startIndex" << endl;
+    //cout << "start index: " << startSearch << endl;
     //FIX: Accessing index out of range error is happening somewhere around here
 
     //if start time is near the end of the range, need to loop back to check the full range
