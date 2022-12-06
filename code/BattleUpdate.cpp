@@ -60,11 +60,13 @@ void Battle::updateEndScreen()
     {
         m_p2->setState(VICTORY);
         m_endScreen->activate(P2);
+        m_song->stop();
     }
     if(m_status2->getHealth() <= 0)
     {
         m_p1->setState(VICTORY);
         m_endScreen->activate(P1);
+        m_song->stop();
     }
     //have some kind of input handler that lets you hit space to restart back to menu
 }

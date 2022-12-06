@@ -2,6 +2,7 @@
 #define ENDSCREEN_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Character.h"
 #include <iostream>
 
@@ -21,7 +22,10 @@ public:
 private:
     Sprite *m_sprite;
     Sprite *m_victory; //victory text 
+    SoundBuffer m_victorySFXBuffer;
+    Sound m_victorySFX;
     bool m_active;
+    
 
     const int SCREEN_WIDTH = 1920;
 };

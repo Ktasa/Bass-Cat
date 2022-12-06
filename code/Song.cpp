@@ -181,3 +181,7 @@ bool Song::isPlaying()
     }
     return isPlaying;
 }
+void Song::stop()
+{
+    m_music.stop();
+}

@@ -26,7 +26,6 @@ Battle::Battle()
     m_scoreP2 = 0.0;
     
     m_battleTime = Time::Zero;
- //set up stuff that doesnt require user input
 }
 
 //void Battle::setChoices(Display display, CharacterType p1_type, CharacterType p2_type, string songFileName)
@@ -202,4 +201,3 @@ double Battle::getScore(PlayerID id) //return int score/100 of an input session
 
     return score;
 }
-

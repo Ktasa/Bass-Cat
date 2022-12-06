@@ -7,6 +7,9 @@ EndScreen::EndScreen()
     m_sprite = new Sprite(TextureHolder::GetTexture(fileName));
     fileName = "graphics/victory.png";
     m_victory = new Sprite(TextureHolder::GetTexture(fileName));
+
+    m_victorySFXBuffer.loadFromFile("sound/bass sfx.ogg");
+	m_victorySFX.setBuffer(m_victorySFXBuffer);
     
     Vector2f resolution;
     resolution.x = VideoMode::getDesktopMode().width;
@@ -66,6 +69,7 @@ void EndScreen::activate(PlayerID victor)
             position = {resolution.x * float(0.16), resolution.y * float(1.1)};
             m_victory->setPosition(position);
         }
+        m_victorySFX.play();
     }
     m_active = true;
 }
