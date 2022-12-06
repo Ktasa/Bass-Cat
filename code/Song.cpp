@@ -160,10 +160,9 @@ void Song::loadTracks(string fileName)
     }
     */
 }
-Track Song::getTrack(int trackID)
+Track* Song::getTrack(int trackID)
 {
-    Track t;
-    return t; //temp definition
+    return m_tracks[trackID];
 }
 
 void Song::play()

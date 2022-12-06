@@ -105,8 +105,8 @@ void Battle::updateInput()
     if(getIsInputDone() == true) //both players input done
     {
         //calculate scores, change state
-        m_actionScoreP1 = getScore(P1);
-        m_actionScoreP2 = getScore(P2);
+        m_scoreP1 = getScore(P1);
+        m_scoreP2 = getScore(P2);
         m_state = EFFECT;
         m_input1->reset();
         m_input2->reset();

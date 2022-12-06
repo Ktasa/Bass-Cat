@@ -58,9 +58,6 @@ public:
     vector<RectangleShape*> getStatusBars(PlayerID id);
     vector<RectangleShape*> getRhythmBar();
 
-    int getScore(PlayerID player); //return int score/100 of an input session
-    //void setScore(PlayerID id, int score);
-
     bool getIsCalibrated();
     void handleInput();
     void update(float dtAsSeconds); //update all objects within
@@ -85,6 +82,9 @@ public:
     bool getIsInputActive(); 
     RectangleShape* getRhythmTester(PlayerID id);
 
+    int getScore(PlayerID player); //return int score/100 of an input session
+    //void setScore(PlayerID id, int score);
+
     int getCurrentTicks();
 
 private:
@@ -100,7 +100,7 @@ private:
     CombatMenu *m_combatMenu; //menu specifically for battle options
 
     CombatType m_combat1, m_combat2; //player action choices
-    int m_actionScoreP1, m_actionScoreP2; //store scores for the turn
+    int m_scoreP1, m_scoreP2; //store scores for the turn
 
     Song *m_song;
     Rhythm *m_input1, *m_input2; //store user input as Note data
@@ -117,6 +117,10 @@ private:
     void updateMenu();
     void updateInput();
     void updateEffect();
+
+    //functions to calculate input scores
+    void calculateScores();
+    int calculateScore(Rhythm* input, int track);
 };
 
 #include "Song.h"

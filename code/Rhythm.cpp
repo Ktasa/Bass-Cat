@@ -36,7 +36,7 @@ void Rhythm::activate(int startMidiTime, int range)
     m_recordingTime = range;
     m_active = true;
     m_isDone = false;
-    m_track.clear(); //empty vector for new inputs, use track destructor though
+    m_track->clear(); //empty vector for new inputs, use track destructor though
     m_tester->setFillColor(Color::Red); //red represents recording
 }
 
@@ -88,7 +88,7 @@ void Rhythm::update(int midiTime)
                 //cout << "last note added" << endl;
                 int duration = midiTime - m_note->getStart();
                 m_note->setDuration(duration);
-                m_track.addNote(m_note);
+                m_track->addNote(m_note);
             }
             
         }
@@ -107,7 +107,7 @@ void Rhythm::update(int midiTime)
             //set duration of our note for this input, add it to the track
             int duration = midiTime - m_note->getStart();
             m_note->setDuration(duration);
-            m_track.addNote(m_note);
+            m_track->addNote(m_note);
             m_stateChange = false;
             //cout << "note duration set" << endl;
         }
@@ -141,7 +141,7 @@ void Rhythm::updateTester(int midiTime)
         {
             //cout << "initializing playback" << endl;
             //load finished vector for first time
-            m_notes = m_track.getNotes();
+            m_notes = m_track->getNotes();
             //set internal time
             playbackStartTime = midiTime;
             if(m_notes.size() != 0)
@@ -210,4 +210,16 @@ void Rhythm::updateTester(int midiTime)
 RectangleShape* Rhythm::getTester()
 {
     return m_tester;
+}
+Track* Rhythm::getTrack()
+{
+    return m_track;
+}
+int Rhythm::getStartTime()
+{
+    return m_startTime;
+}
+int Rhythm::getRecordingTime()
+{
+    return m_recordingTime;
 }

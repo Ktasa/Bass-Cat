@@ -18,7 +18,8 @@ public:
     void setDuration(int midiTime);
     int getStart();
     int getDuration();
-    virtual int checkNoteAccuracy() = 0;
+    //check the accuracy of an input compared to the note
+    virtual double checkNoteAccuracy(Note* input) = 0;
     
 protected:
     int m_start; //start time in midi clock units
@@ -31,14 +32,14 @@ class Tapper : public Note
 {
 public:
     Tapper(int midiTime);
-    int checkNoteAccuracy() override;
+    double checkNoteAccuracy(Note* input) override;
 };
 
 class Holder : public Note
 {
 public:
     Holder(int midiTime);
-    int checkNoteAccuracy() override;
+    double checkNoteAccuracy(Note* input) override;
 //private:
     //int m_duration; //how many units does this note last
 };

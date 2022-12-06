@@ -21,8 +21,8 @@ Battle::Battle()
     m_combat1 = NO_SELECTION;
     m_combat2 = NO_SELECTION;
     
-    m_actionScoreP1 = 0;
-    m_actionScoreP2 = 0;
+    m_scoreP1 = 0;
+    m_scoreP2 = 0;
  //set up stuff that doesnt require user input
 }
 
@@ -186,12 +186,15 @@ int Battle::getScore(PlayerID id) //return int score/100 of an input session
 {
     //change to store scores as Battle data members
     //use helper function to process the rhythm analysis
+    int score = 0;
     if(id == P1)
     {
-        return 50;
+        score = m_scoreP1;
     }
     else    
-        return 50;
+        score = m_scoreP2;
+
+    return score;
 }
 
 

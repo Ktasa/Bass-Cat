@@ -28,7 +28,7 @@ private:
     //80bpm is 0.75 seconds per beat
     //midi clock for this song is 480 ticks per beat
     //that means... 640 ticks per second
-    //*ticks per second is not always consistent between midi files with different tempos
+    // *ticks per second is not always consistent between midi files with different tempos
     const double TICKS_PER_SECOND = 640.0;
     const double SECONDS_PER_TICK = 1.0 / 640.0;
     */

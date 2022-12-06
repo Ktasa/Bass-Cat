@@ -20,7 +20,7 @@ public:
     //add destructor to free input notes that are no longer relevant?
     Rhythm(PlayerID id);
     void activate(int midiTime, int range); //time of start and range in midi clock units
-    Track getTrack();
+    Track* getTrack();
     void handleInput(); 
     void update(int midiTime);
     bool getIsDone();
@@ -28,9 +28,11 @@ public:
     void reset(); //reset isDone and isActive in Battle::update()
     void updateTester(int midiTime);
     RectangleShape* getTester();
+    int getStartTime(); //return midi time of recording start
+    int getRecordingTime();
 
 private:
-    Track m_track; //make track*
+    Track* m_track; //make track*
     Note* m_note; 
     PlayerID m_player;
 

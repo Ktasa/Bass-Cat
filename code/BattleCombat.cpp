@@ -4,8 +4,8 @@ void Battle::combatAction()
 {
     cout << "Entered CombatAction" << endl;
     //make this system based on doubles?
-    cout << "P1 score: " << m_actionScoreP1 << endl;
-    cout << "P2 score: " << m_actionScoreP2 << endl;
+    cout << "P1 score: " << m_scoreP1 << endl;
+    cout << "P2 score: " << m_scoreP2 << endl;
     cout << "P1 health: " << m_status1->getHealth() << endl;
     cout << "P2 health: " << m_status2->getHealth() << endl;
     cout << "P1 meter: " << m_status1->getMeter() << endl;
@@ -17,20 +17,20 @@ void Battle::combatAction()
     int effectP2 = 0;
     if(m_combat1 == ATTACK || m_combat1 == BLOCK || m_combat1 == BUILD_METER)
     {
-        effectP1 = m_actionScoreP1 * DEFAULT_MULTIPLIER;
+        effectP1 = m_scoreP1 * DEFAULT_MULTIPLIER;
         cout << "Effect p1: " << effectP1 << endl;
     }
     else if(m_combat1 == MAGIC_ATTACK)
     {
-        effectP1 = m_actionScoreP1 * MAGIC_ATTACK_MULTIPLIER;
+        effectP1 = m_scoreP1 * MAGIC_ATTACK_MULTIPLIER;
     }
     if(m_combat2 == ATTACK || m_combat2 == BLOCK || m_combat2 == BUILD_METER)
     {
-        effectP2 = m_actionScoreP2 * DEFAULT_MULTIPLIER;
+        effectP2 = m_scoreP2 * DEFAULT_MULTIPLIER;
     }
     else if(m_combat1 == MAGIC_ATTACK)
     {
-        effectP2 = m_actionScoreP2 * MAGIC_ATTACK_MULTIPLIER;
+        effectP2 = m_scoreP2 * MAGIC_ATTACK_MULTIPLIER;
     }
 
     if(m_combat1 == ATTACK || m_combat1 == MAGIC_ATTACK) //make magic attack even more effective on block?

@@ -37,7 +37,7 @@ public:
 
     //get unit info? (read unit length info from track file when loading)
 
-    Track getTrack(int trackID);
+    Track* getTrack(int trackID);
     //vector<Note*> getNotesInRange(int trackID, int unit); //param: instrument and time unit
 
     //setters
