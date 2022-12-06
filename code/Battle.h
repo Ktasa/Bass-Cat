@@ -122,6 +122,8 @@ private:
     //functions to calculate input scores
     void calculateScores();
     double calculateScore(Rhythm* input, int track);
+
+    double getMultiplier(CombatType type); //help calc battle damage
 };
 
 #include "Song.h"
