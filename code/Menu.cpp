@@ -38,7 +38,7 @@ Menu::Menu()
     resolution.x = 1920;
     resolution.y = 1080;
 
-    m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.5));
+    m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.55));
     FloatRect textRect = m_menuText.getGlobalBounds();
     m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
 }
