@@ -36,9 +36,11 @@ void Engine::displayBackground()
     m_Window.clear(Color::Black);
     if(battle->getState() != INACTIVE)
     {
-        m_Window.clear(battle->getBackground());
-        //m_Window.setView(m_mainView);
-        //m_Window.draw(*m_backgroundSprite);
+        Display type = battle->getDisplay();
+        if(type == GALAXY)
+            m_Window.draw(*m_backgroundSprite);
+        else
+            m_Window.clear(battle->getBackground());
     }
 }
 

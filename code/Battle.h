@@ -37,7 +37,7 @@ enum BattleState
     ENDSCREEN
 };
 
-enum Display{LIGHT, DARK}; //black or white background/sprites
+enum Display{LIGHT, DARK, GALAXY}; //black or white background/sprites
 //enum CombatType{NO_SELECTION, ATTACK, BLOCK, BUILD_METER, MAGIC_ATTACK,}; //moved to CombatMenu.h
 //enum EffectType{MAGIC, DAMAGE};
 
@@ -53,6 +53,7 @@ public:
     void setChoices(vector<int> choices);
 
     Color getBackground(); //use in draw()    
+    Display getDisplay(); //background depends on display setting
     Sprite* getCharacterSprite(PlayerID id); //better to get sprite pointers?
     Sprite* getEffectSprite(PlayerID id);
     Sprite* getCombatMenuSprite();

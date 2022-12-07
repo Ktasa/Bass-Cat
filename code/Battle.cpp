@@ -46,7 +46,8 @@ void Battle::setChoices(vector<int> choices)
         if(choices[1] == 1){p2_type = CAT;}
         else{p2_type = PANDA;}
         if(choices[2] == 1){display = LIGHT;}
-        else{display = DARK;}
+        else if(choices[2] == 2){display = DARK;}
+        else {display = GALAXY;}
     }
 
     //this may be a selectable option in the future
@@ -62,6 +63,15 @@ void Battle::setChoices(vector<int> choices)
     {
         outline = Color::White;
         m_display = DARK;
+        m_combatMenu->setColor(Color::White);
+        m_status1->setUp(P1, Color::White);
+        m_status2->setUp(P2, Color::White);
+        m_calibration->setColor(Color::White);
+    }
+    else if(display == GALAXY)
+    {
+        outline = Color::White;
+        m_display = GALAXY;
         m_combatMenu->setColor(Color::White);
         m_status1->setUp(P1, Color::White);
         m_status2->setUp(P2, Color::White);
@@ -121,6 +131,10 @@ Color Battle::getBackground()
     else if(m_display == DARK)
     {color = Color::Black;}
     return color;
+}
+Display Battle::getDisplay()
+{
+    return m_display;
 }
 Sprite* Battle::getCalibrationSprite()
 {

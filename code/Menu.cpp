@@ -18,7 +18,7 @@ Menu::Menu()
                << "1. Bass Cat" << endl << "2. Flute Panda" << endl;
     ostringstream displaySelect;
     displaySelect << "Select Display Mode: " << endl
-                  << "1. Light" << endl << "2. Dark" << endl;
+                  << "1. Light" << endl << "2. Dark" << endl << "3. Galaxy" << endl;
 
     m_prompts.push_back(p1Select.str());
     m_prompts.push_back(p2Select.str());
@@ -62,7 +62,14 @@ void Menu::handleInput()
         m_current++;
         //cout << "num 2 entered" << endl;
     }
-    if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num2)))
+    else if (Keyboard::isKeyPressed(Keyboard::Num3) && m_validInput && m_current==2)
+    {
+        m_choices.push_back(3);
+        m_current++;
+        //cout << "num 2 entered" << endl;
+    }
+    if( !(Keyboard::isKeyPressed(Keyboard::Num1)) && !(Keyboard::isKeyPressed(Keyboard::Num2))
+        && !(Keyboard::isKeyPressed(Keyboard::Num3)))
     {m_validInput = true;}
     else
     {m_validInput = false;} //only allow new input for unique key presses

@@ -29,7 +29,8 @@ Engine::Engine()
     string fileName = "graphics/nebula.png";
     m_backgroundSprite = new Sprite(TextureHolder::GetTexture(fileName));
     m_backgroundSprite->setPosition(Vector2f{0,0});
-
+    Uint8 shade = 200;
+    m_backgroundSprite->setColor(Color(shade,shade,shade));
 }
 
 void Engine::run()
