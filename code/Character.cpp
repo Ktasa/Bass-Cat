@@ -70,6 +70,7 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     m_stateChange = false;
 
     m_playerID = playerID;
+    m_type = type;
 }
 void Character::handleInput()
 {
@@ -120,7 +121,9 @@ void Character::updateCharacter(float dtAsSeconds)
         }
         else if(m_state == VICTORY)
         {
-            m_frameID = m_frameNum + 4; //frameID 4&5
+            if(m_type == PANDA){m_frameID = m_frameNum + 4;} //use either 4&5 or 1&2
+            else
+                m_frameID = m_frameNum + 4; //frameID 4&5
         }
 
         //set texture coords of sprite

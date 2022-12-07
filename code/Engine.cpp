@@ -20,7 +20,7 @@ Engine::Engine()
         "Bass Cat", Style::Fullscreen);
     //not sure whether to use Fullscreen or Default
     
-    //m_Window.setFramerateLimit(30); //looks cleaner but less responsive animations
+    m_Window.setFramerateLimit(30); //looks cleaner but less responsive animations
 
     m_mainView.reset(FloatRect(0, 0, 1920, 1080));
     //m_mainView.setSize(resolution);
