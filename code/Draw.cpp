@@ -1,13 +1,6 @@
 #include "Engine.h"
 #include <iostream>
 
-//William:
-//Battle, Song, Track, Note, Rhythm, Calibration, HSV, Endscreen,
-
-//Ben:
-//Input, Draw, Update
-//Character, combatMenu, Effect, StatusBar, TextureHolder
-
 void Engine::draw()
 {
     displayBackground();
@@ -16,12 +9,7 @@ void Engine::draw()
 
     if(battle->getState() == ENDSCREEN)
     {
-        //displayEffects();
-        displayCharacters();
-        Sprite* endscreen = battle->getEndScreenSprite();
-        m_Window.draw(*endscreen);
-        Sprite* victoryText = battle->getEndScreenText();
-        m_Window.draw(*victoryText);
+        displayEndScreen();
     }
     else if(m_Playing)
     {
@@ -73,6 +61,8 @@ void Engine::displayCharacters()
 {
     Sprite* p1Sprite;
     p1Sprite = battle->getCharacterSprite(P1);
+    //Vector2f scale = p1Sprite->getScale();
+    //p1Sprite->setScale(scale.x * 1.1, scale.y * 1.1);
     m_Window.draw(*p1Sprite);
     Sprite* p2Sprite;
     p2Sprite = battle->getCharacterSprite(P2);
@@ -117,4 +107,13 @@ void Engine::displayInterface()
         Sprite* combatMenuSprite = battle->getCombatMenuSprite();
         m_Window.draw(*combatMenuSprite);
     }
+}
+void Engine::displayEndScreen()
+{
+    //displayEffects();
+    displayCharacters();
+    Sprite* endscreen = battle->getEndScreenSprite();
+    m_Window.draw(*endscreen);
+    Sprite* victoryText = battle->getEndScreenText();
+    m_Window.draw(*victoryText);
 }

@@ -12,33 +12,19 @@ EndScreen::EndScreen()
 	m_victorySFX.setBuffer(m_victorySFXBuffer);
     
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
-    Vector2f position = {resolution.x * float(0.15), resolution.y * float(1.2)};
+    //Vector2f position = {resolution.x * float(0.15), resolution.y * float(1.2)};
+    Vector2f position = {resolution.x * float(0.5), resolution.y * float(0.5)};
     m_sprite->setPosition(position);
 
-    //adjust scale to screen resolution
-    float defaultSize = SCREEN_WIDTH / resolution.x;
-    float goalSize = 1.5; 
-    float adjustScale = goalSize / defaultSize;
-    Vector2f scale = {adjustScale,adjustScale};
-
-    m_sprite->setScale(scale);
-    m_sprite->setOrigin(SCREEN_WIDTH / 2, SCREEN_WIDTH / 2);
+    m_sprite->setOrigin(SCREEN_WIDTH/2.0, SCREEN_HEIGHT /2.0);
 
     //set victory text sprite
-    position = {resolution.x * float(0.16), resolution.y * float(1.1)};
+    position = {resolution.x * float(0.5), resolution.y * float(0.5)};
     m_victory->setPosition(position);
-
-    //adjust scale to screen resolution
-    defaultSize = SCREEN_WIDTH / resolution.x;
-    goalSize = 1.4; 
-    adjustScale = goalSize / defaultSize;
-    scale = {adjustScale,adjustScale};
-
-    m_victory->setScale(scale);
-    m_victory->setOrigin(SCREEN_WIDTH / 2, SCREEN_WIDTH / 2);
+    m_victory->setOrigin(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 
 }
 void EndScreen::activate(PlayerID victor)
@@ -48,26 +34,13 @@ void EndScreen::activate(PlayerID victor)
         if(victor == P1)
         {
             m_sprite->setColor(Color(100,0,255));
+            m_sprite->setScale(1,1);
+            //m_sprite->setColor(Color(100,0,255,150));
         }
         else if(victor == P2)
         {
-            Vector2f resolution;
-            resolution.x = VideoMode::getDesktopMode().width;
-            resolution.y = VideoMode::getDesktopMode().height;
-            
-            Vector2f position = {resolution.x * float(0.25), resolution.y * float(1.2)};
-            m_sprite->setPosition(position);
-
-            //adjust scale to screen resolution
-            float defaultSize = SCREEN_WIDTH / resolution.x;
-            float goalSize = 1.4; 
-            float adjustScale = goalSize / defaultSize;
-            Vector2f scale = {-adjustScale,adjustScale};
-            m_sprite->setScale(scale);
+            m_sprite->setScale(-1,1);
             m_sprite->setColor(Color(255,0,100));
-
-            position = {resolution.x * float(0.16), resolution.y * float(1.1)};
-            m_victory->setPosition(position);
         }
         m_victorySFX.play();
     }

@@ -1,6 +1,5 @@
 #include "StatusBar.h"
-//
-//set position in the same place you set postion the characters
+
 StatusBar::StatusBar()
 {
     m_health = MAX_HEALTH;
@@ -35,8 +34,8 @@ void StatusBar::update()
             m_meter = MAX_METER;
 
         Vector2f resolution;
-        resolution.x = VideoMode::getDesktopMode().width;
-        resolution.y = VideoMode::getDesktopMode().height;
+        resolution.x = 1920;
+        resolution.y = 1080;
 
         float healthPerc = float(m_health) / MAX_HEALTH;
         float meterPerc = float(m_meter) / MAX_METER;
@@ -88,13 +87,17 @@ void StatusBar::setColor(PlayerID id, Color color)
 void StatusBar::setPosition(PlayerID id)
 {
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
-    Vector2f healthPositionP1 = {resolution.x * float(0.1), resolution.y * float(1.05)};
-    Vector2f healthPositionP2 = {resolution.x * float(0.595), resolution.y * float(1.05)};
-    Vector2f meterPositionP1 = {resolution.x * float(0.1), resolution.y * float(1.08)};
-    Vector2f meterPositionP2 = {resolution.x * float(0.595), resolution.y * float(1.08)};
+    //Vector2f player1Position = {resolution.x * float(0.2), resolution.y * float(0.5)};
+    //Vector2f player2Position = {resolution.x * float(0.8), resolution.y * float(0.5)};
+
+
+    Vector2f healthPositionP1 = {resolution.x * float(0.2), resolution.y * float(0.85)};
+    Vector2f healthPositionP2 = {resolution.x * float(0.8), resolution.y * float(0.85)};
+    Vector2f meterPositionP1 = {resolution.x * float(0.2), resolution.y * float(0.875)};
+    Vector2f meterPositionP2 = {resolution.x * float(0.8), resolution.y * float(0.875)};
     Vector2f healthPosition;
     Vector2f meterPosition;
     if(id == P1)
@@ -117,6 +120,8 @@ void StatusBar::setPosition(PlayerID id)
     //center origin
     m_healthBar->setOrigin(healthRect.width / 2, healthRect.height / 2);
     m_meterBar->setOrigin(healthRect.width / 2, healthRect.height / 2);
+    //m_healthBar->setOrigin(0,0);
+    //m_meterBar->setOrigin(0,0);
 
     //adjust scale to screen resolution
     float defaultSize = healthRect.height / resolution.y;

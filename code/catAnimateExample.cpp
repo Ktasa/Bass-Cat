@@ -16,17 +16,17 @@ void animateTest()
     resolution.y = VideoMode::getDesktopMode().height;
 
     RenderWindow window(VideoMode(resolution.x, resolution.y),
-        "Animate Cat", Style::Default);
+        "Animate Cat", Style::Fullscreen);
 
-    View mainView;
-    mainView.setSize(resolution);
+    View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
+    //mainView.setSize(resolution);
     window.setView(mainView);
     //window.setView(window.getDefaultView());
-    View view = window.getDefaultView();
+    //View view = window.getDefaultView();
 
     cout << resolution.x << " " << resolution.y << endl;
-    Vector2f size = view.getSize();
-    cout << size.x << " " << size.y << endl;
+   // Vector2f size = view.getSize();
+    //cout << size.x << " " << size.y << endl;
 
     
 

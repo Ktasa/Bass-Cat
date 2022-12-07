@@ -5,8 +5,10 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
 {
     //Remove once battle class handles this with setPosition
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    //resolution.x = VideoMode::getDesktopMode().width;
+    //resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
     //load texture file
     //change to use TextureHolder (not working yet)
@@ -17,8 +19,11 @@ Character::Character(PlayerID playerID, CharacterType type, Color color, int BPM
     
     //set sprite texture, position, origin, scale, color
     //position is relative to resolution. 
-    Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
-    Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
+    //Vector2f player1Position = {resolution.x * float(0.1), resolution.y * float(0.8)};
+    //Vector2f player2Position = {resolution.x * float(0.6), resolution.y * float(0.8)};
+
+    Vector2f player1Position = {resolution.x * float(0.2), resolution.y * float(0.6)};
+    Vector2f player2Position = {resolution.x * float(0.8), resolution.y * float(0.6)};
     
     //size of cat proportional to resolution
     float defaultSize = CHARACTER_SHEET_WIDTH / resolution.y;

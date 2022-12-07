@@ -11,10 +11,11 @@ Calibration::Calibration()
     *m_sprite = Sprite(TextureHolder::GetTexture(fileName));
     
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
-    Vector2f position = {resolution.x * float(0.35), resolution.y * float(0.8)};
+    //Vector2f position = {resolution.x * float(0.35), resolution.y * float(0.8)};
+    Vector2f position = {resolution.x * float(0.5), resolution.y * float(0.55)};
     m_sprite->setPosition(position);
 
     //adjust scale to screen resolution

@@ -14,12 +14,13 @@ CombatMenu::CombatMenu()
     m_sprite->setColor(m_color);
 
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
     //Set position
-    //Positions of other things - p1: 0.1x, 0.8y; p2: 0.6x, 0.8y
-    Vector2f menuPosition = {resolution.x * float(0.35), resolution.y * float(0.8)};
+    //Vector2f menuPosition = {resolution.x * float(0.35), resolution.y * float(0.8)};
+    Vector2f menuPosition = {resolution.x * float(0.5), resolution.y * float(0.55)};
+    
     m_sprite->setPosition(menuPosition);
 
     //adjust scale to screen resolution

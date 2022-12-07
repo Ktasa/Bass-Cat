@@ -27,7 +27,7 @@ Menu::Menu()
     Font font;
     font.loadFromFile("fonts/DanmarkURWTDem.ttf");
 
-    m_menuText.setCharacterSize(80);
+    m_menuText.setCharacterSize(100);
     m_menuText.setFillColor(Color::White);
     m_menuText.setFont(font);
     m_menuText.setOutlineColor(Color::Black);
@@ -35,11 +35,11 @@ Menu::Menu()
     m_menuText.setString(p1Select.str());
 
     Vector2f resolution;
-    resolution.x = VideoMode::getDesktopMode().width;
-    resolution.y = VideoMode::getDesktopMode().height;
+    resolution.x = 1920;
+    resolution.y = 1080;
 
     m_menuText.setPosition(resolution.x * float(0.5), resolution.y * float(0.5));
-    FloatRect textRect = m_menuText.getLocalBounds();
+    FloatRect textRect = m_menuText.getGlobalBounds();
     m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
 }
 
@@ -85,7 +85,10 @@ void Menu::drawText(RenderWindow &window)
     menuFont.loadFromFile("fonts/DanmarkURWTDem.ttf");
     m_menuText.setFont(menuFont);
 
-    window.setView(window.getDefaultView()); //prevent view slicing errors
+    FloatRect textRect = m_menuText.getGlobalBounds();
+    m_menuText.setOrigin(textRect.width / 2, textRect.height / 2);
+    View mainView(sf::FloatRect(0, 0, 1920, 1080));
+    window.setView(mainView); //prevent view slicing errors
     window.draw(m_menuText);
 }
 

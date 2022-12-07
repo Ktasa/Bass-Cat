@@ -35,7 +35,7 @@ void Battle::setChoices(vector<int> choices)
     
     //TESTING ENDSCREEN
     //m_state = ENDSCREEN;
-    //m_endScreen->activate(P2);
+    //m_endScreen->activate(P1);
 
     CharacterType p1_type, p2_type;
     Display display;
