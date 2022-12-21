@@ -36,6 +36,8 @@ MAGIC ATTACK
     Effect 2: if meter is empty, deal damage by expending your own health
 
 4. Input
+Player 1 input using [Space]
+Player 2 input using [Enter]
 Match your input to the appropriate instrument
 Input lasts for 2 measures of music
 Input ends when the menu reappears
