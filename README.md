@@ -22,18 +22,18 @@ Immediately once the menu closes, input begins
 
 Combat Options:
 ATTACK
-    Match your input to the DRUMS
-    Effect: deal damage based on your rhythm score
+- Match your input to the DRUMS
+- Effect: deal damage based on your rhythm score
 BLOCK
-    Match your input to the PIANO
-    Effect: reduce incoming opponent damage, might be nice if they're using a MAGIC ATTACK
+- Match your input to the PIANO
+- Effect: reduce incoming opponent damage, might be nice if they're using a MAGIC ATTACK
 BUILD METER
-    Match your input to the BASS
-    Effect: build meter which can be spent to use MAGIC ATTACK
+- Match your input to the BASS
+- Effect: build meter which can be spent to use MAGIC ATTACK
 MAGIC ATTACK
-    Match your input to the SAX
-    Effect 1: deal high damage by expending meter
-    Effect 2: if meter is empty, deal damage by expending your own health
+- Match your input to the SAX
+- Effect 1: deal high damage by expending meter
+- Effect 2: if meter is empty, deal damage by expending your own health
 
 4. Input
 Player 1 input using [Space]
