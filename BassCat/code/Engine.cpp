@@ -18,7 +18,6 @@ Engine::Engine()
 
     m_Window.create(VideoMode(resolution.x, resolution.y),
         "Bass Cat", Style::Fullscreen);
-    //not sure whether to use Fullscreen or Default
     
     m_Window.setFramerateLimit(30); //looks cleaner but less responsive animations
 

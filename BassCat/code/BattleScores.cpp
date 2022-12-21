@@ -5,7 +5,7 @@ void Battle::calculateScores()
 {
     cout << "entering calculateScores()" << endl;
     Rhythm* input = m_input1;
-    int track;
+    int track = 0;
 
     //get the correct track index to compare against
     if(m_combat1 == ATTACK)
@@ -59,9 +59,13 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
     else
     {
         //score of each note stored as percentage of note time played
-        double noteScores[notesSize];
-        for(int i=0; i<notesSize; i++)
-            noteScores[i] = 0.0;
+        // changing code to use vectors windows makes it harder to use arrays
+        //double noteScores[notesSize];
+        //for(int i=0; i<notesSize; i++)
+        //    noteScores[i] = 0.0;
+        vector<double> noteScores;
+        for (int i = 0; i < notesSize; i++)
+            noteScores.push_back(0.0);
 
         for(int i=0; i<inputSize; i++)
         {
@@ -84,7 +88,7 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
 // **************************POLYMORPHISM REQUIREMENT*******************************
 //checkNoteAccuracy depends on the note type, Tapper or Holder
             double notePerc = notes.at(closestIndex)->checkNoteAccuracy(input.at(i));
-            noteScores[closestIndex] = notePerc;
+            noteScores.at(closestIndex) = notePerc;
             
             
         }
@@ -94,7 +98,7 @@ double Battle::calculateScore(Rhythm* inputRhythm, int track)
         double total = 0.0;
         for(int k=0; k<notesSize; k++)
         {
-            total += noteScores[k];
+            total += noteScores.at(k);
             //cout << k << ": " << noteScores[k] << endl;
         }
         
