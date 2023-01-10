@@ -14,6 +14,7 @@
 #include "Effect.h"
 #include "Calibration.h"
 #include "EndScreen.h"
+#include "RhythmBar.h"
 
 using namespace sf;
 using namespace std;
@@ -26,6 +27,7 @@ class RhythmBar;
 class Calibration;
 class Rhythm;
 class EndScreen;
+class RhythmBar;
 
 enum BattleState
 {
@@ -61,7 +63,7 @@ public:
     Sprite* getEndScreenSprite();
     Sprite* getEndScreenText();
     vector<RectangleShape*> getStatusBars(PlayerID id);
-    vector<RectangleShape*> getRhythmBar();
+    vector<RectangleShape*> getRhythmBar(PlayerID id);
 
     bool getIsCalibrated();
     void handleInput();
@@ -77,6 +79,7 @@ public:
     void setEffects(); //use in Battle::update()
 
     CombatType getCombatType(PlayerID id);
+    Track* getTrackFromCombat(CombatType combat);//get instrument track for a combat option
     void combatAction();
 
     //functions to handle rhythm input stuff
@@ -106,7 +109,7 @@ private:
 
     Song *m_song;
     Rhythm *m_input1, *m_input2; //store user input as Note data
-    RhythmBar *m_bar; //I hope to display a scrolling sequence of notes with simple lines over a box
+    RhythmBar *m_bar1, *m_bar2; //I hope to display a scrolling sequence of notes with simple lines over a box
 
     Display m_display;
     BattleState m_state;
@@ -125,21 +128,6 @@ private:
     double calculateScore(Rhythm* input, int track);
 
     double getMultiplier(CombatType type); //help calc battle damage
-};
-
-#include "Song.h"
-class RhythmBar
-{
-public:
-    RhythmBar();
-    //void loadNotes(vector<Note*> notes);
-    void setRange(int units);
-    vector<RectangleShape*> getRects();
-
-private:
-    vector<RectangleShape*> m_rects;
-    int unitsToDisplay = 480 * 8; //range of note units to be displayed
-
 };
 
 #endif

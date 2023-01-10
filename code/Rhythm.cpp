@@ -81,7 +81,7 @@ void Rhythm::update(int midiTime)
         {
             //active period just ended, cleanup
             m_isDone = true;
-            //cout << "isDone set true in Rhythm::update" << endl;
+            cout << "isDone set true in Rhythm::update" << endl;
             
             //if holding note when expired, set duration and add it to track
             if(m_isPressed)
@@ -113,7 +113,7 @@ void Rhythm::update(int midiTime)
             //cout << "note duration set" << endl;
         }
     }
-    updateTester(midiTime); //tester will play back input when done
+    //updateTester(midiTime); //tester will play back input when done
 }
 bool Rhythm::getIsActive()
 {
@@ -121,17 +121,18 @@ bool Rhythm::getIsActive()
 }
 bool Rhythm::getIsDone()
 {
-    //cout << "returning " << boolalpha << m_isDone << "to update" << endl;
+    //cout << "returning " << boolalpha << m_isDone << "to update (getIsDone)" << endl;
     return m_isDone;
 }
 void Rhythm::reset()
 {
+    cout << "reset rhythm input" << endl;
     m_active = false;
     m_isDone = false;
     //resetting isDone from outside is necessary to determine when scores have already been input
     //other stuff gets reset at activation
 }
-void Rhythm::updateTester(int midiTime)
+void Rhythm::updateTester(int midiTime) //(no longer relevant)
 {
 
     //cout << "Entering rhythm updateTester" << endl;
@@ -208,7 +209,7 @@ void Rhythm::updateTester(int midiTime)
         }
     }
 }
-RectangleShape* Rhythm::getTester()
+RectangleShape* Rhythm::getTester() //no longer relevant
 {
     return m_tester;
 }

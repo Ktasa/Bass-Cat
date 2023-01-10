@@ -16,6 +16,7 @@ void Engine::draw()
         displayEffects();
         displayCharacters();
         displayStatusBars();
+        displayRhythmBars();
         //displayRhythmTester();
         displayInterface();
     }
@@ -78,6 +79,46 @@ void Engine::displayStatusBars()
     m_Window.draw(*statusBarsP2[0]);
     m_Window.draw(*statusBarsP1[1]);
     m_Window.draw(*statusBarsP2[1]);
+}
+void Engine::displayRhythmBars()
+{
+    if (battle->getIsInputActive())
+    {
+        vector<RectangleShape*> barP1 = battle->getRhythmBar(P1);
+        vector<RectangleShape*> barP2 = battle->getRhythmBar(P2);
+        //draw the background rectangles stored at the end of vector
+        //m_Window.draw(*barP1.at(barP1.size() - 1));
+        //m_Window.draw(*barP2.at(barP2.size() - 1));
+        //draw the notes over the background
+        //change to check if position is negative (off screen)
+        //cout << barP1.size() << " " << barP2.size() << endl;
+
+        for (size_t i = 0; i < barP1.size() - 1; i++)
+        {
+            //m_Window.draw(*barP1.at(i));
+            
+            Vector2f pos = barP1.at(i)->getPosition();
+            //cout << pos.y << endl;
+            m_Window.draw(*barP1.at(i));
+            if (pos.y > 0)
+            {
+                m_Window.draw(*barP1.at(i));
+            }
+        }
+        for (size_t i = 0; i < barP2.size() - 1; i++)
+        {
+            //m_Window.draw(*barP2.at(i));
+            
+            Vector2f pos = barP2.at(i)->getPosition();
+            if (pos.y > 0)
+            {
+                m_Window.draw(*barP2.at(i));
+            }
+        }
+        //use low opacity to draw the background bars on top to hide minor width errors
+        m_Window.draw(*barP1.at(barP1.size() - 1));
+        m_Window.draw(*barP2.at(barP2.size() - 1));
+    }
 }
 void Engine::displayRhythmTester()
 {

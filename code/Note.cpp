@@ -32,6 +32,10 @@ Tapper::Tapper(int midiTime)
 {
     m_start = midiTime;
 }
+bool Tapper::isTapper()
+{
+    return true;
+}
 
 double Tapper::checkNoteAccuracy(Note* input)
 {
@@ -78,6 +82,10 @@ double Tapper::checkNoteAccuracy(Note* input)
 Holder::Holder(int midiTime)
 {
     m_start = midiTime;
+}
+bool Holder::isTapper()
+{
+    return false;
 }
 double Holder::checkNoteAccuracy(Note* input)
 {

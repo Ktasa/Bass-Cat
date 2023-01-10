@@ -19,7 +19,7 @@ class Song
 public:
     const int SONG_DURATION_TICKS = 90240; //Not the same between all songs, add to read from file
     const int TICKS_PER_BEAT = 480; //same as m_quarterTime
-    const int TICKS_PER_MEASURE = 3840;
+    const int TICKS_PER_MEASURE = 1920;
     const double TICKS_PER_SECOND = 640.0; 
     const double SECONDS_PER_TICK = 1.0 / 640.0;
 

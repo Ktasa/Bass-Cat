@@ -91,12 +91,12 @@ void Battle::updateMenu()
     {
         m_combat1 =  m_combatMenu->getChoice(P1);
         m_combat2 =  m_combatMenu->getChoice(P2);
-        cout << "Choice 1: " << m_combat1 << endl;
-        cout << "Choice 2: " << m_combat2 << endl;
+        //cout << "Choice 1: " << m_combat1 << endl;
+        //cout << "Choice 2: " << m_combat2 << endl;
         setEffects();
         m_state = INPUT; //if menu is done, next phase
         m_combatMenu->reset();
-        cout << "Menu done" << endl;
+        cout << "CombatMenu done" << endl;
     }
     else if (m_combatMenu->getIsActive() == false)
     {
@@ -116,24 +116,42 @@ void Battle::updateInput()
         m_state = EFFECT;
         m_input1->reset(); //rhythm tester wont work if reset immediately, change for testing
         m_input2->reset();
+        m_bar1->deactivate();
+        m_bar2->deactivate();
         //cout << "input is done" << endl;
         //probably also set the rhythm bar to deactivate or change color here
     }
-    else if(getIsInputActive() == false)
+    else if(getIsInputActive() == false) //this block executes once for activation
     {
         //maybe only activate rhythm input at a certain time like at the start of a measure
         //set effect on or to rainbow if combat option is magic related
-        //int recordTime = m_song->TICKS_PER_MEASURE * 2; //2 measures
-        int recordTime = m_song->TICKS_PER_MEASURE;
-        //cout << "recordTime: " << recordTime << endl;
-        m_input1->activate(getCurrentTicks(), recordTime);
-        m_input2->activate(getCurrentTicks(), recordTime);
-        //cout << "exit rhythm activation" << endl;
+        int currTime = getCurrentTicks();
+        int recordTime = m_song->TICKS_PER_MEASURE * 2; //2 measures
+        //int recordTime = m_song->TICKS_PER_MEASURE;
+        cout << "recordTime: " << recordTime << endl;
+        m_input1->activate(currTime, recordTime);
+        m_input2->activate(currTime, recordTime);
+        cout << "rhythm input activated" << endl;
 
-        //convert DT to midi time? Is it better to calculate input in the engine?
-        //calculate midi time in update.cpp and send it here?
-        // m_input1->activate(int midiTime, int range);
+        //load notes to rhythm bar
+        //need to load notes of the correct track via combatChoice
+        Track* track1 = getTrackFromCombat(m_combat1);
+        Track* track2 = getTrackFromCombat(m_combat2);
+        
+        m_bar1->setRange(recordTime);
+        m_bar2->setRange(recordTime);
+        m_bar1->setDisplayRange(recordTime / 2);
+        m_bar2->setDisplayRange(recordTime / 2);
+        //check how long these take?
+        Clock searchTime;
+        Time searchDT = searchTime.restart();
+        m_bar1->activate(track1, currTime);
+        m_bar2->activate(track2, currTime);
+        searchDT = searchTime.restart();
+        cout << "Time to load notes: " << searchDT.asSeconds() << endl;
     }
+    m_bar1->update(getCurrentTicks());
+    m_bar2->update(getCurrentTicks());
 }
 
 void Battle::updateEffect()

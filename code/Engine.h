@@ -48,6 +48,7 @@ private:
     void displayEffects();
     void displayCharacters();
     void displayStatusBars();
+    void displayRhythmBars();
     void displayRhythmTester();
     void displayInterface();
     void displayEndScreen();

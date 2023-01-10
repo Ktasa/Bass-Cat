@@ -285,7 +285,7 @@ vector<Note*> Track::getNotesInRange(int midiTime, int range)
     }//endif (!outOfRange)
 
     //Move to helper function
-    cout << "GetNotesInRange() TEST RESULTS:" << endl;
+    //cout << "GetNotesInRange() TEST RESULTS:" << endl;
     //load vector to return
     if(!outOfRange && !endOutOfRange)
     {

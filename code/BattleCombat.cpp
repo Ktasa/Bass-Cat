@@ -4,12 +4,12 @@ void Battle::combatAction()
 {
     cout << "Entered CombatAction" << endl;
 
-    cout << "P1 score: " << m_scoreP1 << endl;
-    cout << "P2 score: " << m_scoreP2 << endl;
-    cout << "P1 health: " << m_status1->getHealth() << endl;
-    cout << "P2 health: " << m_status2->getHealth() << endl;
-    cout << "P1 meter: " << m_status1->getMeter() << endl;
-    cout << "P2 meter: " << m_status2->getMeter() << endl;
+    //cout << "P1 score: " << m_scoreP1 << endl;
+    //cout << "P2 score: " << m_scoreP2 << endl;
+    //cout << "P1 health: " << m_status1->getHealth() << endl;
+    //cout << "P2 health: " << m_status2->getHealth() << endl;
+    //cout << "P1 meter: " << m_status1->getMeter() << endl;
+    //cout << "P2 meter: " << m_status2->getMeter() << endl;
 
     //calculate effect multiplier 
     double multiplier1 = getMultiplier(m_combat1);
@@ -17,8 +17,8 @@ void Battle::combatAction()
     int effectP1 = multiplier1 * m_scoreP1;
     int effectP2 = multiplier2 * m_scoreP2;
 
-    cout << "P1 effect: " << effectP1 << endl;
-    cout << "P2 effect: " << effectP2 << endl;
+    //cout << "P1 effect: " << effectP1 << endl;
+    //cout << "P2 effect: " << effectP2 << endl;
 
     //reduce effect if blocked
     if(m_combat1 == ATTACK || m_combat1 == MAGIC_ATTACK)
@@ -88,13 +88,13 @@ void Battle::combatAction()
         cout << "Error: NO_SELECTION combat action" << endl;
     }
 
-    cout << "P1 effect: " << effectP1 << endl;
-    cout << "P2 effect: " << effectP2 << endl;
+    //cout << "P1 effect: " << effectP1 << endl;
+    //cout << "P2 effect: " << effectP2 << endl;
 
-    cout << "P1 health: " << m_status1->getHealth() << endl;
-    cout << "P2 health: " << m_status2->getHealth() << endl;
-    cout << "P1 meter: " << m_status1->getMeter() << endl;
-    cout << "P2 meter: " << m_status2->getMeter() << endl;
+    //cout << "P1 health: " << m_status1->getHealth() << endl;
+    //cout << "P2 health: " << m_status2->getHealth() << endl;
+    //cout << "P1 meter: " << m_status1->getMeter() << endl;
+    //cout << "P2 meter: " << m_status2->getMeter() << endl;
 }
 
 double Battle::getMultiplier(CombatType type)

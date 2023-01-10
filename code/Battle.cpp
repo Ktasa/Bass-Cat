@@ -11,6 +11,8 @@ Battle::Battle()
     m_endScreen = new EndScreen();
     m_input1 = new Rhythm(P1);
     m_input2 = new Rhythm(P2);
+    m_bar1 = new RhythmBar();
+    m_bar2 = new RhythmBar();
     //m_recordingInput = false; //unnecessary from Rhythm testing
     m_status1 = new StatusBar();
     m_status2 = new StatusBar();
@@ -59,9 +61,11 @@ void Battle::setChoices(vector<int> choices)
 
     //set up colors
     Color outline;
+    Color rhythmBarColor;
     if(display == DARK)
     {
         outline = Color::White;
+        rhythmBarColor = Color::Black;
         m_display = DARK;
         m_combatMenu->setColor(Color::White);
         m_status1->setUp(P1, Color::White);
@@ -71,6 +75,7 @@ void Battle::setChoices(vector<int> choices)
     else if(display == GALAXY)
     {
         outline = Color::White;
+        rhythmBarColor = Color::Black;
         m_display = GALAXY;
         m_combatMenu->setColor(Color::White);
         m_status1->setUp(P1, Color::White);
@@ -80,6 +85,7 @@ void Battle::setChoices(vector<int> choices)
     else
     {
         outline = Color::Black;
+        rhythmBarColor = Color::White;
         m_display = LIGHT;
         m_combatMenu->setColor(Color::Black);
         m_status1->setUp(P1, Color::Black);
@@ -89,6 +95,10 @@ void Battle::setChoices(vector<int> choices)
 
     m_p1 = new Character(P1, p1_type, outline, BPM);
     m_p2 = new Character(P2, p2_type, outline, BPM);
+
+    //set up rhythm bars, range is 8 beats
+    m_bar1->setUp(P1, rhythmBarColor, 480 * 8);
+    m_bar2->setUp(P2, rhythmBarColor, 480 * 8);
 
     m_magic1->setUp(P1, MAGIC, BPM);
     m_magic2->setUp(P2, MAGIC, BPM);
@@ -165,7 +175,13 @@ vector<RectangleShape*> Battle::getStatusBars(PlayerID id)
     else
         return m_status2->getBars();
 }
-
+vector<RectangleShape*> Battle::getRhythmBar(PlayerID id)
+{
+    if (id == P1)
+        return m_bar1->getRects();
+    else
+        return m_bar2->getRects();
+}
 Sprite* Battle::getEffectSprite(PlayerID id)
 {
     //currently magic is the only effect
@@ -200,6 +216,23 @@ bool Battle::getIsInputActive()
 CombatType Battle::getCombatType(PlayerID id)
 {
     return m_combatMenu->getChoice(id);
+}
+Track* Battle::getTrackFromCombat(CombatType combat)
+{
+    Track* track;
+    int trackNum = 0;
+    if (combat == ATTACK)
+        trackNum = 3; //drums
+    if (combat == BLOCK)
+        trackNum = 1; //piano
+    if (combat == BUILD_METER)
+        trackNum = 2; //bass
+    if (combat == MAGIC_ATTACK)
+        trackNum = 0; //sax
+
+    cout << "Track selected: " << trackNum << endl;
+    track = m_song->getTrack(trackNum);
+    return track;
 }
 double Battle::getScore(PlayerID id) //return int score/100 of an input session
 {
