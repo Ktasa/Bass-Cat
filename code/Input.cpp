@@ -19,6 +19,24 @@ void Engine::input()
 			{
 				m_Playing = true;
 			}
+            if (Keyboard::isKeyPressed(Keyboard::F))
+            {
+                Vector2f resolution;
+                resolution.x = VideoMode::getDesktopMode().width;
+                resolution.y = VideoMode::getDesktopMode().height;
+
+                m_fullscreen = !m_fullscreen;
+                if (m_fullscreen)
+                {
+                    m_Window.create(VideoMode(resolution.x, resolution.y),
+                        "Bass Cat", Style::Fullscreen);
+                }
+                else
+                {
+                    m_Window.create(VideoMode(resolution.x, resolution.y),
+                        "Bass Cat", Style::Default);
+                }
+            }
         }
         if(event.type == Event::Closed)
         {

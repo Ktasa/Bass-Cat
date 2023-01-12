@@ -89,6 +89,7 @@ void RhythmBar::loadNotes(vector<Note*> notes)
 	}*/
 
 	//these notes look correct so why not displaying correctly...
+	/*
 	cout << "activate time: " << m_activateTime << endl;
 	cout << "end time: " << m_range + m_activateTime << endl;
 	for (size_t i = 0; i < notes.size(); i++)
@@ -97,6 +98,7 @@ void RhythmBar::loadNotes(vector<Note*> notes)
 		cout << i << " duration: " << notes.at(i)->getDuration() << endl;
 	}
 	cout << "end list" << endl << endl;
+	*/
 	
 
 	//set up all of the rectangles in range; size, origin, position, color
@@ -216,13 +218,13 @@ void RhythmBar::loadNotes(vector<Note*> notes)
 
 	//set bg size
 	float bg_width = resolution.x * float(0.05);
-	Vector2f bg_size = { bg_width, resolution.y };
+	Vector2f bg_size = { bg_width, resolution.y * float(0.9999)};
 	bg->setSize(bg_size);
 	//set bg origin to center bottom
 	FloatRect bg_rect = bg->getGlobalBounds();
 	//bg->setOrigin(bg_rect.width / 2, bg_rect.height);
 	//set origin to bottom left
-	bg->setOrigin(0, bg_rect.height);
+	bg->setOrigin(0, bg_rect.height * float(0.995));
 
 	Vector2f bg_position;
 	if (m_player == P1)
@@ -260,12 +262,11 @@ void RhythmBar::update(int midiTime)
 		{
 			//adjust all positions except bg (last index)
 			int elapsedTime = midiTime - m_lastUpdated;
-			//Vector2f resolution;
-			//resolution.y = 1080;
 			Vector2f resolution;
-			resolution.y = VideoMode::getDesktopMode().height;
+			resolution.y = 1080;
+			//resolution.y = VideoMode::getDesktopMode().height;
 			double moveRatio = (elapsedTime) * 1.0 / m_displayRange;
-			cout << "Move ratio: " << moveRatio << endl;
+			//cout << "Move ratio: " << moveRatio << endl;
 			Vector2f offset;
 			offset.x = 0.0;
 			offset.y = moveRatio * resolution.y;

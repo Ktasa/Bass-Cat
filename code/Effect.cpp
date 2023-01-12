@@ -7,6 +7,7 @@ Effect::Effect()
     m_color = Color::White;
     //temp
     m_rainbow = false;
+    m_active = false;
 }
 
 void Effect::setUp(PlayerID id, EffectType type, int BPM)

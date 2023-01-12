@@ -103,7 +103,7 @@ double Battle::getMultiplier(CombatType type)
     const double ATTACK_MULTIPLIER = 0.5; 
     const double BLOCK_MULTIPLIER = 1.2; 
     const double METER_MULTIPLIER = 0.5; 
-    const double MAGIC_ATTACK_MULTIPLIER = 1.5;
+    const double MAGIC_ATTACK_MULTIPLIER = 0.75;
  
     double multiplier;
     if(m_combat1 == ATTACK)

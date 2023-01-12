@@ -35,6 +35,7 @@ private:
 
     //is the game playing or paused / menu
     bool m_Playing = false;
+    bool m_fullscreen = true;
 
     //include any basic variables to determine
     //the state of the program
